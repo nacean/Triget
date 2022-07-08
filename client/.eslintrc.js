@@ -21,5 +21,6 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     // ts파일에서 tsx구문 허용(Next.js)
     "react/jsx-filename-extension": [1, { extensions: [".ts", ".tsx"] }], //should add ".ts" if typescript project
+    "react/jsx-props-no-spreading": "off", // {...component} 처럼 spreading 허용
   },
 };
