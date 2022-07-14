@@ -13,10 +13,10 @@ import activityWeightState from "atoms/plannerAtoms/weightAtoms/activityWeightSt
 import airportWeightState from "atoms/plannerAtoms/weightAtoms/airportWeightState";
 import hotelWeightState from "atoms/plannerAtoms/weightAtoms/hotelWeightState";
 import foodWeightState from "atoms/plannerAtoms/weightAtoms/foodWeightState";
+import SearchIcon from "@mui/icons-material/Search";
 import KeyWordAndCountriesBox from "./keyWordAndCountries/KeyWordAndCountriesBox";
 import BudgetWeightForm from "./budgetWeight/BudgetWeightForm";
 import RestBox from "./restForms/RestBox";
-import SearchIcon from "@mui/icons-material/Search";
 
 const PlanningSlideContainer = styled.div`
   width: 100%;
