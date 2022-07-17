@@ -28,6 +28,7 @@
         "specialLink": ["hrefLeft", "hrefRight"],
         "aspects": ["invalidHref", "preferButton"]
       }
-    ]
+    ],
+    "@typescript-eslint/naming-convention": "off"
   }
 }
