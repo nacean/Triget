@@ -1,7 +1,7 @@
-import { Slide, Button } from "@mui/material";
 import { useState } from "react";
-import styled from "styled-components";
 import { useRecoilValue } from "recoil";
+import { useMutation } from "react-query";
+import fetchTravelSpec from "modules/fetchTravelSpec";
 import airportState from "atoms/plannerAtoms/airportState";
 import travelKeywordState from "atoms/plannerAtoms/travelKeywordState";
 import countriesState from "atoms/plannerAtoms/countriesState";
@@ -13,81 +13,79 @@ import activityWeightState from "atoms/plannerAtoms/weightAtoms/activityWeightSt
 import airportWeightState from "atoms/plannerAtoms/weightAtoms/airportWeightState";
 import hotelWeightState from "atoms/plannerAtoms/weightAtoms/hotelWeightState";
 import foodWeightState from "atoms/plannerAtoms/weightAtoms/foodWeightState";
-import SearchIcon from "@mui/icons-material/Search";
-import KeyWordAndCountriesBox from "./keyWordAndCountries/KeyWordAndCountriesBox";
-import BudgetWeightForm from "./budgetWeight/BudgetWeightForm";
-import RestBox from "./restForms/RestBox";
+import styled from "styled-components";
+import TravelSpecContainer from "./userTravelSpecs/TravelSpecContainer";
+import ProductPickContainer from "./pickTravelProducts/ProductPickContainer";
 
-const PlanningSlideContainer = styled.div`
-  width: 100%;
-`;
+interface journeyDataType {
+  journey_id: number;
+  airports: [];
+  accommodations: [];
+  restaurants: [];
+  attractions: [];
+}
 
-const PlanningContainer = styled.section`
-  position: relative;
+const StyledPlanningContainer = styled.div`
   width: 100%;
-  height: 500px;
-  padding: 30px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 15px -1px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 15px -1px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: flexbox;
+  overflow: visible;
 `;
 
 function PlanningBox() {
-  //slide state
+  // slide state
   const [slideMove, setSlideMove] = useState(false);
+  const travelMutation = useMutation(fetchTravelSpec);
 
-  const travelKeywordValue = useRecoilValue(travelKeywordState);
-  const countryValue = useRecoilValue(countriesState);
-  const startDateValue = useRecoilValue(startDateState);
-  const endDateValue = useRecoilValue(endDateState);
-  const peopleCntValue = useRecoilValue(peopleCntState);
-  const budgetValue = useRecoilValue(budgetState);
-  const airportValue = useRecoilValue(airportState);
+  const journey_theme = useRecoilValue(travelKeywordState);
+  const place = useRecoilValue(countriesState);
+  const departure_date = useRecoilValue(startDateState);
+  const arrival_date = useRecoilValue(endDateState);
+  const people_num = useRecoilValue(peopleCntState);
+  const budget = useRecoilValue(budgetState);
+  const departure_airport = useRecoilValue(airportState);
 
   // recoil weight values
-  const airportWeightValue = useRecoilValue(airportWeightState);
-  const hotelWeightValue = useRecoilValue(hotelWeightState);
-  const foodWeightValue = useRecoilValue(foodWeightState);
-  const activityWeightValue = useRecoilValue(activityWeightState);
+  const airport_prior = useRecoilValue(airportWeightState);
+  const accommodation_prior = useRecoilValue(hotelWeightState);
+  const restaurant_prior = useRecoilValue(foodWeightState);
+  const activity_prior = useRecoilValue(activityWeightState);
 
-  const onBtnClick = () => {
+  // post travel spec and get data
+
+  const onSlideBtnClick = () => {
+    setSlideMove(!slideMove);
+  };
+
+  const onSpecPostBtnClick = () => {
+    travelMutation.mutate({
+      place,
+      people_num,
+      departure_date,
+      arrival_date,
+      departure_airport,
+      budget,
+      journey_theme,
+      airport_prior,
+      accommodation_prior,
+      restaurant_prior,
+      activity_prior,
+    });
+
     setSlideMove(!slideMove);
   };
 
   return (
-    <PlanningSlideContainer>
-      <Slide direction="right" in={!slideMove} mountOnEnter unmountOnExit>
-        <PlanningContainer>
-          <KeyWordAndCountriesBox />
-          <RestBox />
-          <BudgetWeightForm />
-          <Button
-            variant="contained"
-            endIcon={<SearchIcon />}
-            size="large"
-            sx={{
-              position: "absolute",
-              bottom: 20,
-              right: 20,
-              backgroundColor: "#000000b7",
-              borderRadius: "12px",
-              ":hover": {
-                backgroundColor: "#0000009f",
-              },
-            }}
-            onClick={onBtnClick}
-          >
-            일정표 만들기
-          </Button>
-        </PlanningContainer>
-      </Slide>
-      <Slide direction="left" in={slideMove} mountOnEnter unmountOnExit>
-        <PlanningContainer />
-      </Slide>
-    </PlanningSlideContainer>
+    <StyledPlanningContainer>
+      <TravelSpecContainer
+        slideMove={slideMove}
+        onSpecPostBtnClick={onSpecPostBtnClick}
+      />
+      <ProductPickContainer
+        slideMove={slideMove}
+        onSlideBtnClick={onSlideBtnClick}
+        travelMutation={travelMutation}
+      />
+    </StyledPlanningContainer>
   );
 }
 
