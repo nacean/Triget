@@ -33,6 +33,7 @@ interface ProductPanelType {
 
 const StyledPanel = styled.div`
   width: 100%;
+  overflow-y: scroll;
 `;
 
 function ProductPanel({ value, index, productArray }: ProductPanelType) {
@@ -49,7 +50,7 @@ function ProductPanel({ value, index, productArray }: ProductPanelType) {
             <Paper square sx={{ marginBottom: "10px" }}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText />
+                  <ListItemText></ListItemText>
                 </ListItemButton>
               </ListItem>
             </Paper>
