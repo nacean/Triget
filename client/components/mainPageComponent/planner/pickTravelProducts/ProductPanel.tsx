@@ -1,6 +1,7 @@
 import { Button, List, ListItem, ListItemButton, Paper } from "@mui/material";
 import Image from "next/image";
 import styled from "styled-components";
+import ProductLocation from "./productDetails/ProductLocation";
 import ProductName from "./productDetails/ProductName";
 import ProductReviewRate from "./productDetails/ProductReviewRate";
 
@@ -75,6 +76,13 @@ function ProductPanel({ value, index, productArray }: ProductPanelType) {
                     <StyledDiv>
                       <ProductName productName={product.product_name} />
                       <ProductReviewRate reviewRate={product.review_score} />
+                    </StyledDiv>
+                    <StyledDiv>
+                      <ProductLocation
+                        productCity={product.city}
+                        productDistrict={product.district}
+                        productAddress={product.address}
+                      />
                     </StyledDiv>
                   </StyledLeftProductContainer>
                   <StyledRightProductContainer>
