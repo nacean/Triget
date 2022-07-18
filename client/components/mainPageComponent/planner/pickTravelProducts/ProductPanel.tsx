@@ -1,13 +1,8 @@
-import {
-  Button,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Paper,
-} from "@mui/material";
+import { Button, List, ListItem, ListItemButton, Paper } from "@mui/material";
 import Image from "next/image";
 import styled from "styled-components";
+import ProductName from "./productDetails/ProductName";
+import ProductReviewRate from "./productDetails/ProductReviewRate";
 
 interface ProductDataType {
   product_id: number;
@@ -38,6 +33,24 @@ const StyledPanel = styled.div`
   overflow-y: scroll;
 `;
 
+const StyledLeftProductContainer = styled.div`
+  width: 65%;
+  margin-left: 20px;
+  height: 250px;
+`;
+const StyledRightProductContainer = styled.div`
+  width: 15%;
+  height: 250px;
+`;
+
+const StyledDiv = styled.div`
+  width: 100%;
+  padding: 5px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+`;
+
 function ProductPanel({ value, index, productArray }: ProductPanelType) {
   return (
     <StyledPanel
@@ -52,12 +65,21 @@ function ProductPanel({ value, index, productArray }: ProductPanelType) {
             <Paper square sx={{ marginBottom: "10px" }}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <Image src={product.thumbnail_url} width={200} height={200} />
-                  <ListItemText
-                    sx={{ width: "70%", height: "200px", marginLeft: "10px" }}
-                  >
-                    <div>yeah</div>
-                  </ListItemText>
+                  <Image
+                    src={product.thumbnail_url}
+                    alt="Product Thumbnail"
+                    width={250}
+                    height={250}
+                  />
+                  <StyledLeftProductContainer>
+                    <StyledDiv>
+                      <ProductName productName={product.product_name} />
+                      <ProductReviewRate reviewRate={product.review_score} />
+                    </StyledDiv>
+                  </StyledLeftProductContainer>
+                  <StyledRightProductContainer>
+                    rightcontainer
+                  </StyledRightProductContainer>
                 </ListItemButton>
                 <Button
                   variant="contained"
