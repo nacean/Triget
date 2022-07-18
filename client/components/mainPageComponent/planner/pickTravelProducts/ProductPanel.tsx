@@ -3,6 +3,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import ProductLocation from "./productDetails/ProductLocation";
 import ProductName from "./productDetails/ProductName";
+import ProductPopularity from "./productDetails/ProductPopularity";
 import ProductReviewRate from "./productDetails/ProductReviewRate";
 
 interface ProductDataType {
@@ -40,13 +41,16 @@ const StyledLeftProductContainer = styled.div`
   height: 250px;
 `;
 const StyledRightProductContainer = styled.div`
-  width: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 18%;
   height: 250px;
 `;
 
 const StyledSeperateDiv = styled.div`
   width: 100%;
-  padding: 5px 0;
+  padding-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -86,7 +90,7 @@ function ProductPanel({ value, index, productArray }: ProductPanelType) {
                     </StyledSeperateDiv>
                   </StyledLeftProductContainer>
                   <StyledRightProductContainer>
-                    rightcontainer
+                    <ProductPopularity productPopularity={product.popularity} />
                   </StyledRightProductContainer>
                 </ListItemButton>
                 <Button
