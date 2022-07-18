@@ -41,10 +41,10 @@ function TravelSpecContainer({
             position: "absolute",
             bottom: 20,
             right: 20,
-            backgroundColor: "#000000b7",
+            backgroundColor: "#424242",
             borderRadius: "12px",
             ":hover": {
-              backgroundColor: "#0000009f",
+              backgroundColor: "#616161",
             },
           }}
           onClick={onSpecPostBtnClick}
