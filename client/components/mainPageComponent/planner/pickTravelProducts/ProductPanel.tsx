@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import styled from "styled-components";
 
-interface testProductDataType {
+interface ProductDataType {
   product_id: number;
   product_name: string;
   thumbnail_url: string;
@@ -28,7 +28,7 @@ interface testProductDataType {
 interface ProductPanelType {
   value: number;
   index: number;
-  productArray: testProductDataType[];
+  productArray: ProductDataType[];
 }
 
 const StyledPanel = styled.div`
@@ -45,7 +45,7 @@ function ProductPanel({ value, index, productArray }: ProductPanelType) {
     >
       {value === index && (
         <List>
-          {productArray.map((Product: testProductDataType) => (
+          {productArray.map((Product: ProductDataType) => (
             <Paper square sx={{ marginBottom: "10px" }}>
               <ListItem disablePadding>
                 <ListItemButton>
