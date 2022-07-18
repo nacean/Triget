@@ -28,6 +28,11 @@ const StyledProductPickContainer = styled.section`
     props.className === "cannot" ? "center" : "none"};
 `;
 
+const LoadingParagraph = styled.p`
+  font-size: 20px;
+  margin-top: 20px;
+`;
+
 function ProductPickContainer({
   slideMove,
   onSlideBtnClick,
@@ -56,7 +61,10 @@ function ProductPickContainer({
     return (
       <Slide direction="left" in={slideMove} mountOnEnter unmountOnExit>
         <StyledProductPickContainer className="cannot">
-          <CircularProgress size={100} />
+          <CircularProgress size={100} sx={{ color: "#606060" }} />
+          <LoadingParagraph>
+            맞춤 상품을 가져오는 중입니다. 잠시만 기다려주세요.
+          </LoadingParagraph>
         </StyledProductPickContainer>
       </Slide>
     );
