@@ -1,4 +1,5 @@
 import {
+  Button,
   List,
   ListItem,
   ListItemButton,
@@ -52,8 +53,26 @@ function ProductPanel({ value, index, productArray }: ProductPanelType) {
               <ListItem disablePadding>
                 <ListItemButton>
                   <Image src={product.thumbnail_url} width={200} height={200} />
-                  <ListItemText />
+                  <ListItemText
+                    sx={{ width: "70%", height: "200px", marginLeft: "10px" }}
+                  >
+                    <div>yeah</div>
+                  </ListItemText>
                 </ListItemButton>
+                <Button
+                  variant="contained"
+                  sx={{
+                    position: "absolute",
+                    bottom: 10,
+                    right: 10,
+                  }}
+                  href={product.product_detail_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  size="large"
+                >
+                  상세페이지로 가기
+                </Button>
               </ListItem>
             </Paper>
           ))}
