@@ -13,6 +13,14 @@ interface ProductPickContainerType {
   travelMutation: UseMutationResult;
 }
 
+interface journeyDataType {
+  journey_id: number;
+  airports: [];
+  accommodations: [];
+  restaurants: [];
+  attractions: [];
+}
+
 const StyledProductPickContainer = styled.section`
   position: relative;
   width: 100%;
@@ -38,13 +46,7 @@ function ProductPickContainer({
   onSlideBtnClick,
   travelMutation,
 }: ProductPickContainerType) {
-  const {
-    data: travelData,
-    isLoading,
-    isError,
-    error,
-    isSuccess,
-  } = travelMutation;
+  const { data, isLoading, isError, error, isSuccess } = travelMutation;
 
   const [menuNum, setMenuNum] = useState(0);
 
@@ -69,15 +71,22 @@ function ProductPickContainer({
       </Slide>
     );
 
-  if (isSuccess)
+  if (isSuccess) {
+    const { airports, accommodations, restaurants, attractions } =
+      data as journeyDataType;
+
     return (
       <Slide direction="left" in={slideMove} mountOnEnter unmountOnExit>
         <StyledProductPickContainer>
           <ProductMenu menuNum={menuNum} setMenuNum={setMenuNum} />
-          <ProductPanel value={menuNum} index={0} />
-          <ProductPanel value={menuNum} index={1} />
-          <ProductPanel value={menuNum} index={2} />
-          <ProductPanel value={menuNum} index={3} />
+          <ProductPanel value={menuNum} index={0} productArray={airports} />
+          <ProductPanel
+            value={menuNum}
+            index={1}
+            productArray={accommodations}
+          />
+          <ProductPanel value={menuNum} index={2} productArray={restaurants} />
+          <ProductPanel value={menuNum} index={3} productArray={attractions} />
           <Button
             variant="contained"
             startIcon={<ChevronLeftIcon />}
@@ -114,6 +123,7 @@ function ProductPickContainer({
         </StyledProductPickContainer>
       </Slide>
     );
+  }
 }
 
 export default ProductPickContainer;

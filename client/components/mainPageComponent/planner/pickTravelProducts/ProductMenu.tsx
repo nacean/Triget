@@ -26,11 +26,25 @@ function ProductMenu({ menuNum, setMenuNum }: ProductMenuType) {
         aria-label="products-menus"
         value={menuNum}
         onChange={onMenuChange}
-        TabIndicatorProps={{ style: { backgroundColor: "#000" } }}
+        TabIndicatorProps={{
+          style: { backgroundColor: "#000", height: 1.5 },
+        }}
       >
-        <Tab label="항공" {...menuProps(0)} sx={{ fontSize: 24 }} />
-        <Tab label="숙박" {...menuProps(1)} sx={{ fontSize: 24 }} />
-        <Tab label="식당" {...menuProps(3)} sx={{ fontSize: 24 }} />
+        <Tab
+          label="항공"
+          {...menuProps(0)}
+          sx={{ fontSize: 24, borderRight: "1px solid #00000030" }}
+        />
+        <Tab
+          label="숙박"
+          {...menuProps(1)}
+          sx={{ fontSize: 24, borderRight: "1px solid #00000030" }}
+        />
+        <Tab
+          label="식당"
+          {...menuProps(3)}
+          sx={{ fontSize: 24, borderRight: "1px solid #00000030" }}
+        />
         <Tab label="액티비티" {...menuProps(4)} sx={{ fontSize: 24 }} />
       </Tabs>
     </AppBar>

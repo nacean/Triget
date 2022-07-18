@@ -17,14 +17,6 @@ import styled from "styled-components";
 import TravelSpecContainer from "./userTravelSpecs/TravelSpecContainer";
 import ProductPickContainer from "./pickTravelProducts/ProductPickContainer";
 
-interface journeyDataType {
-  journey_id: number;
-  airports: [];
-  accommodations: [];
-  restaurants: [];
-  attractions: [];
-}
-
 const StyledPlanningContainer = styled.div`
   width: 100%;
   display: flexbox;
