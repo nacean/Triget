@@ -5,6 +5,7 @@ import {
   ListItemText,
   Paper,
 } from "@mui/material";
+import Image from "next/image";
 import styled from "styled-components";
 
 interface ProductDataType {
@@ -46,11 +47,12 @@ function ProductPanel({ value, index, productArray }: ProductPanelType) {
     >
       {value === index && (
         <List>
-          {productArray.map((Product: ProductDataType) => (
+          {productArray.map((product: ProductDataType) => (
             <Paper square sx={{ marginBottom: "10px" }}>
               <ListItem disablePadding>
                 <ListItemButton>
-                  <ListItemText></ListItemText>
+                  <Image src={product.thumbnail_url} width={200} height={200} />
+                  <ListItemText />
                 </ListItemButton>
               </ListItem>
             </Paper>
