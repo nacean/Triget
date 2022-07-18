@@ -32,11 +32,48 @@ async function fetchTravelSpec(travelSpec: travelSpecType) {
       resolve({
         journey_id: 9999,
         airports: [],
-        accommodations: [],
+        accommodations: [
+          {
+            product_id: 1,
+            product_name: "롯데월드",
+            thumbnail_url:
+              "https://image.fmkorea.com/files/attach/new2/20210827/1378413927/100154207/3867607871/dd6b22fc4ee4a915b655b1594f0cdd85.png",
+            product_type: "놀이공원",
+            city: "서울",
+            district: "잠실",
+            address: "서울잠실예아",
+            longitude: 0.77,
+            latitude: 0.77,
+            price: 50000,
+            currency_code: "원",
+            review_score: 4.5,
+            popularity: 50,
+            product_detail_url: "http://www.lotteworld.com/gate.html",
+            keywords_array: ["재밌다", "신난다", "굉장해 엄청나"],
+          },
+          {
+            product_id: 2,
+            product_name: "롯데월드",
+            thumbnail_url:
+              "https://image.fmkorea.com/files/attach/new2/20210827/1378413927/100154207/3867607871/dd6b22fc4ee4a915b655b1594f0cdd85.png",
+            product_type: "놀이공원",
+            city: "서울",
+            district: "잠실",
+            address: "서울잠실예아",
+            longitude: 0.77,
+            latitude: 0.77,
+            price: 50000,
+            currency_code: "원",
+            review_score: 4.5,
+            popularity: 50,
+            product_detail_url: "http://www.lotteworld.com/gate.html",
+            keywords_array: ["재밌다", "신난다", "굉장해 엄청나"],
+          },
+        ],
         restaurants: [],
         attractions: [],
       });
-    }, 2000);
+    }, 500);
   });
 
   const travelDatas = await testPromise;
