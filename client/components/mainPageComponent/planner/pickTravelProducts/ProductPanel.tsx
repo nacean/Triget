@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ProductLocation from "./productDetails/ProductLocation";
 import ProductName from "./productDetails/ProductName";
 import ProductPopularity from "./productDetails/ProductPopularity";
+import ProductPrice from "./productDetails/ProductPrice";
 import ProductReviewRate from "./productDetails/ProductReviewRate";
 
 interface ProductDataType {
@@ -91,6 +92,10 @@ function ProductPanel({ value, index, productArray }: ProductPanelType) {
                   </StyledLeftProductContainer>
                   <StyledRightProductContainer>
                     <ProductPopularity productPopularity={product.popularity} />
+                    <ProductPrice
+                      productPrice={product.price}
+                      currency_code={product.currency_code}
+                    />
                   </StyledRightProductContainer>
                 </ListItemButton>
                 <Button
