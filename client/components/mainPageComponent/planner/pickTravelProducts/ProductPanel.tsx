@@ -44,7 +44,7 @@ const StyledRightProductContainer = styled.div`
   height: 250px;
 `;
 
-const StyledDiv = styled.div`
+const StyledSeperateDiv = styled.div`
   width: 100%;
   padding: 5px 0;
   display: flex;
@@ -73,17 +73,17 @@ function ProductPanel({ value, index, productArray }: ProductPanelType) {
                     height={250}
                   />
                   <StyledLeftProductContainer>
-                    <StyledDiv>
+                    <StyledSeperateDiv>
                       <ProductName productName={product.product_name} />
                       <ProductReviewRate reviewRate={product.review_score} />
-                    </StyledDiv>
-                    <StyledDiv>
+                    </StyledSeperateDiv>
+                    <StyledSeperateDiv>
                       <ProductLocation
                         productCity={product.city}
                         productDistrict={product.district}
                         productAddress={product.address}
                       />
-                    </StyledDiv>
+                    </StyledSeperateDiv>
                   </StyledLeftProductContainer>
                   <StyledRightProductContainer>
                     rightcontainer
