@@ -1,6 +1,7 @@
 import { Button, List, ListItem, ListItemButton, Paper } from "@mui/material";
 import Image from "next/image";
 import styled from "styled-components";
+import ProductKeywords from "./productDetails/ProductKeywords";
 import ProductLocation from "./productDetails/ProductLocation";
 import ProductName from "./productDetails/ProductName";
 import ProductPopularity from "./productDetails/ProductPopularity";
@@ -89,6 +90,7 @@ function ProductPanel({ value, index, productArray }: ProductPanelType) {
                         productAddress={product.address}
                       />
                     </StyledSeperateDiv>
+                    <ProductKeywords keywords_array={product.keywords_array} />
                   </StyledLeftProductContainer>
                   <StyledRightProductContainer>
                     <ProductPopularity productPopularity={product.popularity} />
