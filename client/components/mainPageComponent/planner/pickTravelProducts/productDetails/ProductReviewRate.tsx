@@ -9,7 +9,6 @@ function ProductReviewRate({ reviewRate }: ProductReviewRateType) {
     <Rating
       name="product-rating"
       defaultValue={reviewRate}
-      size="large"
       precision={0.5}
       readOnly
       sx={{ marginLeft: "10px" }}

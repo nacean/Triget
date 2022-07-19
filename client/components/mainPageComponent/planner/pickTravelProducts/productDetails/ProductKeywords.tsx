@@ -22,6 +22,7 @@ function ProductKeywords({ keywords_array }: ProductKeywordsType) {
             height: "40px",
             marginRight: "5px",
             fontSize: "16px",
+            fontWeight: 500,
           }}
         />
       ))}
