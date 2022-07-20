@@ -12,6 +12,7 @@ import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsStat
 import { productDataType } from "atoms/pickProductAtoms/productDataType";
 import ProductMenu from "./ProductMenu";
 import ProductPanel from "./ProductPanel";
+import PickedProductsContainer from "./showPickedProducts/pickedProductsContainer";
 
 interface ProductPickContainerType {
   slideMove: boolean;
@@ -104,6 +105,7 @@ function ProductPickContainer({
       <Slide direction="left" in={slideMove} mountOnEnter unmountOnExit>
         <StyledProductPickContainer>
           <ProductMenu menuNum={menuNum} setMenuNum={setMenuNum} />
+          <PickedProductsContainer />
           <ProductPanel
             value={menuNum}
             index={0}
