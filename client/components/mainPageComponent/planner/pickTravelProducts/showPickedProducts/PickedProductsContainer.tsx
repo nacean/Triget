@@ -4,6 +4,7 @@ import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsStat
 import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsState";
 import { productDataType } from "atoms/pickProductAtoms/productDataType";
 import { useRecoilState } from "recoil";
+import { useEffect } from "react";
 import styled from "styled-components";
 import FlightIcon from "@mui/icons-material/Flight";
 import HotelIcon from "@mui/icons-material/Hotel";
@@ -21,6 +22,10 @@ const StyledPickedProductsContainer = styled.div`
 `;
 
 function PickedProductsContainer() {
+  useEffect(() => {
+    window.scrollTo({ top: 1070, left: 0, behavior: "smooth" });
+  });
+
   const [pickedAirports, setPickedAirports] =
     useRecoilState<productDataType[]>(pickedAirportsState);
   const [pickedAccommodations, setPickedAccommodations] = useRecoilState<
