@@ -12,7 +12,7 @@ import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsStat
 import { productDataType } from "atoms/pickProductAtoms/productDataType";
 import ProductMenu from "./ProductMenu";
 import ProductPanel from "./ProductPanel";
-import PickedProductsContainer from "./showPickedProducts/pickedProductsContainer";
+import PickedProductsContainer from "./showPickedProducts/PickedProductsContainer";
 
 interface ProductPickContainerType {
   slideMove: boolean;
