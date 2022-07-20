@@ -4,6 +4,12 @@ import { Slide, Button, CircularProgress } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import SearchIcon from "@mui/icons-material/Search";
 import { UseMutationResult } from "react-query";
+import { useRecoilState } from "recoil";
+import pickedAirportsState from "atoms/pickProductAtoms/pickedAirportsState";
+import pickedAccommodationsState from "atoms/pickProductAtoms/pickedAccommodationsState";
+import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsState";
+import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsState";
+import { productDataType } from "atoms/pickProductAtoms/productDataType";
 import ProductMenu from "./ProductMenu";
 import ProductPanel from "./ProductPanel";
 
@@ -49,6 +55,25 @@ function ProductPickContainer({
   const { data, isLoading, isError, error, isSuccess } = travelMutation;
 
   const [menuNum, setMenuNum] = useState(0);
+  const [pickedAirports, setPickedAirports] =
+    useRecoilState<productDataType[]>(pickedAirportsState);
+  const [pickedAccommodations, setPickedAccommodations] = useRecoilState<
+    productDataType[]
+  >(pickedAccommodationsState);
+  const [pickedRestaurants, setPickedRestaurants] = useRecoilState<
+    productDataType[]
+  >(pickedRestaurantsState);
+  const [pickedAttractions, setPickedAttractions] = useRecoilState<
+    productDataType[]
+  >(pickedAttractionsState);
+
+  const onBackBtnClick = () => {
+    onSlideBtnClick();
+    setPickedAirports([]);
+    setPickedAccommodations([]);
+    setPickedRestaurants([]);
+    setPickedAttractions([]);
+  };
 
   if (isError)
     return (
@@ -79,14 +104,34 @@ function ProductPickContainer({
       <Slide direction="left" in={slideMove} mountOnEnter unmountOnExit>
         <StyledProductPickContainer>
           <ProductMenu menuNum={menuNum} setMenuNum={setMenuNum} />
-          <ProductPanel value={menuNum} index={0} productArray={airports} />
+          <ProductPanel
+            value={menuNum}
+            index={0}
+            productArray={airports}
+            pickedProducts={pickedAirports}
+            setPickedProducts={setPickedAirports}
+          />
           <ProductPanel
             value={menuNum}
             index={1}
             productArray={accommodations}
+            pickedProducts={pickedAccommodations}
+            setPickedProducts={setPickedAccommodations}
           />
-          <ProductPanel value={menuNum} index={2} productArray={restaurants} />
-          <ProductPanel value={menuNum} index={3} productArray={attractions} />
+          <ProductPanel
+            value={menuNum}
+            index={2}
+            productArray={restaurants}
+            pickedProducts={pickedRestaurants}
+            setPickedProducts={setPickedRestaurants}
+          />
+          <ProductPanel
+            value={menuNum}
+            index={3}
+            productArray={attractions}
+            pickedProducts={pickedAttractions}
+            setPickedProducts={setPickedAttractions}
+          />
           <Button
             variant="contained"
             startIcon={<ChevronLeftIcon />}
@@ -101,7 +146,7 @@ function ProductPickContainer({
                 backgroundColor: "#616161",
               },
             }}
-            onClick={onSlideBtnClick}
+            onClick={onBackBtnClick}
           >
             뒤로가기
           </Button>

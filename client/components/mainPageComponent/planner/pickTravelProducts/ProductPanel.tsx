@@ -1,5 +1,7 @@
-import { Button, List, ListItem, ListItemButton, Paper } from "@mui/material";
+import { List, ListItem, ListItemButton, Paper } from "@mui/material";
+import { productDataType } from "atoms/pickProductAtoms/productDataType";
 import Image from "next/image";
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import ProductKeywords from "./productDetails/ProductKeywords";
 import ProductLocation from "./productDetails/ProductLocation";
@@ -7,29 +9,14 @@ import ProductName from "./productDetails/ProductName";
 import ProductPopularity from "./productDetails/ProductPopularity";
 import ProductPrice from "./productDetails/ProductPrice";
 import ProductReviewRate from "./productDetails/ProductReviewRate";
-
-interface ProductDataType {
-  product_id: number;
-  product_name: string;
-  thumbnail_url: string;
-  product_type: string;
-  city: string;
-  district: string;
-  address: string;
-  longitude: number;
-  latitude: number;
-  price: number;
-  currency_code: string;
-  review_score: number;
-  popularity: number;
-  product_detail_url: string;
-  keywords_array: string[];
-}
+import ProductPickBtn from "./ProductPickBtn";
 
 interface ProductPanelType {
   value: number;
   index: number;
-  productArray: ProductDataType[];
+  productArray: productDataType[];
+  pickedProducts: productDataType[];
+  setPickedProducts: Dispatch<SetStateAction<productDataType[]>>;
 }
 
 const StyledPanel = styled.div`
@@ -58,7 +45,21 @@ const StyledSeperateDiv = styled.div`
   align-items: center;
 `;
 
-function ProductPanel({ value, index, productArray }: ProductPanelType) {
+function ProductPanel({
+  value,
+  index,
+  productArray,
+  pickedProducts,
+  setPickedProducts,
+}: ProductPanelType) {
+  const isInPickedArray = (newProduct_id: number): boolean => {
+    return (
+      pickedProducts.findIndex(
+        productParam => newProduct_id === productParam.product_id,
+      ) !== -1
+    );
+  };
+
   return (
     <StyledPanel
       role="tabpanel"
@@ -68,10 +69,14 @@ function ProductPanel({ value, index, productArray }: ProductPanelType) {
     >
       {value === index && (
         <List>
-          {productArray.map((product: ProductDataType) => (
+          {productArray.map((product: productDataType) => (
             <Paper square sx={{ marginBottom: "10px" }}>
               <ListItem disablePadding>
-                <ListItemButton>
+                <ListItemButton
+                  href={product.product_detail_url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <Image
                     src={product.thumbnail_url}
                     alt="Product Thumbnail"
@@ -100,23 +105,15 @@ function ProductPanel({ value, index, productArray }: ProductPanelType) {
                     />
                   </StyledRightProductContainer>
                 </ListItemButton>
-                <Button
-                  variant="contained"
-                  sx={{
-                    position: "absolute",
-                    bottom: 10,
-                    right: 10,
-                  }}
-                  href={product.product_detail_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  size="large"
-                >
-                  상세페이지로 가기
-                </Button>
+                <ProductPickBtn
+                  product={product}
+                  setPickedProducts={setPickedProducts}
+                  pickOrNot={isInPickedArray(product.product_id)}
+                />
               </ListItem>
             </Paper>
           ))}
+          <ListItem disablePadding sx={{ height: "50px" }} />
         </List>
       )}
     </StyledPanel>

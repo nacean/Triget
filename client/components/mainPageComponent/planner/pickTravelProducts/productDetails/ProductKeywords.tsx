@@ -7,9 +7,10 @@ interface ProductKeywordsType {
 
 const StyledProductKeywordsContainer = styled.div`
   width: 100%;
-  margin-top: 100px;
+  margin-top: 145px;
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-end;
 `;
 
 function ProductKeywords({ keywords_array }: ProductKeywordsType) {
