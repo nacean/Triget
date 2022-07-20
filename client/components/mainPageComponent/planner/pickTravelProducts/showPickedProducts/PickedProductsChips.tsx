@@ -1,4 +1,4 @@
-import { Chip } from "@mui/material";
+import { Badge, Chip, SvgIconProps } from "@mui/material";
 import { productDataType } from "atoms/pickProductAtoms/productDataType";
 import { SetterOrUpdater } from "recoil";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ interface PickedProductsChipsType {
   productKind: string;
   pickedProducts: productDataType[];
   setPickedProducts: SetterOrUpdater<productDataType[]>;
+  icon: React.ReactElement<SvgIconProps>;
 }
 
 const StyledChipsContainer = styled.div`
@@ -18,15 +19,18 @@ const StyledChipsContainer = styled.div`
 `;
 
 const StyledProductKind = styled.p`
-  color: #6e767c;
+  display: flex;
+  align-items: center;
+  color: #9e9e9e;
   font-size: 18px;
-  margin-right: 10px;
+  margin-right: 5px;
 `;
 
 function PickedProductsChips({
   productKind,
   pickedProducts,
   setPickedProducts,
+  icon,
 }: PickedProductsChipsType) {
   const onChipDelete = (newProduct_id: number) => {
     setPickedProducts(
@@ -38,7 +42,13 @@ function PickedProductsChips({
 
   return (
     <StyledChipsContainer>
-      <StyledProductKind>{`${productKind} : `}</StyledProductKind>
+      <Badge
+        badgeContent={pickedProducts.length}
+        sx={{ color: "#9e9e9e", marginRight: "3px" }}
+      >
+        {icon}
+      </Badge>
+      <StyledProductKind>{`${productKind}`}</StyledProductKind>
       {pickedProducts.map(product => (
         <Chip
           label={product.product_name}

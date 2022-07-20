@@ -5,10 +5,14 @@ import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsStat
 import { productDataType } from "atoms/pickProductAtoms/productDataType";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import FlightIcon from "@mui/icons-material/Flight";
+import HotelIcon from "@mui/icons-material/Hotel";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
+import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import PickedProductsChips from "./PickedProductsChips";
 
 const StyledPickedProductsContainer = styled.div`
-  width: 90%;
+  width: 95%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,21 +38,25 @@ function PickedProductsContainer() {
         productKind="항공"
         pickedProducts={pickedAirports}
         setPickedProducts={setPickedAirports}
+        icon={<FlightIcon />}
       />
       <PickedProductsChips
         productKind="숙박"
         pickedProducts={pickedAccommodations}
         setPickedProducts={setPickedAccommodations}
+        icon={<HotelIcon />}
       />
       <PickedProductsChips
         productKind="식당"
         pickedProducts={pickedRestaurants}
         setPickedProducts={setPickedRestaurants}
+        icon={<RestaurantIcon />}
       />
       <PickedProductsChips
         productKind="액티비티"
         pickedProducts={pickedAttractions}
         setPickedProducts={setPickedAttractions}
+        icon={<DirectionsRunIcon />}
       />
     </StyledPickedProductsContainer>
   );
