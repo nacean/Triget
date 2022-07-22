@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 const foodWeightState = atom<number>({
   key: "foodWeightState",
-  default: 50,
+  default: 0,
 });
 
 export default foodWeightState;
