@@ -93,7 +93,10 @@ function ProductPickContainer({
   if (isLoading)
     return (
       <Slide direction="left" in={slideMove} mountOnEnter unmountOnExit>
-        <StyledProductPickContainer className="cannot">
+        <StyledProductPickContainer
+          style={{ width: "100%" }}
+          className="cannot"
+        >
           <CircularProgress size={100} sx={{ color: "#606060" }} />
           <LoadingParagraph>
             맞춤 상품을 가져오는 중입니다. 잠시만 기다려주세요.
