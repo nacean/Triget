@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import { Slide, Button, CircularProgress } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -59,6 +60,8 @@ function ProductPickContainer({
   onSlideBtnClick,
   travelMutation,
 }: ProductPickContainerType) {
+  const router = useRouter();
+
   const { data, isLoading, isError, error, isSuccess } = travelMutation;
 
   const [menuNum, setMenuNum] = useState(0);
@@ -80,6 +83,10 @@ function ProductPickContainer({
     setPickedAccommodations([]);
     setPickedRestaurants([]);
     setPickedAttractions([]);
+  };
+
+  const onMakePlanBtnClick = () => {
+    router.push("/travelMapPage");
   };
 
   if (isError)
@@ -174,7 +181,7 @@ function ProductPickContainer({
               right: 10,
               borderRadius: "12px",
             }}
-            onClick={onSlideBtnClick}
+            onClick={onMakePlanBtnClick}
           >
             일정표 생성
           </Button>
