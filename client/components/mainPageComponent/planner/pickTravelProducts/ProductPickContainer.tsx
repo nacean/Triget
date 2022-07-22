@@ -44,6 +44,7 @@ const StyledProductPickContainer = styled.div`
 `;
 
 const StyledProductListContainer = styled.section`
+  position: relative;
   width: 100%;
   display: flex;
 `;
@@ -160,23 +161,23 @@ function ProductPickContainer({
             >
               뒤로가기
             </Button>
-            <Button
-              variant="contained"
-              endIcon={<SearchIcon />}
-              size="large"
-              color="info"
-              sx={{
-                position: "absolute",
-                bottom: 20,
-                right: 20,
-                borderRadius: "12px",
-              }}
-              onClick={onSlideBtnClick}
-            >
-              일정표 생성
-            </Button>
           </StyledProductPickContainer>
           <PickedProductsContainer />
+          <Button
+            variant="contained"
+            endIcon={<SearchIcon />}
+            size="large"
+            color="info"
+            sx={{
+              position: "absolute",
+              bottom: 20,
+              right: 10,
+              borderRadius: "12px",
+            }}
+            onClick={onSlideBtnClick}
+          >
+            일정표 생성
+          </Button>
         </StyledProductListContainer>
       </Slide>
     );
