@@ -1,6 +1,7 @@
-import { Slider } from "@mui/material";
+import { Paper, Slider } from "@mui/material";
+import budgetState from "atoms/plannerAtoms/budgetState";
 import React from "react";
-import { SetterOrUpdater } from "recoil";
+import { SetterOrUpdater, useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 const WeightTemplateContainer = styled.div`
@@ -32,6 +33,8 @@ function WeightTemplate({
   weightValue,
   setWeightValue,
 }: WeightTemplateType) {
+  const budget = useRecoilValue(budgetState);
+
   const onWeightChange = (
     newWeightEvent: Event,
     newWeight: number | Array<number>,
@@ -50,6 +53,19 @@ function WeightTemplate({
         value={weightValue}
         onChange={onWeightChange}
       />
+      <Paper
+        sx={{
+          width: "150px",
+          height: "40px",
+          marginLeft: "10px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        elevation={2}
+      >
+        {`${(budget * (weightValue / 100)).toFixed(0)} 원`}
+      </Paper>
     </WeightTemplateContainer>
   );
 }
