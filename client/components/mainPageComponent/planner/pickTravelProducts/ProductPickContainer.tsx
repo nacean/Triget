@@ -28,9 +28,9 @@ interface journeyDataType {
   attractions: [];
 }
 
-const StyledProductPickContainer = styled.section`
+const StyledProductPickContainer = styled.div`
   position: relative;
-  width: 100%;
+  width: 80%;
   height: 800px;
   border-radius: 10px;
   -webkit-box-shadow: 0px 0px 15px -1px rgba(0, 0, 0, 0.2);
@@ -41,6 +41,11 @@ const StyledProductPickContainer = styled.section`
   overflow: hidden;
   justify-content: ${props =>
     props.className === "cannot" ? "center" : "none"};
+`;
+
+const StyledProductListContainer = styled.section`
+  width: 100%;
+  display: flex;
 `;
 
 const LoadingParagraph = styled.p`
@@ -103,71 +108,73 @@ function ProductPickContainer({
 
     return (
       <Slide direction="left" in={slideMove} mountOnEnter unmountOnExit>
-        <StyledProductPickContainer>
-          <ProductMenu menuNum={menuNum} setMenuNum={setMenuNum} />
+        <StyledProductListContainer>
+          <StyledProductPickContainer>
+            <ProductMenu menuNum={menuNum} setMenuNum={setMenuNum} />
+            <ProductPanel
+              value={menuNum}
+              index={0}
+              productArray={airports}
+              pickedProducts={pickedAirports}
+              setPickedProducts={setPickedAirports}
+            />
+            <ProductPanel
+              value={menuNum}
+              index={1}
+              productArray={accommodations}
+              pickedProducts={pickedAccommodations}
+              setPickedProducts={setPickedAccommodations}
+            />
+            <ProductPanel
+              value={menuNum}
+              index={2}
+              productArray={restaurants}
+              pickedProducts={pickedRestaurants}
+              setPickedProducts={setPickedRestaurants}
+            />
+            <ProductPanel
+              value={menuNum}
+              index={3}
+              productArray={attractions}
+              pickedProducts={pickedAttractions}
+              setPickedProducts={setPickedAttractions}
+            />
+            <Button
+              variant="contained"
+              startIcon={<ChevronLeftIcon />}
+              size="large"
+              sx={{
+                position: "absolute",
+                bottom: 20,
+                left: 20,
+                backgroundColor: "#424242",
+                borderRadius: "12px",
+                ":hover": {
+                  backgroundColor: "#616161",
+                },
+              }}
+              onClick={onBackBtnClick}
+            >
+              뒤로가기
+            </Button>
+            <Button
+              variant="contained"
+              endIcon={<SearchIcon />}
+              size="large"
+              color="info"
+              sx={{
+                position: "absolute",
+                bottom: 20,
+                right: 20,
+                borderRadius: "12px",
+              }}
+              onClick={onSlideBtnClick}
+            >
+              일정표 생성
+            </Button>
+          </StyledProductPickContainer>
           <PickedProductsContainer />
-          <ProductPanel
-            value={menuNum}
-            index={0}
-            productArray={airports}
-            pickedProducts={pickedAirports}
-            setPickedProducts={setPickedAirports}
-          />
-          <ProductPanel
-            value={menuNum}
-            index={1}
-            productArray={accommodations}
-            pickedProducts={pickedAccommodations}
-            setPickedProducts={setPickedAccommodations}
-          />
-          <ProductPanel
-            value={menuNum}
-            index={2}
-            productArray={restaurants}
-            pickedProducts={pickedRestaurants}
-            setPickedProducts={setPickedRestaurants}
-          />
-          <ProductPanel
-            value={menuNum}
-            index={3}
-            productArray={attractions}
-            pickedProducts={pickedAttractions}
-            setPickedProducts={setPickedAttractions}
-          />
-          <Button
-            variant="contained"
-            startIcon={<ChevronLeftIcon />}
-            size="large"
-            sx={{
-              position: "absolute",
-              bottom: 20,
-              left: 20,
-              backgroundColor: "#424242",
-              borderRadius: "12px",
-              ":hover": {
-                backgroundColor: "#616161",
-              },
-            }}
-            onClick={onBackBtnClick}
-          >
-            뒤로가기
-          </Button>
-          <Button
-            variant="contained"
-            endIcon={<SearchIcon />}
-            size="large"
-            color="info"
-            sx={{
-              position: "absolute",
-              bottom: 20,
-              right: 20,
-              borderRadius: "12px",
-            }}
-            onClick={onSlideBtnClick}
-          >
-            일정표 생성
-          </Button>
-        </StyledProductPickContainer>
+        </StyledProductListContainer>
       </Slide>
     );
   }

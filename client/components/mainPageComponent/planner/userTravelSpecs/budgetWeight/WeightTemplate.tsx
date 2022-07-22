@@ -52,6 +52,7 @@ function WeightTemplate({
         sx={{ color: "#bababa" }}
         value={weightValue}
         onChange={onWeightChange}
+        max={budget}
       />
       <Paper
         sx={{
@@ -64,7 +65,7 @@ function WeightTemplate({
         }}
         elevation={2}
       >
-        {`${(budget * (weightValue / 100)).toFixed(0)} 원`}
+        {`${weightValue} 원`}
       </Paper>
     </WeightTemplateContainer>
   );

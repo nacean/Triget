@@ -1,7 +1,18 @@
-import { Badge, Chip, SvgIconProps } from "@mui/material";
+import {
+  Badge,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  SvgIconProps,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { productDataType } from "atoms/pickProductAtoms/productDataType";
 import { SetterOrUpdater } from "recoil";
 import styled from "styled-components";
+import Image from "next/image";
 
 interface PickedProductsChipsType {
   productKind: string;
@@ -12,18 +23,7 @@ interface PickedProductsChipsType {
 
 const StyledChipsContainer = styled.div`
   width: 100%;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-`;
-
-const StyledProductKind = styled.p`
-  display: flex;
-  align-items: center;
-  color: #9e9e9e;
-  font-size: 18px;
-  margin-right: 5px;
+  min-height: 50px;
 `;
 
 function PickedProductsChips({
@@ -32,7 +32,7 @@ function PickedProductsChips({
   setPickedProducts,
   icon,
 }: PickedProductsChipsType) {
-  const onChipDelete = (newProduct_id: number) => {
+  const onItemDelete = (newProduct_id: number) => {
     setPickedProducts(
       pickedProducts.filter(
         productParam => productParam.product_id !== newProduct_id,
@@ -42,21 +42,49 @@ function PickedProductsChips({
 
   return (
     <StyledChipsContainer>
-      <Badge
-        badgeContent={pickedProducts.length}
-        sx={{ color: "#9e9e9e", marginRight: "3px" }}
-      >
-        {icon}
-      </Badge>
-      <StyledProductKind>{`${productKind}`}</StyledProductKind>
-      {pickedProducts.map(product => (
-        <Chip
-          label={product.product_name}
-          variant="outlined"
-          onDelete={() => onChipDelete(product.product_id)}
-          sx={{ marginRight: "5px" }}
-        />
-      ))}
+      <Divider sx={{ color: "#9e9e9e" }}>
+        <Badge
+          badgeContent={pickedProducts.length}
+          sx={{ color: "#9e9e9e", marginRight: "3px" }}
+        >
+          {icon}
+        </Badge>
+        {productKind}
+      </Divider>
+      <List>
+        {pickedProducts.map(product => (
+          <Paper variant="outlined" sx={{ marginBottom: "3px" }}>
+            <ListItem
+              secondaryAction={
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => {
+                    onItemDelete(product.product_id);
+                  }}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              }
+              sx={{ borderTopColor: "#9e9e9e" }}
+            >
+              <Image
+                src={product.thumbnail_url}
+                alt="pickedProductImage"
+                width={50}
+                height={50}
+              />
+              <ListItemText
+                primary={product.product_name}
+                sx={{
+                  width: "50%",
+                  marginLeft: "10px",
+                }}
+              />
+            </ListItem>
+          </Paper>
+        ))}
+      </List>
     </StyledChipsContainer>
   );
 }
