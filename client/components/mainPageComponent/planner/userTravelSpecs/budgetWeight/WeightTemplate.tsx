@@ -11,7 +11,7 @@ const WeightTemplateContainer = styled.div`
 `;
 
 const WeightSubject = styled.h3`
-  width: 90px;
+  width: 100px;
   height: 40px;
   margin-right: 10px;
   display: flex;
