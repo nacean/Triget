@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledMapContainer = styled.section`
   width: 65%;
-  border: 1px solid black;
+  border: 1px solid #dee2e6;
 `;
 
 function MapContainer() {
