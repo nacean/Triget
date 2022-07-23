@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { productDataType } from "./productDataType";
+import { productDataType } from "../../types/productDataType";
 
 const pickedAirportsState = atom<productDataType[]>({
   key: "pickedAirportsState",
