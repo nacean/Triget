@@ -9,7 +9,7 @@ import {
   SvgIconProps,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { productDataType } from "atoms/pickProductAtoms/productDataType";
+import { productDataType } from "types/productDataType";
 import { SetterOrUpdater } from "recoil";
 import styled from "styled-components";
 import Image from "next/image";

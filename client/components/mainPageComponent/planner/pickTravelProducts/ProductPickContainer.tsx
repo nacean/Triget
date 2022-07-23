@@ -10,7 +10,7 @@ import pickedAirportsState from "atoms/pickProductAtoms/pickedAirportsState";
 import pickedAccommodationsState from "atoms/pickProductAtoms/pickedAccommodationsState";
 import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsState";
 import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsState";
-import { productDataType } from "atoms/pickProductAtoms/productDataType";
+import { productDataType } from "types/productDataType";
 import ProductMenu from "./ProductMenu";
 import ProductPanel from "./ProductPanel";
 import PickedProductsContainer from "./showPickedProducts/PickedProductsContainer";

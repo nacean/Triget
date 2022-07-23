@@ -1,5 +1,5 @@
 import { List, ListItem, ListItemButton, Paper } from "@mui/material";
-import { productDataType } from "atoms/pickProductAtoms/productDataType";
+import { productDataType } from "types/productDataType";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";

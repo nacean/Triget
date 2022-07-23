@@ -2,7 +2,7 @@ import pickedAccommodationsState from "atoms/pickProductAtoms/pickedAccommodatio
 import pickedAirportsState from "atoms/pickProductAtoms/pickedAirportsState";
 import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsState";
 import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsState";
-import { productDataType } from "atoms/pickProductAtoms/productDataType";
+import { productDataType } from "types/productDataType";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 import { Button } from "@mui/material";
