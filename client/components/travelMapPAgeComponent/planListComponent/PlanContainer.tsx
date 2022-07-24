@@ -10,10 +10,14 @@ import { productDataType } from "types/productDataType";
 import { travelListType } from "types/travelListType";
 import PlanHeader from "./PlanHeader";
 import PlanStepContainer from "./planSteps/PlanStepContainer";
+import RescheduleBtn from "./RescheduleBtn";
 
 const StyledPlanContainer = styled.section`
   width: 35%;
+  height: 100%;
   border: 1px solid #dee2e6;
+  display: flex;
+  flex-direction: column;
 `;
 
 function PlanContainer() {
@@ -39,6 +43,7 @@ function PlanContainer() {
       <StyledPlanContainer>
         <PlanHeader />
         <PlanStepContainer travelListArray={travelListArray} />
+        <RescheduleBtn />
       </StyledPlanContainer>
     );
   }
