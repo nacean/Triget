@@ -19,7 +19,7 @@ const IndexSphere = styled.div`
   width: 24px;
   height: 24px;
   font-size: 14px;
-  background-color: black;
+  background-color: ${({ color }) => color};
   color: white;
   border-radius: 100%;
   display: flex;
@@ -36,8 +36,17 @@ function PlanStep({ isPicked, product, index, onStepClick }: PlanStepType) {
         onClick={() => {
           onStepClick(product, index);
         }}
+        sx={{
+          "&.Mui-selected": {
+            borderRadius: "10px",
+          },
+        }}
       >
-        <ListItemIcon sx={{ fontSize: 18 }}>{product.travel_time}</ListItemIcon>
+        <ListItemIcon
+          sx={{ fontSize: 18, color: isPicked ? "#000" : "#A4A5B6" }}
+        >
+          {product.travel_time}
+        </ListItemIcon>
         <ListItemText>
           <Paper
             elevation={2}
@@ -47,9 +56,12 @@ function PlanStep({ isPicked, product, index, onStepClick }: PlanStepType) {
               display: "flex",
               alignItems: "center",
               marginLeft: "20px",
+              color: isPicked ? "#000" : "#2C2E39",
             }}
           >
-            <IndexSphere>{index}</IndexSphere>
+            <IndexSphere color={isPicked ? "#000" : "#A4A5B6"}>
+              {index}
+            </IndexSphere>
             {product.product_name}
           </Paper>
         </ListItemText>
