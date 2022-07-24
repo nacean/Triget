@@ -30,12 +30,13 @@ const IndexSphere = styled.div`
 
 function PlanStep({ isPicked, product, index, onStepClick }: PlanStepType) {
   return (
-    <ListItem>
+    <ListItem sx={{ width: "100%" }}>
       <ListItemButton
         selected={isPicked}
         onClick={() => {
           onStepClick(product, index);
         }}
+        sx={{ width: "27vw" }}
       >
         <ListItemIcon
           sx={{ fontSize: 18, color: isPicked ? "#000" : "#A4A5B6" }}
@@ -46,11 +47,11 @@ function PlanStep({ isPicked, product, index, onStepClick }: PlanStepType) {
           <Paper
             elevation={2}
             sx={{
-              width: "20vw",
+              width: "95%",
               height: "50px",
               display: "flex",
               alignItems: "center",
-              marginLeft: "20px",
+              marginLeft: "5%",
               color: isPicked ? "#000" : "#2C2E39",
             }}
           >
