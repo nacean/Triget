@@ -36,11 +36,6 @@ function PlanStep({ isPicked, product, index, onStepClick }: PlanStepType) {
         onClick={() => {
           onStepClick(product, index);
         }}
-        sx={{
-          "&.Mui-selected": {
-            borderRadius: "10px",
-          },
-        }}
       >
         <ListItemIcon
           sx={{ fontSize: 18, color: isPicked ? "#000" : "#A4A5B6" }}
