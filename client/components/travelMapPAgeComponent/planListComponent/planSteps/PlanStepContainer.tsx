@@ -2,10 +2,11 @@ import { List } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
 import { travelListType } from "types/travelListType";
+import { travelMovingTime } from "types/travelMovingTime";
 import PlanStep from "./PlanStep";
 
 interface PlanStepContainerType {
-  travelListArray: travelListType[];
+  travelListArray: (travelListType | travelMovingTime)[];
 }
 
 const StyledPlanStepContainer = styled.div`

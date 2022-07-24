@@ -1,5 +1,5 @@
 export interface travelListType {
-  travelTime: string;
+  travel_time: string;
   product_id: number;
   product_name: string;
   thumbnail_url: string;

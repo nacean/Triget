@@ -8,6 +8,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { productDataType } from "types/productDataType";
 import { travelListType } from "types/travelListType";
+import { travelMovingTime } from "types/travelMovingTime";
 import PlanHeader from "./PlanHeader";
 import PlanStepContainer from "./planSteps/PlanStepContainer";
 import RescheduleBtn from "./RescheduleBtn";
@@ -38,7 +39,7 @@ function PlanContainer() {
     fetchTravelPlanList,
   );
   if (isSuccess) {
-    const travelListArray = data as travelListType[];
+    const travelListArray = data as (travelListType | travelMovingTime)[];
     return (
       <StyledPlanContainer>
         <PlanHeader />

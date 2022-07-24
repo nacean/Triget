@@ -1,18 +1,13 @@
-interface pickedProducts {
-  place: string;
-  people_num: number;
-  departure_date: any;
-  arrival_date: any;
-  departure_airport: string;
-  budget: number;
-  journey_theme: string;
-  airport_prior: number;
-  accommodation_prior: number;
-  restaurant_prior: number;
-  activity_prior: number;
+import { productDataType } from "types/productDataType";
+
+interface pickedProductsType {
+  airport: productDataType;
+  accomodation: productDataType[];
+  restaurant: productDataType[];
+  attraction: productDataType[];
 }
 
-async function fetchTravelPlanList(travelSpec: pickedProducts) {
+async function fetchTravelPlanList() {
   const testPromise = new Promise(resolve => {
     setTimeout(() => {
       resolve([
@@ -36,6 +31,10 @@ async function fetchTravelPlanList(travelSpec: pickedProducts) {
           keywords_array: ["재밌다", "신난다", "굉장해 엄청나"],
         },
         {
+          moving_type: "도보",
+          moving_time: 8,
+        },
+        {
           travel_time: "14:00",
           product_id: 1,
           product_name: "하얏트 리젠시 와이키키 비치 리조트 & 스파",
@@ -55,6 +54,10 @@ async function fetchTravelPlanList(travelSpec: pickedProducts) {
           keywords_array: ["재밌다", "신난다", "굉장해 엄청나"],
         },
         {
+          moving_type: "도보",
+          moving_time: 15,
+        },
+        {
           travel_time: "15:30",
           product_id: 2,
           product_name: "와이키키 비치",
@@ -72,6 +75,10 @@ async function fetchTravelPlanList(travelSpec: pickedProducts) {
           popularity: 50,
           product_detail_url: "http://www.lotteworld.com/gate.html",
           keywords_array: ["재밌다", "신난다", "굉장해 엄청나"],
+        },
+        {
+          moving_type: "자가용",
+          moving_time: 10,
         },
         {
           travel_time: "16:30",
