@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { travelListType } from "types/travelListType";
 import { travelMovingTime } from "types/travelMovingTime";
+import MovingTime from "./MovingTime";
 import PlanStep from "./PlanStep";
 
 interface PlanStepContainerType {
@@ -15,29 +16,44 @@ const StyledPlanStepContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
 `;
 
 function PlanStepContainer({ travelListArray }: PlanStepContainerType) {
   const [nowPickIndex, setNowPickIndex] = useState<number>(-1);
   const [nowPickStep, setNowPickStep] = useState<travelListType | null>(null);
+  let travelIndex = 0;
 
   const onStepClick = (productParam: travelListType, indexParam: number) => {
     setNowPickIndex(indexParam);
     setNowPickStep(productParam);
   };
 
+  const productOrTimeComponent = (
+    product: travelListType | travelMovingTime,
+  ) => {
+    // if it is time Obj
+    if ("moving_time" in product) {
+      return <MovingTime timeObj={product as travelMovingTime} />;
+    }
+
+    // else it is product Obj
+    travelIndex += 1;
+    return (
+      <PlanStep
+        isPicked={nowPickIndex === travelIndex}
+        product={product as travelListType}
+        index={travelIndex}
+        onStepClick={onStepClick}
+      />
+    );
+  };
+
   return (
     <StyledPlanStepContainer>
       <List>
-        {travelListArray.map((product, index) => (
-          <PlanStep
-            isPicked={nowPickIndex === index}
-            product={product}
-            index={index}
-            onStepClick={onStepClick}
-          />
-        ))}
+        {travelListArray.map((product: travelListType | travelMovingTime) =>
+          productOrTimeComponent(product),
+        )}
       </List>
     </StyledPlanStepContainer>
   );

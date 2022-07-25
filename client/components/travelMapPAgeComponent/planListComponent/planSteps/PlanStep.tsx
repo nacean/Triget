@@ -30,7 +30,7 @@ const IndexSphere = styled.div`
 
 function PlanStep({ isPicked, product, index, onStepClick }: PlanStepType) {
   return (
-    <ListItem sx={{ width: "100%" }}>
+    <ListItem sx={{ width: "100%" }} disablePadding>
       <ListItemButton
         selected={isPicked}
         onClick={() => {
