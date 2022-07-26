@@ -9,17 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.7.0",
     "@date-io/dayjs": "^2.14.0",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
-    "@googlemaps/react-wrapper": "^1.1.35",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.7",
     "@mui/styled-engine-sc": "^5.8.0",
     "@mui/x-date-pickers": "^5.0.0-beta.0",
     "@react-google-maps/api": "^2.12.1",
-    "antd": "^4.21.5",
     "babel-plugin-styled-components": "^2.0.7",
     "dayjs": "^1.11.3",
     "next": "12.2.1",
