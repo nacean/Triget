@@ -11,6 +11,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { productDataType } from "types/productDataType";
 import { travelListType } from "types/travelListType";
+import { travelMovingTime } from "types/travelMovingTime";
 
 const StyledTravelMapPage = styled.article`
   width: 100%;
