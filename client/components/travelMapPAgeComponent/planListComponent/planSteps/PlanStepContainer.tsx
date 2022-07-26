@@ -1,5 +1,5 @@
 import { List } from "@mui/material";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import { travelListType } from "types/travelListType";
 import { travelMovingTime } from "types/travelMovingTime";
@@ -8,6 +8,7 @@ import PlanStep from "./PlanStep";
 
 interface PlanStepContainerType {
   travelListArray: (travelListType | travelMovingTime)[];
+  setNowPickStep: Dispatch<SetStateAction<travelListType>>;
 }
 
 const StyledPlanStepContainer = styled.div`
@@ -18,9 +19,11 @@ const StyledPlanStepContainer = styled.div`
   align-items: center;
 `;
 
-function PlanStepContainer({ travelListArray }: PlanStepContainerType) {
+function PlanStepContainer({
+  travelListArray,
+  setNowPickStep,
+}: PlanStepContainerType) {
   const [nowPickIndex, setNowPickIndex] = useState<number>(-1);
-  const [nowPickStep, setNowPickStep] = useState<travelListType | null>(null);
   let travelIndex = 0;
 
   const onStepClick = (productParam: travelListType, indexParam: number) => {

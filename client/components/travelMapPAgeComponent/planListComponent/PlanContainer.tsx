@@ -1,17 +1,15 @@
-import pickedAccommodationsState from "atoms/pickProductAtoms/pickedAccommodationsState";
-import pickedAirportsState from "atoms/pickProductAtoms/pickedAirportsState";
-import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsState";
-import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsState";
-import fetchTravelPlanList from "modules/fetchTravelPlanList";
-import { useQuery } from "react-query";
-import { useRecoilState } from "recoil";
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { productDataType } from "types/productDataType";
 import { travelListType } from "types/travelListType";
 import { travelMovingTime } from "types/travelMovingTime";
 import PlanHeader from "./PlanHeader";
 import PlanStepContainer from "./planSteps/PlanStepContainer";
 import RescheduleBtn from "./RescheduleBtn";
+
+interface PlanContainerType {
+  travelListArray: (travelListType | travelMovingTime)[];
+  setNowPickStep: Dispatch<SetStateAction<travelListType>>;
+}
 
 const StyledPlanContainer = styled.section`
   width: 35%;
@@ -21,33 +19,17 @@ const StyledPlanContainer = styled.section`
   flex-direction: column;
 `;
 
-function PlanContainer() {
-  const [pickedAirports, setPickedAirports] =
-    useRecoilState<productDataType[]>(pickedAirportsState);
-  const [pickedAccommodations, setPickedAccommodations] = useRecoilState<
-    productDataType[]
-  >(pickedAccommodationsState);
-  const [pickedRestaurants, setPickedRestaurants] = useRecoilState<
-    productDataType[]
-  >(pickedRestaurantsState);
-  const [pickedAttractions, setPickedAttractions] = useRecoilState<
-    productDataType[]
-  >(pickedAttractionsState);
-
-  const { data, isSuccess, isLoading, isError, error } = useQuery(
-    "travelList",
-    fetchTravelPlanList,
+function PlanContainer({ travelListArray, setNowPickStep }: PlanContainerType) {
+  return (
+    <StyledPlanContainer>
+      <PlanHeader />
+      <PlanStepContainer
+        travelListArray={travelListArray}
+        setNowPickStep={setNowPickStep}
+      />
+      <RescheduleBtn />
+    </StyledPlanContainer>
   );
-  if (isSuccess) {
-    const travelListArray = data as (travelListType | travelMovingTime)[];
-    return (
-      <StyledPlanContainer>
-        <PlanHeader />
-        <PlanStepContainer travelListArray={travelListArray} />
-        <RescheduleBtn />
-      </StyledPlanContainer>
-    );
-  }
 }
 
 export default PlanContainer;
