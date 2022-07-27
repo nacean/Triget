@@ -3,12 +3,18 @@ import { GoogleMap, LoadScriptNext } from "@react-google-maps/api";
 import { travelListType } from "types/travelListType";
 import { travelMovingTime } from "types/travelMovingTime";
 import { Dispatch, SetStateAction } from "react";
+import MapPolyLines from "./MapPolyLines";
 import MapMarker from "./MapMarker";
 
 interface MapContainerType {
   travelListArray: (travelListType | travelMovingTime)[];
   nowPickStep: travelListType | null;
   setNowPickStep: Dispatch<SetStateAction<travelListType>>;
+}
+
+interface pathType {
+  lat: number;
+  lng: number;
 }
 
 const StyledMapContainer = styled.section`
@@ -21,7 +27,7 @@ function MapContainer({
   nowPickStep,
   setNowPickStep,
 }: MapContainerType) {
-  let productIndex = 0;
+  let index = 0;
 
   const containerStyle = {
     width: "100%",
@@ -32,6 +38,19 @@ function MapContainer({
     lat: 37.5124159,
     lng: 127.0992765,
   };
+
+  // 이동 시간을 제외한 순수 product만 있는 배열
+  const productsExceptMovingTime: travelListType[] = travelListArray.filter(
+    (product: travelListType | travelMovingTime) => !("moving_time" in product),
+  ) as travelListType[];
+
+  // product 에서 path만 따로 관리, 다른 map component에 대해 사용
+  const travelPaths: pathType[] = productsExceptMovingTime.map(
+    (product: travelListType) => ({
+      lat: product.latitude,
+      lng: product.longitude,
+    }),
+  );
 
   return (
     <StyledMapContainer>
@@ -45,18 +64,11 @@ function MapContainer({
             zoomControl: true,
           }}
         >
-          {travelListArray.map((product: travelListType | travelMovingTime) => {
-            if ("moving_time" in product) {
-              return null;
-            }
-            productIndex += 1;
-            return (
-              <MapMarker
-                product={product as travelListType}
-                productIndex={productIndex}
-              />
-            );
+          {productsExceptMovingTime.map((product: travelListType) => {
+            index += 1;
+            return <MapMarker product={product} productIndex={index} />;
           })}
+          <MapPolyLines travelPaths={travelPaths} />
         </GoogleMap>
       </LoadScriptNext>
     </StyledMapContainer>
