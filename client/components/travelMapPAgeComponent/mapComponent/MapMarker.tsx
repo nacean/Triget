@@ -18,20 +18,22 @@ const getPixelPositionOffset = (width: number, height: number) => ({
   y: -(height / 2),
 });
 
-const StyledMarker = styled.div`
-  width: 30px;
-  height: 30px;
-  background-color: #000;
-  border: 1px solid black;
-  border-radius: 100%;
-  color: white;
-  font-size: 18px;
-  font-weight: 300;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-`;
+const selectedMarkerColor = {
+  backgroundColor: "#000",
+  color: "#fff",
+  "&:hover": {
+    backgroundColor: "#000",
+  },
+};
+
+const nonSelectedMarkerColor = {
+  backgroundColor: "#fff",
+  color: "#838593",
+  border: "1px solid #CACBDB",
+  "&:hover": {
+    backgroundColor: "#CACBDB",
+  },
+};
 
 function MapMarker({
   product,
@@ -45,6 +47,14 @@ function MapMarker({
     setNowPickIndex(productIndex);
   };
 
+  const nowBtnColor = () => {
+    if (nowPickStep === null) return nonSelectedMarkerColor;
+
+    if (product.product_id === nowPickStep.product_id)
+      return selectedMarkerColor;
+
+    return nonSelectedMarkerColor;
+  };
   return (
     <OverlayView
       mapPaneName={OverlayView.FLOAT_PANE}
@@ -58,16 +68,14 @@ function MapMarker({
           height: "30px",
           minWidth: 0,
           padding: 0,
-          backgroundColor: "#000",
-          border: "1px solid black",
           borderRadius: "100%",
-          color: "#fff",
           fontSize: "18px",
           fontWeight: 300,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           zIndex: 10,
+          ...nowBtnColor(),
         }}
         onClick={onMarkerClick}
       >
