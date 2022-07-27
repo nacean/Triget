@@ -9,6 +9,8 @@ import RescheduleBtn from "./RescheduleBtn";
 interface PlanContainerType {
   travelListArray: (travelListType | travelMovingTime)[];
   setNowPickStep: Dispatch<SetStateAction<travelListType>>;
+  nowPickIndex: number;
+  setNowPickIndex: Dispatch<SetStateAction<number>>;
 }
 
 const StyledPlanContainer = styled.section`
@@ -19,13 +21,20 @@ const StyledPlanContainer = styled.section`
   flex-direction: column;
 `;
 
-function PlanContainer({ travelListArray, setNowPickStep }: PlanContainerType) {
+function PlanContainer({
+  travelListArray,
+  setNowPickStep,
+  nowPickIndex,
+  setNowPickIndex,
+}: PlanContainerType) {
   return (
     <StyledPlanContainer>
       <PlanHeader />
       <PlanStepContainer
         travelListArray={travelListArray}
         setNowPickStep={setNowPickStep}
+        nowPickIndex={nowPickIndex}
+        setNowPickIndex={setNowPickIndex}
       />
       <RescheduleBtn />
     </StyledPlanContainer>

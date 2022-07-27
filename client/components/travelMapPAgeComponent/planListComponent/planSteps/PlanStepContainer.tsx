@@ -9,6 +9,8 @@ import PlanStep from "./PlanStep";
 interface PlanStepContainerType {
   travelListArray: (travelListType | travelMovingTime)[];
   setNowPickStep: Dispatch<SetStateAction<travelListType>>;
+  nowPickIndex: number;
+  setNowPickIndex: Dispatch<SetStateAction<number>>;
 }
 
 const StyledPlanStepContainer = styled.div`
@@ -22,8 +24,9 @@ const StyledPlanStepContainer = styled.div`
 function PlanStepContainer({
   travelListArray,
   setNowPickStep,
+  nowPickIndex,
+  setNowPickIndex,
 }: PlanStepContainerType) {
-  const [nowPickIndex, setNowPickIndex] = useState<number>(-1);
   let travelIndex = 0;
 
   const onStepClick = (productParam: travelListType, indexParam: number) => {

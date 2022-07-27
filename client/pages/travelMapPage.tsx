@@ -23,6 +23,7 @@ const StyledTravelMapPage = styled.article`
 function travelMapPage() {
   //현재 고른 product 정보
   const [nowPickStep, setNowPickStep] = useState<travelListType | null>(null);
+  const [nowPickIndex, setNowPickIndex] = useState<number>(-1);
 
   const [pickedAirports, setPickedAirports] =
     useRecoilState<productDataType[]>(pickedAirportsState);
@@ -54,10 +55,13 @@ function travelMapPage() {
           travelListArray={travelListArray}
           nowPickStep={nowPickStep}
           setNowPickStep={setNowPickStep}
+          setNowPickIndex={setNowPickIndex}
         />
         <PlanContainer
           travelListArray={travelListArray}
           setNowPickStep={setNowPickStep}
+          nowPickIndex={nowPickIndex}
+          setNowPickIndex={setNowPickIndex}
         />
       </StyledTravelMapPage>
     );

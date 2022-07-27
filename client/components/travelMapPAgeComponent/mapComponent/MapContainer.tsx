@@ -10,6 +10,7 @@ interface MapContainerType {
   travelListArray: (travelListType | travelMovingTime)[];
   nowPickStep: travelListType | null;
   setNowPickStep: Dispatch<SetStateAction<travelListType>>;
+  setNowPickIndex: Dispatch<SetStateAction<number>>;
 }
 
 interface pathType {
@@ -26,6 +27,7 @@ function MapContainer({
   travelListArray,
   nowPickStep,
   setNowPickStep,
+  setNowPickIndex,
 }: MapContainerType) {
   let index = 0;
 
@@ -66,7 +68,15 @@ function MapContainer({
         >
           {productsExceptMovingTime.map((product: travelListType) => {
             index += 1;
-            return <MapMarker product={product} productIndex={index} />;
+            return (
+              <MapMarker
+                product={product}
+                productIndex={index}
+                nowPickStep={nowPickStep}
+                setNowPickStep={setNowPickStep}
+                setNowPickIndex={setNowPickIndex}
+              />
+            );
           })}
           <MapPolyLines travelPaths={travelPaths} />
         </GoogleMap>
