@@ -5,6 +5,7 @@ import { travelMovingTime } from "types/travelMovingTime";
 import { Dispatch, SetStateAction } from "react";
 import MapPolyLines from "./MapPolyLines";
 import MapMarker from "./MapMarker";
+import ClickedMarkerInfo from "./ClickedMarkerInfo";
 
 interface MapContainerType {
   travelListArray: (travelListType | travelMovingTime)[];
@@ -69,13 +70,20 @@ function MapContainer({
           {productsExceptMovingTime.map((product: travelListType) => {
             index += 1;
             return (
-              <MapMarker
-                product={product}
-                productIndex={index}
-                nowPickStep={nowPickStep}
-                setNowPickStep={setNowPickStep}
-                setNowPickIndex={setNowPickIndex}
-              />
+              <>
+                <MapMarker
+                  product={product}
+                  productIndex={index}
+                  nowPickStep={nowPickStep}
+                  setNowPickStep={setNowPickStep}
+                  setNowPickIndex={setNowPickIndex}
+                />
+
+                <ClickedMarkerInfo
+                  product={product}
+                  nowPickStep={nowPickStep}
+                />
+              </>
             );
           })}
           <MapPolyLines travelPaths={travelPaths} />
