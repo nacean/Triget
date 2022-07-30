@@ -1,34 +1,57 @@
 import PublicIcon from "@mui/icons-material/Public";
-import { InputAdornment, TextField } from "@mui/material";
+import { Autocomplete, InputAdornment, TextField } from "@mui/material";
 import countriesState from "atoms/plannerAtoms/countriesState";
+import { SyntheticEvent } from "react";
 import { useRecoilState } from "recoil";
 
-function CountriesForm() {
-  const [countryValue, setCountryValue] =
-    useRecoilState<string>(countriesState);
+interface countryListType {
+  label: string;
+  year: number;
+}
 
-  const onCountryChange = (newCountry: React.ChangeEvent<HTMLInputElement>) => {
-    setCountryValue(newCountry.target.value);
+const countryArray = [
+  { label: "일본-도쿄" },
+  { label: "일본-오사카" },
+  { label: "일본-후쿠오카" },
+];
+
+function CountriesForm() {
+  const [countryValue, setCountryValue] = useRecoilState<string | null>(
+    countriesState,
+  );
+
+  const onCountryChange = (
+    event: SyntheticEvent<Element, Event>,
+    newCountry: countryListType | null,
+  ) => {
+    if (!newCountry) setCountryValue(null);
+    else setCountryValue(newCountry.label);
   };
 
   return (
-    <TextField
-      id="outlined-basic"
-      label="Countries"
-      variant="outlined"
-      placeholder="가고 싶은 나라를 선택해주세요"
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <PublicIcon fontSize="small" />
-          </InputAdornment>
-        ),
-      }}
-      sx={{
-        width: "30%",
-      }}
+    <Autocomplete
+      disablePortal
+      id="country-autoComplete"
+      options={countryArray}
       value={countryValue}
       onChange={onCountryChange}
+      noOptionsText="일치하는 여행지가 없습니다"
+      sx={{ width: "30%" }}
+      renderInput={params => (
+        <TextField
+          {...params}
+          label="countries"
+          placeholder="가고 싶은 나라를 선택해주세요"
+          InputProps={{
+            ...params.InputProps,
+            startAdornment: (
+              <InputAdornment position="start">
+                <PublicIcon fontSize="small" />
+              </InputAdornment>
+            ),
+          }}
+        />
+      )}
     />
   );
 }
