@@ -11,9 +11,9 @@ const WeightTemplateContainer = styled.div`
 `;
 
 const WeightSubject = styled.h3`
-  width: 100px;
+  width: 8vw;
   height: 40px;
-  margin-right: 10px;
+  margin-right: 0.5vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,7 +77,7 @@ function WeightTemplate({
         }}
         sx={{
           width: "50%",
-          marginRight: "30px",
+          marginLeft: "0.5vw",
         }}
         value={weightValue.toLocaleString()}
         onChange={onWeightChange}

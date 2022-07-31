@@ -38,7 +38,7 @@ function BudgetWeightForm() {
       <BudgetWeightIntroduce>
         얼마정도 사용이 가능하신가요?
       </BudgetWeightIntroduce>
-      <Stack spacing={3}>
+      <Stack spacing={4}>
         <WeightBox>
           <WeightTemplate
             subjectName="항공"
