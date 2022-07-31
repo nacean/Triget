@@ -1,6 +1,6 @@
-import { Paper, Slider } from "@mui/material";
+import { InputAdornment, Paper, Slider, TextField } from "@mui/material";
 import budgetState from "atoms/plannerAtoms/budgetState";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { SetterOrUpdater, useRecoilValue } from "recoil";
 import styled from "styled-components";
 
@@ -36,10 +36,21 @@ function WeightTemplate({
   const budget = useRecoilValue(budgetState);
 
   const onWeightChange = (
-    newWeightEvent: Event,
-    newWeight: number | Array<number>,
+    newWeightEvent: Event | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    newWeightParam?: number | Array<number>,
   ) => {
-    setWeightValue(newWeight as number);
+    if (newWeightParam !== undefined) {
+      setWeightValue(newWeightParam as number);
+    } else {
+      const newWeight = Number(
+        (
+          newWeightEvent as ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        ).target.value.replace(/,/g, ""),
+      );
+      if (Number.isNaN(newWeight) === false) {
+        if (newWeight <= budget) setWeightValue(newWeight);
+      }
+    }
   };
 
   return (
@@ -55,19 +66,22 @@ function WeightTemplate({
         max={budget}
         step={1000}
       />
-      <Paper
-        sx={{
-          width: "150px",
-          height: "40px",
-          marginLeft: "10px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+      <TextField
+        id={`${subjectName}Weight-textfield`}
+        label={subjectName}
+        variant="outlined"
+        placeholder="예산"
+        size="small"
+        InputProps={{
+          endAdornment: <InputAdornment position="end">원</InputAdornment>,
         }}
-        elevation={2}
-      >
-        {`${weightValue.toLocaleString()} 원`}
-      </Paper>
+        sx={{
+          width: "50%",
+          marginRight: "30px",
+        }}
+        value={weightValue.toLocaleString()}
+        onChange={onWeightChange}
+      />
     </WeightTemplateContainer>
   );
 }

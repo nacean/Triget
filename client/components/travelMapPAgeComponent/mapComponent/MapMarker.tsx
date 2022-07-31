@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
 import { OverlayView } from "@react-google-maps/api";
 import { Dispatch, SetStateAction } from "react";
-import styled from "styled-components";
 import { travelListType } from "types/travelListType";
 
 interface MapMarkerType {
