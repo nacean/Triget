@@ -1,5 +1,5 @@
 import pickedAccommodationsState from "atoms/pickProductAtoms/pickedAccommodationsState";
-import pickedAirportsState from "atoms/pickProductAtoms/pickedAirportsState";
+import pickedFlightState from "atoms/pickProductAtoms/pickedFlightState";
 import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsState";
 import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsState";
 import { productDataType } from "types/productDataType";
@@ -11,7 +11,9 @@ import FlightIcon from "@mui/icons-material/Flight";
 import HotelIcon from "@mui/icons-material/Hotel";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
+import flightProductType from "types/flightTypes/flightProductType";
 import PickedProductsChips from "./PickedProductsChips";
+import PickedFlightChips from "./PickedFlightChips";
 
 const StyledPickedProductsContainer = styled.div`
   width: 20%;
@@ -41,8 +43,8 @@ function PickedProductsContainer() {
     window.scrollTo({ top: 1070, left: 0, behavior: "smooth" });
   });
 
-  const [pickedAirports, setPickedAirports] =
-    useRecoilState<productDataType[]>(pickedAirportsState);
+  const [pickedFlight, setPickedFlight] =
+    useRecoilState<flightProductType | null>(pickedFlightState);
   const [pickedAccommodations, setPickedAccommodations] = useRecoilState<
     productDataType[]
   >(pickedAccommodationsState);
@@ -54,7 +56,7 @@ function PickedProductsContainer() {
   >(pickedAttractionsState);
 
   const onClickResetBtn = () => {
-    setPickedAirports([]);
+    setPickedFlight(null);
     setPickedAccommodations([]);
     setPickedRestaurants([]);
     setPickedAttractions([]);
@@ -73,10 +75,10 @@ function PickedProductsContainer() {
           초기화
         </Button>
       </StyledHead>
-      <PickedProductsChips
+      <PickedFlightChips
         productKind="항공"
-        pickedProducts={pickedAirports}
-        setPickedProducts={setPickedAirports}
+        pickedFlight={pickedFlight}
+        setPickedFlight={setPickedFlight}
         icon={<FlightIcon />}
       />
       <PickedProductsChips

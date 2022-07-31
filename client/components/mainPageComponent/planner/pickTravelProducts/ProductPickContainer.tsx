@@ -6,14 +6,16 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import SearchIcon from "@mui/icons-material/Search";
 import { UseMutationResult } from "react-query";
 import { useRecoilState } from "recoil";
-import pickedAirportsState from "atoms/pickProductAtoms/pickedAirportsState";
+import pickedFlightState from "atoms/pickProductAtoms/pickedFlightState";
 import pickedAccommodationsState from "atoms/pickProductAtoms/pickedAccommodationsState";
 import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsState";
 import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsState";
 import { productDataType } from "types/productDataType";
+import flightProductType from "types/flightTypes/flightProductType";
 import ProductMenu from "./ProductMenu";
 import ProductPanel from "./ProductPanel";
 import PickedProductsContainer from "./showPickedProducts/PickedProductsContainer";
+import FlightPanel from "./FlightPanel";
 
 interface ProductPickContainerType {
   slideMove: boolean;
@@ -65,8 +67,8 @@ function ProductPickContainer({
   const { data, isLoading, isError, error, isSuccess } = travelMutation;
 
   const [menuNum, setMenuNum] = useState(0);
-  const [pickedAirports, setPickedAirports] =
-    useRecoilState<productDataType[]>(pickedAirportsState);
+  const [pickedFlight, setPickedFlight] =
+    useRecoilState<flightProductType | null>(pickedFlightState);
   const [pickedAccommodations, setPickedAccommodations] = useRecoilState<
     productDataType[]
   >(pickedAccommodationsState);
@@ -79,7 +81,7 @@ function ProductPickContainer({
 
   const onBackBtnClick = () => {
     onSlideBtnClick();
-    setPickedAirports([]);
+    setPickedFlight(null);
     setPickedAccommodations([]);
     setPickedRestaurants([]);
     setPickedAttractions([]);
@@ -122,12 +124,12 @@ function ProductPickContainer({
         <StyledProductListContainer>
           <StyledProductPickContainer>
             <ProductMenu menuNum={menuNum} setMenuNum={setMenuNum} />
-            <ProductPanel
+            <FlightPanel
               value={menuNum}
               index={0}
               productArray={airports}
-              pickedProducts={pickedAirports}
-              setPickedProducts={setPickedAirports}
+              pickedFlight={pickedFlight}
+              setPickedFlight={setPickedFlight}
             />
             <ProductPanel
               value={menuNum}

@@ -1,5 +1,5 @@
 import pickedAccommodationsState from "atoms/pickProductAtoms/pickedAccommodationsState";
-import pickedAirportsState from "atoms/pickProductAtoms/pickedAirportsState";
+import pickedFlightState from "atoms/pickProductAtoms/pickedFlightState";
 import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsState";
 import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsState";
 import MapContainer from "components/travelMapPAgeComponent/mapComponent/MapContainer";
@@ -12,6 +12,7 @@ import styled from "styled-components";
 import { productDataType } from "types/productDataType";
 import { travelListType } from "types/travelListType";
 import { travelMovingTime } from "types/travelMovingTime";
+import flightProductType from "types/flightTypes/flightProductType";
 
 const StyledTravelMapPage = styled.article`
   width: 100%;
@@ -25,8 +26,8 @@ function travelMapPage() {
   const [nowPickStep, setNowPickStep] = useState<travelListType | null>(null);
   const [nowPickIndex, setNowPickIndex] = useState<number>(-1);
 
-  const [pickedAirports, setPickedAirports] =
-    useRecoilState<productDataType[]>(pickedAirportsState);
+  const [pickedFlight, setPickedFlight] =
+    useRecoilState<flightProductType | null>(pickedFlightState);
   const [pickedAccommodations, setPickedAccommodations] = useRecoilState<
     productDataType[]
   >(pickedAccommodationsState);

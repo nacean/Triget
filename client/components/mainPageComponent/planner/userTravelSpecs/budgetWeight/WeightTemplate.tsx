@@ -1,4 +1,4 @@
-import { InputAdornment, Paper, Slider, TextField } from "@mui/material";
+import { InputAdornment, Slider, TextField } from "@mui/material";
 import budgetState from "atoms/plannerAtoms/budgetState";
 import React, { ChangeEvent } from "react";
 import { SetterOrUpdater, useRecoilValue } from "recoil";
