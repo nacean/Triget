@@ -53,6 +53,7 @@ function WeightTemplate({
         value={weightValue}
         onChange={onWeightChange}
         max={budget}
+        step={1000}
       />
       <Paper
         sx={{
@@ -65,7 +66,7 @@ function WeightTemplate({
         }}
         elevation={2}
       >
-        {`${weightValue} 원`}
+        {`${weightValue.toLocaleString()} 원`}
       </Paper>
     </WeightTemplateContainer>
   );
