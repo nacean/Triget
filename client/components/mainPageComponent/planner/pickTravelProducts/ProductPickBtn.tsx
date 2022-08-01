@@ -16,9 +16,7 @@ function ProductPickBtn({
   const onProductBtnClick = () => {
     if (pickOrNot) {
       setPickedProducts(productArray =>
-        productArray.filter(
-          productParam => product.product_id !== productParam.product_id,
-        ),
+        productArray.filter(productParam => product._id !== productParam._id),
       );
     } else {
       setPickedProducts(productArray => [...productArray, product]);

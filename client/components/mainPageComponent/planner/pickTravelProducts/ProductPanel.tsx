@@ -55,7 +55,7 @@ function ProductPanel({
   const isInPickedArray = (newProduct_id: number): boolean => {
     return (
       pickedProducts.findIndex(
-        productParam => newProduct_id === productParam.product_id,
+        productParam => newProduct_id === productParam._id,
       ) !== -1
     );
   };
@@ -69,50 +69,55 @@ function ProductPanel({
     >
       {value === index && (
         <List>
-          {productArray.map((product: productDataType) => (
-            <Paper square sx={{ marginBottom: "10px" }}>
-              <ListItem disablePadding>
-                <ListItemButton
-                  href={product.product_detail_url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Image
-                    src={product.thumbnail_url}
-                    alt="Product Thumbnail"
-                    width={250}
-                    height={250}
-                  />
-                  <StyledLeftProductContainer>
-                    <StyledSeperateDiv>
-                      <ProductName productName={product.product_name} />
-                      <ProductReviewRate reviewRate={product.review_score} />
-                    </StyledSeperateDiv>
-                    <StyledSeperateDiv>
-                      <ProductLocation
-                        productCity={product.city}
-                        productDistrict={product.district}
-                        productAddress={product.address}
-                      />
-                    </StyledSeperateDiv>
-                    <ProductKeywords keywords_array={product.keywords_array} />
-                  </StyledLeftProductContainer>
-                  <StyledRightProductContainer>
-                    <ProductPopularity productPopularity={product.popularity} />
-                    <ProductPrice
-                      productPrice={product.price}
-                      currency_code={product.currency_code}
+          {productArray.map((product: productDataType) => {
+            console.log(product.thumbnail);
+            return (
+              <Paper square sx={{ marginBottom: "10px" }}>
+                <ListItem disablePadding>
+                  <ListItemButton
+                    href={product.product_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Image
+                      src={product.thumbnail}
+                      alt="Product Thumbnail"
+                      width={250}
+                      height={250}
                     />
-                  </StyledRightProductContainer>
-                </ListItemButton>
-                <ProductPickBtn
-                  product={product}
-                  setPickedProducts={setPickedProducts}
-                  pickOrNot={isInPickedArray(product.product_id)}
-                />
-              </ListItem>
-            </Paper>
-          ))}
+                    <StyledLeftProductContainer>
+                      <StyledSeperateDiv>
+                        <ProductName productName={product.product_name} />
+                        <ProductReviewRate reviewRate={product.review_score} />
+                      </StyledSeperateDiv>
+                      <StyledSeperateDiv>
+                        <ProductLocation
+                          productCity={product.city}
+                          productDistrict={product.state}
+                          productAddress={product.address}
+                        />
+                      </StyledSeperateDiv>
+                      <ProductKeywords keywords_array={product.keywords} />
+                    </StyledLeftProductContainer>
+                    <StyledRightProductContainer>
+                      <ProductPopularity
+                        productPopularity={product.popularity}
+                      />
+                      <ProductPrice
+                        productPrice={product.price}
+                        currency_code={product.currency_code}
+                      />
+                    </StyledRightProductContainer>
+                  </ListItemButton>
+                  <ProductPickBtn
+                    product={product}
+                    setPickedProducts={setPickedProducts}
+                    pickOrNot={isInPickedArray(product._id)}
+                  />
+                </ListItem>
+              </Paper>
+            );
+          })}
           <ListItem disablePadding sx={{ height: "50px" }} />
         </List>
       )}

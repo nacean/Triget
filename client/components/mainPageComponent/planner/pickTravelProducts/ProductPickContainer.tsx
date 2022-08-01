@@ -15,7 +15,7 @@ import flightProductType from "types/flightTypes/flightProductType";
 import ProductMenu from "./ProductMenu";
 import ProductPanel from "./ProductPanel";
 import PickedProductsContainer from "./showPickedProducts/PickedProductsContainer";
-import FlightPanel from "./FlightPanel";
+import FlightPanel from "./flightComponents/FlightPanel";
 
 interface ProductPickContainerType {
   slideMove: boolean;
@@ -25,7 +25,11 @@ interface ProductPickContainerType {
 
 interface journeyDataType {
   journey_id: number;
-  airports: [];
+  flights_budget: number;
+  accommodations_budget: number;
+  restaurants_budget: number;
+  attractions_budget: number;
+  flights: [];
   accommodations: [];
   restaurants: [];
   attractions: [];
@@ -116,7 +120,7 @@ function ProductPickContainer({
     );
 
   if (isSuccess) {
-    const { airports, accommodations, restaurants, attractions } =
+    const { flights, accommodations, restaurants, attractions } =
       data as journeyDataType;
 
     return (
@@ -127,7 +131,7 @@ function ProductPickContainer({
             <FlightPanel
               value={menuNum}
               index={0}
-              productArray={airports}
+              productArray={flights}
               pickedFlight={pickedFlight}
               setPickedFlight={setPickedFlight}
             />

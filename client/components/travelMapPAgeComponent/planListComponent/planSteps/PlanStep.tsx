@@ -6,13 +6,13 @@ import {
   Paper,
 } from "@mui/material";
 import styled from "styled-components";
-import { travelListType } from "types/travelListType";
+import { productDataType } from "types/productDataType";
 
 interface PlanStepType {
   isPicked: boolean;
-  product: travelListType;
+  product: productDataType;
   index: number;
-  onStepClick: (product: travelListType, index: number) => void;
+  onStepClick: (product: productDataType, index: number) => void;
 }
 
 const IndexSphere = styled.div`

@@ -1,14 +1,14 @@
 import { List } from "@mui/material";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { travelListType } from "types/travelListType";
+import { productDataType } from "types/productDataType";
 import { travelMovingTime } from "types/travelMovingTime";
 import MovingTime from "./MovingTime";
 import PlanStep from "./PlanStep";
 
 interface PlanStepContainerType {
-  travelListArray: (travelListType | travelMovingTime)[];
-  setNowPickStep: Dispatch<SetStateAction<travelListType>>;
+  travelListArray: (productDataType | travelMovingTime)[];
+  setNowPickStep: Dispatch<SetStateAction<productDataType>>;
   nowPickIndex: number;
   setNowPickIndex: Dispatch<SetStateAction<number>>;
 }
@@ -29,16 +29,16 @@ function PlanStepContainer({
 }: PlanStepContainerType) {
   let travelIndex = 0;
 
-  const onStepClick = (productParam: travelListType, indexParam: number) => {
+  const onStepClick = (productParam: productDataType, indexParam: number) => {
     setNowPickIndex(indexParam);
     setNowPickStep(productParam);
   };
 
   const productOrTimeComponent = (
-    product: travelListType | travelMovingTime,
+    product: productDataType | travelMovingTime,
   ) => {
     // if it is time Obj
-    if ("moving_time" in product) {
+    if ("transit_mode" in product) {
       return <MovingTime timeObj={product as travelMovingTime} />;
     }
 
@@ -47,7 +47,7 @@ function PlanStepContainer({
     return (
       <PlanStep
         isPicked={nowPickIndex === travelIndex}
-        product={product as travelListType}
+        product={product as productDataType}
         index={travelIndex}
         onStepClick={onStepClick}
       />
@@ -57,7 +57,7 @@ function PlanStepContainer({
   return (
     <StyledPlanStepContainer>
       <List>
-        {travelListArray.map((product: travelListType | travelMovingTime) =>
+        {travelListArray.map((product: productDataType | travelMovingTime) =>
           productOrTimeComponent(product),
         )}
       </List>

@@ -34,9 +34,7 @@ function PickedProductsChips({
 }: PickedProductsChipsType) {
   const onItemDelete = (newProduct_id: number) => {
     setPickedProducts(
-      pickedProducts.filter(
-        productParam => productParam.product_id !== newProduct_id,
-      ),
+      pickedProducts.filter(productParam => productParam._id !== newProduct_id),
     );
   };
 
@@ -60,7 +58,7 @@ function PickedProductsChips({
                   edge="end"
                   aria-label="delete"
                   onClick={() => {
-                    onItemDelete(product.product_id);
+                    onItemDelete(product._id);
                   }}
                 >
                   <DeleteIcon />
@@ -69,7 +67,7 @@ function PickedProductsChips({
               sx={{ borderTopColor: "#9e9e9e" }}
             >
               <Image
-                src={product.thumbnail_url}
+                src={product.thumbnail}
                 alt="pickedProductImage"
                 width={50}
                 height={50}

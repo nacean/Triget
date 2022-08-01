@@ -10,7 +10,6 @@ import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { productDataType } from "types/productDataType";
-import { travelListType } from "types/travelListType";
 import { travelMovingTime } from "types/travelMovingTime";
 import flightProductType from "types/flightTypes/flightProductType";
 
@@ -23,7 +22,7 @@ const StyledTravelMapPage = styled.article`
 
 function travelMapPage() {
   //현재 고른 product 정보
-  const [nowPickStep, setNowPickStep] = useState<travelListType | null>(null);
+  const [nowPickStep, setNowPickStep] = useState<productDataType | null>(null);
   const [nowPickIndex, setNowPickIndex] = useState<number>(-1);
 
   const [pickedFlight, setPickedFlight] =
@@ -48,7 +47,7 @@ function travelMapPage() {
   });
 
   if (isSuccess) {
-    const travelListArray = data as (travelListType | travelMovingTime)[];
+    const travelListArray = data as (productDataType | travelMovingTime)[];
 
     return (
       <StyledTravelMapPage>

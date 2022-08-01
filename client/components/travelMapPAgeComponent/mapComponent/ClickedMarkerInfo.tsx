@@ -1,11 +1,11 @@
 import { Chip } from "@mui/material";
 import { InfoWindow } from "@react-google-maps/api";
 import styled from "styled-components";
-import { travelListType } from "types/travelListType";
+import { productDataType } from "types/productDataType";
 
 interface ClickedMarkerInfoType {
-  product: travelListType;
-  nowPickStep: travelListType;
+  product: productDataType;
+  nowPickStep: productDataType;
 }
 
 const StyledInfo = styled.div`
@@ -37,7 +37,7 @@ function ClickedMarkerInfo({ product, nowPickStep }: ClickedMarkerInfoType) {
     lng: nowPickStep.longitude,
   };
 
-  let isPicked = product.product_id === nowPickStep.product_id;
+  let isPicked = product._id === nowPickStep._id;
 
   // infoBox 사용하는게 좋을 수도 ??
   return (
@@ -52,7 +52,7 @@ function ClickedMarkerInfo({ product, nowPickStep }: ClickedMarkerInfoType) {
         <StyledInfo>
           <StyledInfoName>{product.product_name}</StyledInfoName>
           <StyledInfoTags>
-            {product.keywords_array.map((keyword: string) => (
+            {product.keywords.map((keyword: string) => (
               <Chip
                 label={`#${keyword}`}
                 variant="outlined"
