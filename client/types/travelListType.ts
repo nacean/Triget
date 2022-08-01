@@ -1,4 +1,4 @@
-export interface travelListType {
+export interface productDataType {
   travel_time: string;
   product_id: number;
   product_name: string;

@@ -1,4 +1,4 @@
 export interface travelMovingTime {
-  moving_type: string;
-  moving_time: number;
+  transit_mode: string;
+  duration_time: number;
 }

@@ -1,17 +1,25 @@
+import neightborsProductType from "./neighborsProductType";
+
 export interface productDataType {
-  product_id: number;
+  travel_time?: string; // 나중에 일정표 생성 시 몇시에 이 상품을 이용할 것인가
+  _id: number;
   product_name: string;
-  thumbnail_url: string;
-  product_type: string;
-  city: string;
-  district: string;
-  address: string;
+  subcategory: string;
+  thumbnail: string;
   longitude: number;
   latitude: number;
+  city: string;
+  state: string;
+  country: string;
+  address: string;
   price: number;
   currency_code: string;
   review_score: number;
   popularity: number;
-  product_detail_url: string;
-  keywords_array: string[];
+  weekday_hours: string[];
+  product_website: string;
+  product_url: string;
+  neightbors: neightborsProductType[];
+  is_beach_front: boolean;
+  keywords: string[];
 }
