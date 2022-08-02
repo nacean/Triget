@@ -1,9 +1,16 @@
-import { Button, List, ListItem, ListItemButton, Paper } from "@mui/material";
+import {
+  Button,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  Paper,
+} from "@mui/material";
 import React from "react";
 import { SetterOrUpdater } from "recoil";
 import styled from "styled-components";
 import flightProductType from "types/flightTypes/flightProductType";
-import FlightRoute from "./FlightRoute";
+import FlightRoute from "./flightRouteComponents.tsx/FlightRoute";
 
 interface FlightPanelType {
   value: number;
@@ -18,9 +25,22 @@ const StyledPanel = styled.div`
   overflow-y: scroll;
 `;
 
-const StyledFlightRouteContainer = styled.div`
-  width: 100%;
-  height: 250px;
+const StyledFlightRoutesContainer = styled.div`
+  width: 75%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+`;
+
+const StyledFlightPriceContainer = styled.div`
+  width: 25%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: 700;
 `;
 
 function FlightPanel({
@@ -60,11 +80,24 @@ function FlightPanel({
                   href={product.detail_url}
                   target="_blank"
                   rel="noreferrer"
+                  sx={{
+                    height: 250,
+                    display: "flex",
+                  }}
                 >
-                  <StyledFlightRouteContainer>
+                  <StyledFlightRoutesContainer>
                     <FlightRoute flightLeg={product.legs[0]} />
                     <FlightRoute flightLeg={product.legs[1]} />
-                  </StyledFlightRouteContainer>
+                  </StyledFlightRoutesContainer>
+                  <Divider
+                    orientation="vertical"
+                    variant="middle"
+                    flexItem
+                    sx={{ backgroundColor: "#DDDCE5" }}
+                  />
+                  <StyledFlightPriceContainer>
+                    {`₩${product.price.toLocaleString()}`}
+                  </StyledFlightPriceContainer>
                 </ListItemButton>
                 <Button
                   variant="contained"

@@ -70,7 +70,6 @@ function ProductPanel({
       {value === index && (
         <List>
           {productArray.map((product: productDataType) => {
-            console.log(product.thumbnail);
             return (
               <Paper square sx={{ marginBottom: "10px" }}>
                 <ListItem disablePadding>
