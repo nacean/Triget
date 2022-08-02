@@ -29,6 +29,7 @@
         "aspects": ["invalidHref", "preferButton"]
       }
     ],
-    "@typescript-eslint/naming-convention": "off"
+    "@typescript-eslint/naming-convention": "off",
+    "no-underscore-dangle": 0 // 임시로 변수 맨 앞 언더바 허용
   }
 }
