@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: ["image.fmkorea.com"],
+    domains: ["image.fmkorea.com", "www.skyscanner.net"],
   },
 };
 
