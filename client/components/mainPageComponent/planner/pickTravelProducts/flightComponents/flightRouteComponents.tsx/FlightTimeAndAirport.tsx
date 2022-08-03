@@ -1,4 +1,5 @@
 import { Tooltip } from "@mui/material";
+import getExactTime from "modules/timeModule/getExactTime";
 import styled from "styled-components";
 import flightAirportInfoType from "types/flightTypes/flightAirportInfoType";
 
@@ -36,21 +37,10 @@ function FlightTimeAndAirport({
   airportInfo,
   textRight,
 }: FlightTimeAndAirportType) {
-  const exactTime = (): string => {
-    const hour = Number(flightTime.substring(11, 13));
-    const minute = Number(flightTime.substring(14, 16));
-
-    const isAfternoon: boolean = hour >= 12;
-
-    if (isAfternoon) {
-      const exactHour: number = hour > 12 ? hour - 12 : hour;
-      return `오후 ${exactHour}:${minute}`;
-    }
-    return `오전 ${hour}:${minute}`;
-  };
+  const exactTime = getExactTime(flightTime);
   return (
     <StyledFlightTimeAndAirport>
-      <StyledTime textRight={textRight}>{exactTime()}</StyledTime>
+      <StyledTime textRight={textRight}>{exactTime}</StyledTime>
       <Tooltip
         title={airportInfo.name}
         PopperProps={{
