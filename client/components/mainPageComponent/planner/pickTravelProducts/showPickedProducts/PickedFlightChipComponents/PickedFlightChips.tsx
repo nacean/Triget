@@ -26,6 +26,10 @@ const StyledChipsContainer = styled.div`
   min-height: 50px;
 `;
 
+const StyledFlightChip = styled.div`
+  display: flex;
+`;
+
 function PickedFlightChips({
   productKind,
   pickedFlight,
@@ -60,16 +64,38 @@ function PickedFlightChips({
                   <DeleteIcon />
                 </IconButton>
               }
-              sx={{ borderTopColor: "#9e9e9e" }}
+              sx={{ borderTopColor: "#9e9e9e", display: "block" }}
             >
-              {/* <Image alt="pickedProductImage" width={50} height={50} /> */}
-              <ListItemText
-                primary="test"
-                sx={{
-                  width: "50%",
-                  marginLeft: "10px",
-                }}
-              />
+              <StyledFlightChip>
+                <Image
+                  src={pickedFlight.legs[0].operatings[0].logo_url}
+                  alt="pickedProductImage"
+                  width={50}
+                  height={25}
+                />
+                <ListItemText
+                  primary="test"
+                  sx={{
+                    width: "50%",
+                    marginLeft: "10px",
+                  }}
+                />
+              </StyledFlightChip>
+              <div>
+                <Image
+                  src={pickedFlight.legs[0].operatings[0].logo_url}
+                  alt="pickedProductImage"
+                  width={50}
+                  height={25}
+                />
+                <ListItemText
+                  primary="test"
+                  sx={{
+                    width: "50%",
+                    marginLeft: "10px",
+                  }}
+                />
+              </div>
             </ListItem>
           </Paper>
         </List>

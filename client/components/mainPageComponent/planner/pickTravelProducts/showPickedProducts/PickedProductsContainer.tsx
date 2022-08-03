@@ -13,7 +13,7 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import flightProductType from "types/flightTypes/flightProductType";
 import PickedProductsChips from "./PickedProductsChips";
-import PickedFlightChips from "./PickedFlightChips";
+import PickedFlightChips from "./PickedFlightChipComponents/PickedFlightChips";
 
 const StyledPickedProductsContainer = styled.div`
   width: 20%;
