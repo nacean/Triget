@@ -4,15 +4,14 @@ import {
   IconButton,
   List,
   ListItem,
-  ListItemText,
   Paper,
   SvgIconProps,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { SetterOrUpdater } from "recoil";
 import styled from "styled-components";
-import Image from "next/image";
 import flightProductType from "types/flightTypes/flightProductType";
+import FlightChipDetail from "./FlightChipDetail";
 
 interface PickedProductsChipsType {
   productKind: string;
@@ -24,10 +23,6 @@ interface PickedProductsChipsType {
 const StyledChipsContainer = styled.div`
   width: 100%;
   min-height: 50px;
-`;
-
-const StyledFlightChip = styled.div`
-  display: flex;
 `;
 
 function PickedFlightChips({
@@ -55,6 +50,7 @@ function PickedFlightChips({
         <List>
           <Paper variant="outlined" sx={{ marginBottom: "3px" }}>
             <ListItem
+              disablePadding
               secondaryAction={
                 <IconButton
                   edge="end"
@@ -66,36 +62,8 @@ function PickedFlightChips({
               }
               sx={{ borderTopColor: "#9e9e9e", display: "block" }}
             >
-              <StyledFlightChip>
-                <Image
-                  src={pickedFlight.legs[0].operatings[0].logo_url}
-                  alt="pickedProductImage"
-                  width={50}
-                  height={25}
-                />
-                <ListItemText
-                  primary="test"
-                  sx={{
-                    width: "50%",
-                    marginLeft: "10px",
-                  }}
-                />
-              </StyledFlightChip>
-              <div>
-                <Image
-                  src={pickedFlight.legs[0].operatings[0].logo_url}
-                  alt="pickedProductImage"
-                  width={50}
-                  height={25}
-                />
-                <ListItemText
-                  primary="test"
-                  sx={{
-                    width: "50%",
-                    marginLeft: "10px",
-                  }}
-                />
-              </div>
+              <FlightChipDetail flightLeg={pickedFlight.legs[0]} />
+              <FlightChipDetail flightLeg={pickedFlight.legs[1]} />
             </ListItem>
           </Paper>
         </List>
