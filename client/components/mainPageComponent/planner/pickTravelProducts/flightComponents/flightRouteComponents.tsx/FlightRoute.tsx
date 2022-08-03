@@ -1,3 +1,4 @@
+import { Tooltip } from "@mui/material";
 import Image from "next/image";
 import styled from "styled-components";
 import flightLegType from "types/flightTypes/flightLegType";
@@ -35,12 +36,30 @@ function FlightRoute({ flightLeg }: FlightRouteType) {
   return (
     <StyledFlightRoute>
       <StyledImageContainer>
-        <Image
-          src={flightLeg.operatings[0].logo_url}
-          alt="Product Thumbnail"
-          width={120}
-          height={60}
-        />
+        <Tooltip
+          title={flightLeg.operatings[0].name}
+          PopperProps={{
+            disablePortal: true,
+            sx: {
+              "& .MuiTooltip-tooltip": {
+                backgroundColor: "#fff",
+                color: "#000",
+                fontSize: 12,
+                WebkitBoxShadow:
+                  "0px 10px 13px -7px #000000, 0px 0px 5px 1px rgba(0,0,0,0)",
+                boxShadow:
+                  "0px 10px 13px -7px #000000, 0px 0px 5px 1px rgba(0,0,0,0)",
+              },
+            },
+          }}
+        >
+          <Image
+            src={flightLeg.operatings[0].logo_url}
+            alt="Product Thumbnail"
+            width={120}
+            height={60}
+          />
+        </Tooltip>
       </StyledImageContainer>
       <StyledRouteInfo>
         <FlightTimeAndAirport
