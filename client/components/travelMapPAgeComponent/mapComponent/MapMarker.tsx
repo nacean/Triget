@@ -44,7 +44,7 @@ function MapMarker({
   const onMarkerClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
-    event.stopPropagation();
+    event.stopPropagation(); // stopPropagation을 사용하지 않으면, bubbling 때문에 뒤에 있는 parent marker를 클릭하는 이벤트가 발생하게 됨
     setNowPickStep(product);
     setNowPickIndex(productIndex);
   };
