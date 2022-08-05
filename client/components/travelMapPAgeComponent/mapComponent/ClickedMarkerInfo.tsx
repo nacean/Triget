@@ -48,6 +48,9 @@ function ClickedMarkerInfo({ product, nowPickStep }: ClickedMarkerInfoType) {
           isPicked = false;
         }}
         zIndex={10}
+        options={{
+          pixelOffset: new google.maps.Size(0, -16),
+        }}
       >
         <StyledInfo>
           <StyledInfoName>{product.product_name}</StyledInfoName>
