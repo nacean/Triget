@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { OverlayView } from "@react-google-maps/api";
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { productDataType } from "types/productDataType";
 
 interface MapMarkerType {
@@ -41,7 +41,10 @@ function MapMarker({
   setNowPickStep,
   setNowPickIndex,
 }: MapMarkerType) {
-  const onMarkerClick = () => {
+  const onMarkerClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
     setNowPickStep(product);
     setNowPickIndex(productIndex);
   };
