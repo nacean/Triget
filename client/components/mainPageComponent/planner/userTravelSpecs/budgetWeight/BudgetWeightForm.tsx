@@ -35,9 +35,7 @@ function BudgetWeightForm() {
 
   return (
     <BudgetWeightFormContainer>
-      <BudgetWeightIntroduce>
-        얼마정도 사용이 가능하신가요?
-      </BudgetWeightIntroduce>
+      <BudgetWeightIntroduce>얼마나 중요하신가요?</BudgetWeightIntroduce>
       <Stack spacing={4}>
         <WeightBox>
           <WeightTemplate

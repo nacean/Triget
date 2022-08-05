@@ -1,4 +1,4 @@
-import { InputAdornment, Slider, TextField } from "@mui/material";
+import { Slider } from "@mui/material";
 import budgetState from "atoms/plannerAtoms/budgetState";
 import React, { ChangeEvent } from "react";
 import { SetterOrUpdater, useRecoilValue } from "recoil";
@@ -21,6 +21,29 @@ const WeightSubject = styled.h3`
   background-color: #f6f8fa;
   border-radius: 10px;
 `;
+
+const sliderMark = [
+  {
+    value: 1,
+    label: "최소",
+  },
+  {
+    value: 2,
+    label: "2",
+  },
+  {
+    value: 3,
+    label: "3",
+  },
+  {
+    value: 4,
+    label: "4",
+  },
+  {
+    value: 5,
+    label: "최대",
+  },
+];
 
 interface WeightTemplateType {
   subjectName: string;
@@ -60,13 +83,15 @@ function WeightTemplate({
         size="medium"
         aria-label={`${subjectName}-label`}
         valueLabelDisplay="auto"
-        sx={{ color: "#bababa" }}
+        sx={{ color: "#bababa", position: "relative", top: 8, left: 5 }}
         value={weightValue}
         onChange={onWeightChange}
-        max={budget}
-        step={1000}
+        defaultValue={1}
+        min={1}
+        max={5}
+        marks={sliderMark}
       />
-      <TextField
+      {/* <TextField
         id={`${subjectName}Weight-textfield`}
         label={subjectName}
         variant="outlined"
@@ -81,7 +106,7 @@ function WeightTemplate({
         }}
         value={weightValue.toLocaleString()}
         onChange={onWeightChange}
-      />
+      /> */}
     </WeightTemplateContainer>
   );
 }
