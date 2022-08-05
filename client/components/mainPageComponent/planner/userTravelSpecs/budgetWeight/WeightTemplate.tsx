@@ -86,7 +86,6 @@ function WeightTemplate({
         sx={{ color: "#bababa", position: "relative", top: 8, left: 5 }}
         value={weightValue}
         onChange={onWeightChange}
-        defaultValue={1}
         min={1}
         max={5}
         marks={sliderMark}
