@@ -12,6 +12,7 @@ import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsStat
 import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsState";
 import { productDataType } from "types/productDataType";
 import flightProductType from "types/flightTypes/flightProductType";
+import journeyDataType from "types/journeyDataType";
 import ProductMenu from "./ProductMenu";
 import ProductPanel from "./ProductPanel";
 import PickedProductsContainer from "./showPickedProducts/PickedProductsContainer";
@@ -21,18 +22,6 @@ interface ProductPickContainerType {
   slideMove: boolean;
   onSlideBtnClick: () => void;
   travelMutation: UseMutationResult;
-}
-
-interface journeyDataType {
-  journey_id: number;
-  flights_budget: number;
-  accommodations_budget: number;
-  restaurants_budget: number;
-  attractions_budget: number;
-  flights: [];
-  accommodations: [];
-  restaurants: [];
-  attractions: [];
 }
 
 const StyledProductPickContainer = styled.div`
