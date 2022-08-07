@@ -6,10 +6,13 @@ import {
   ListItemButton,
   Paper,
 } from "@mui/material";
-import React from "react";
+import fetchTravelSpec from "modules/fetchTravelSpec";
+import React, { useState } from "react";
+import { useInView } from "react-intersection-observer";
 import { SetterOrUpdater } from "recoil";
 import styled from "styled-components";
 import flightProductType from "types/flightTypes/flightProductType";
+import journeyDataType from "types/journeyDataType";
 import FlightRoute from "./flightRouteComponents/FlightRoute";
 
 interface FlightPanelType {
@@ -50,6 +53,19 @@ function FlightPanel({
   pickedFlight,
   setPickedFlight,
 }: FlightPanelType) {
+  const [showingFlights, setShowingFlights] =
+    useState<flightProductType[]>(productArray);
+
+  const { ref: scrollRef } = useInView({
+    threshold: 0.5,
+    onChange: async (inView: boolean) => {
+      if (inView) {
+        const newProducts: journeyDataType = await fetchTravelSpec();
+        setShowingFlights([...showingFlights, ...newProducts.flights]);
+      }
+    },
+  });
+
   const onFlightBtnClick = (newFlight: flightProductType) => {
     if (pickedFlight === null) setPickedFlight(newFlight);
     else if (pickedFlight._id === newFlight._id) setPickedFlight(null);
@@ -73,7 +89,7 @@ function FlightPanel({
     >
       {value === index && (
         <List>
-          {productArray.map((product: flightProductType) => (
+          {showingFlights.map((product: flightProductType) => (
             <Paper square sx={{ marginBottom: "10px" }}>
               <ListItem disablePadding>
                 <ListItemButton
@@ -119,7 +135,7 @@ function FlightPanel({
               </ListItem>
             </Paper>
           ))}
-          <ListItem disablePadding sx={{ height: "50px" }} />
+          <ListItem ref={scrollRef} disablePadding sx={{ height: "50px" }} />
         </List>
       )}
     </StyledPanel>

@@ -1,9 +1,10 @@
 import { List, ListItem, ListItemButton, Paper } from "@mui/material";
 import { productDataType } from "types/productDataType";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import { useInView } from "react-intersection-observer";
+import fetchTravelSpec from "modules/fetchTravelSpec";
 import ProductKeywords from "./productDetails/ProductKeywords";
 import ProductLocation from "./productDetails/ProductLocation";
 import ProductName from "./productDetails/ProductName";
@@ -11,6 +12,7 @@ import ProductPopularity from "./productDetails/ProductPopularity";
 import ProductPrice from "./productDetails/ProductPrice";
 import ProductReviewRate from "./productDetails/ProductReviewRate";
 import ProductPickBtn from "./ProductPickBtn";
+import journeyDataType from "types/journeyDataType";
 
 interface ProductPanelType {
   value: number;
@@ -53,14 +55,16 @@ function ProductPanel({
   pickedProducts,
   setPickedProducts,
 }: ProductPanelType) {
-  const {
-    ref: scrollRef,
-    inView,
-    entry,
-  } = useInView({
+  const [showingProducts, setShowingProducts] =
+    useState<productDataType[]>(productArray);
+
+  const { ref: scrollRef } = useInView({
     threshold: 0.5,
-    onChange: event => {
-      console.log(event);
+    onChange: async (inView: boolean) => {
+      if (inView) {
+        const newProducts: journeyDataType = await fetchTravelSpec();
+        setShowingProducts([...showingProducts, ...newProducts.attractions]);
+      }
     },
   });
 
@@ -81,7 +85,7 @@ function ProductPanel({
     >
       {value === index && (
         <List>
-          {productArray.map((product: productDataType) => {
+          {showingProducts.map((product: productDataType) => {
             return (
               <Paper square sx={{ marginBottom: "10px" }}>
                 <ListItem disablePadding>
