@@ -3,6 +3,8 @@ import pickle
 import json
 import pandas as pd
 import ast
+from pymongo import MongoClient
+from tqdm import tqdm
 
 
 def hotel_info():
@@ -71,7 +73,7 @@ def restaurant_details(city):
     df["thumbnail"] = None
     df["country"] = df["timezone"]
     df["detail_url"] = df["web_url"]
-    df["city"] = city
+    df["city"] = city[0].upper()+city[1:]
 
     df[cols].to_csv(f"./data/{city}_restaurant_db.csv", index=False)
 
@@ -82,7 +84,7 @@ def attraction_details(city):
     df = pd.read_csv(f"./data/{city}_attractions.csv")
     df["tripadvisor_id"] = df["location_id"]
     df["thumbnail"] = None
-    df["city"] = city
+    df["city"] = city[0].upper()+city[1:]
     df["address"] = df["address_obj"].apply(
         lambda x: x if not pd.notna(x) else ast.literal_eval(x)["address_string"])
     df["state"] = df["address_obj"].apply(
@@ -118,5 +120,24 @@ def hotel_detail(city):
     df[cols].to_csv(f"./data/{city}_hotel_db.csv", index=False)
 
 
+def string_to_list(collection):
+    client = MongoClient(
+        "mongodb://admin:triget13082!@15.165.221.77:27017/?authMechanism=SCRAM-SHA-1")
+    db = client["triget"]
+    col = db[collection]
+    col.update({}, [{"$set": {"subcategory": ["subcategory"]}}], {
+               "multi": True})
+    # ids = list(map(lambda x: x["tripadvisor_id"], col.find()))
+    # for id in tqdm(ids):
+    #     row = col.find_one({"tripadvisor_id": id})
+    #     subcategory = ast.literal_eval(row["subcategory"])
+    #     col.update_one({"tripadvisor_id": id}, {
+    #                    "$set": {"subcategory": subcategory}})
+    #     if "neighbors" in row.keys():
+    #         neighbors = ast.literal_eval(row["neighbors"])
+    #         col.update_one({"tripadvisor_id": id}, {
+    #                        "$set": {"neighbors": neighbors}})
+
+
 if __name__ == "__main__":
-    hotel_detail("tokyo")
+    string_to_list("attraction")
