@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import { useInView } from "react-intersection-observer";
 import fetchTravelSpec from "modules/fetchTravelSpec";
+import journeyDataType from "types/journeyDataType";
 import ProductKeywords from "./productDetails/ProductKeywords";
 import ProductLocation from "./productDetails/ProductLocation";
 import ProductName from "./productDetails/ProductName";
@@ -12,7 +13,7 @@ import ProductPopularity from "./productDetails/ProductPopularity";
 import ProductPrice from "./productDetails/ProductPrice";
 import ProductReviewRate from "./productDetails/ProductReviewRate";
 import ProductPickBtn from "./ProductPickBtn";
-import journeyDataType from "types/journeyDataType";
+import LoadingBackdrop from "./LoadingBackDrop";
 
 interface ProductPanelType {
   value: number;
@@ -32,6 +33,7 @@ const StyledLeftProductContainer = styled.div`
   margin-left: 20px;
   height: 250px;
 `;
+
 const StyledRightProductContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -58,12 +60,16 @@ function ProductPanel({
   const [showingProducts, setShowingProducts] =
     useState<productDataType[]>(productArray);
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const { ref: scrollRef } = useInView({
     threshold: 0.5,
     onChange: async (inView: boolean) => {
       if (inView) {
+        setLoading(true);
         const newProducts: journeyDataType = await fetchTravelSpec();
         setShowingProducts([...showingProducts, ...newProducts.attractions]);
+        setLoading(false);
       }
     },
   });
@@ -134,6 +140,7 @@ function ProductPanel({
             );
           })}
           <ListItem ref={scrollRef} disablePadding sx={{ height: "50px" }} />
+          <LoadingBackdrop loading={loading} />
         </List>
       )}
     </StyledPanel>

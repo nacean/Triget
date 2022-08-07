@@ -13,6 +13,7 @@ import { SetterOrUpdater } from "recoil";
 import styled from "styled-components";
 import flightProductType from "types/flightTypes/flightProductType";
 import journeyDataType from "types/journeyDataType";
+import LoadingBackdrop from "../LoadingBackDrop";
 import FlightRoute from "./flightRouteComponents/FlightRoute";
 
 interface FlightPanelType {
@@ -56,12 +57,16 @@ function FlightPanel({
   const [showingFlights, setShowingFlights] =
     useState<flightProductType[]>(productArray);
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const { ref: scrollRef } = useInView({
     threshold: 0.5,
     onChange: async (inView: boolean) => {
       if (inView) {
+        setLoading(true);
         const newProducts: journeyDataType = await fetchTravelSpec();
         setShowingFlights([...showingFlights, ...newProducts.flights]);
+        setLoading(false);
       }
     },
   });
@@ -136,6 +141,7 @@ function FlightPanel({
             </Paper>
           ))}
           <ListItem ref={scrollRef} disablePadding sx={{ height: "50px" }} />
+          <LoadingBackdrop loading={loading} />
         </List>
       )}
     </StyledPanel>
