@@ -3,6 +3,7 @@ import { productDataType } from "types/productDataType";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
+import { useInView } from "react-intersection-observer";
 import ProductKeywords from "./productDetails/ProductKeywords";
 import ProductLocation from "./productDetails/ProductLocation";
 import ProductName from "./productDetails/ProductName";
@@ -52,6 +53,17 @@ function ProductPanel({
   pickedProducts,
   setPickedProducts,
 }: ProductPanelType) {
+  const {
+    ref: scrollRef,
+    inView,
+    entry,
+  } = useInView({
+    threshold: 0.5,
+    onChange: event => {
+      console.log(event);
+    },
+  });
+
   const isInPickedArray = (newProduct_id: number): boolean => {
     return (
       pickedProducts.findIndex(
@@ -117,7 +129,7 @@ function ProductPanel({
               </Paper>
             );
           })}
-          <ListItem disablePadding sx={{ height: "50px" }} />
+          <ListItem ref={scrollRef} disablePadding sx={{ height: "50px" }} />
         </List>
       )}
     </StyledPanel>

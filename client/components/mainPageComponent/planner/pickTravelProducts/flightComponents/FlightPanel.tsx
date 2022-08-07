@@ -10,7 +10,7 @@ import React from "react";
 import { SetterOrUpdater } from "recoil";
 import styled from "styled-components";
 import flightProductType from "types/flightTypes/flightProductType";
-import FlightRoute from "./flightRouteComponents.tsx/FlightRoute";
+import FlightRoute from "./flightRouteComponents/FlightRoute";
 
 interface FlightPanelType {
   value: number;
