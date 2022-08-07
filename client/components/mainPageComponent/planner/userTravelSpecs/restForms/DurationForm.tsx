@@ -38,6 +38,7 @@ function DurationForm() {
           )}
           value={startDateValue}
           onChange={onStartDateChange}
+          PopperProps={{ placement: "bottom-start", disablePortal: true }}
         />
         <DesktopDatePicker
           label="End Date"
@@ -45,6 +46,7 @@ function DurationForm() {
           renderInput={params => <TextField {...params} />}
           value={endDateValue}
           onChange={onEndDateChange}
+          PopperProps={{ placement: "bottom-start", disablePortal: true }}
         />
       </LocalizationProvider>
     </DatePickContainer>
