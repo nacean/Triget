@@ -131,9 +131,12 @@ table {
 html,
 body {
   padding: 0;
-  margin: 0 auto;
   font-family: 'Noto Sans KR', sans-serif;
+}
+
+header, main  {
   max-width : 90%;
+  margin: 0 auto;
 }
 
 a {
