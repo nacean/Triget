@@ -120,24 +120,5 @@ def hotel_detail(city):
     df[cols].to_csv(f"./data/{city}_hotel_db.csv", index=False)
 
 
-def string_to_list(collection):
-    client = MongoClient(
-        "mongodb://admin:triget13082!@15.165.221.77:27017/?authMechanism=SCRAM-SHA-1")
-    db = client["triget"]
-    col = db[collection]
-    col.update({}, [{"$set": {"subcategory": ["subcategory"]}}], {
-               "multi": True})
-    # ids = list(map(lambda x: x["tripadvisor_id"], col.find()))
-    # for id in tqdm(ids):
-    #     row = col.find_one({"tripadvisor_id": id})
-    #     subcategory = ast.literal_eval(row["subcategory"])
-    #     col.update_one({"tripadvisor_id": id}, {
-    #                    "$set": {"subcategory": subcategory}})
-    #     if "neighbors" in row.keys():
-    #         neighbors = ast.literal_eval(row["neighbors"])
-    #         col.update_one({"tripadvisor_id": id}, {
-    #                        "$set": {"neighbors": neighbors}})
-
-
 if __name__ == "__main__":
-    string_to_list("attraction")
+    pass
