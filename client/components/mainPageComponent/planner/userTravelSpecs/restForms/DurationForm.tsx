@@ -1,54 +1,64 @@
-import { TextField } from "@mui/material";
-import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "antd";
 import endDateState from "atoms/plannerAtoms/endDateState";
 import startDateState from "atoms/plannerAtoms/startDateState";
-import { Dayjs } from "dayjs";
+import moment, { Moment } from "moment";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import ConnectingAirportsIcon from "@mui/icons-material/ConnectingAirports";
+
+const { RangePicker } = DatePicker;
 
 const DatePickContainer = styled.div`
+  position: relative;
   display: flex;
+  width: 25%;
   margin-right: 30px;
 `;
 function DurationForm() {
-  const [startDateValue, setStartDateValue] = useRecoilState<Dayjs | null>(
+  const [startDateValue, setStartDateValue] = useRecoilState<string | null>(
     startDateState,
   );
-  const [endDateValue, setEndDateValue] = useRecoilState<Dayjs | null>(
+  const [endDateValue, setEndDateValue] = useRecoilState<string | null>(
     endDateState,
   );
 
-  const onStartDateChange = (newStartDate: Dayjs | null) => {
-    setStartDateValue(newStartDate);
-  };
+  const startMoment: Moment | null = startDateValue
+    ? moment(startDateValue)
+    : null;
+  const endMoment: Moment | null = endDateValue ? moment(endDateValue) : null;
 
-  const onEndDateChange = (newEndDate: Dayjs | null) => {
-    setEndDateValue(newEndDate);
+  const onCalendarChange = (
+    dates: [Moment, Moment],
+    dateStrings: [string, string],
+  ) => {
+    setStartDateValue(dateStrings[0]);
+    setEndDateValue(dateStrings[1]);
   };
 
   return (
     <DatePickContainer>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DesktopDatePicker
-          label="Start Date"
-          inputFormat="YYYY-MM-DD"
-          renderInput={params => (
-            <TextField {...params} sx={{ marginRight: 1 }} />
-          )}
-          value={startDateValue}
-          onChange={onStartDateChange}
-          PopperProps={{ placement: "bottom-start", disablePortal: true }}
-        />
-        <DesktopDatePicker
-          label="End Date"
-          inputFormat="YYYY-MM-DD"
-          renderInput={params => <TextField {...params} />}
-          value={endDateValue}
-          onChange={onEndDateChange}
-          PopperProps={{ placement: "bottom-start", disablePortal: true }}
-        />
-      </LocalizationProvider>
+      <ConnectingAirportsIcon
+        sx={{
+          position: "absolute",
+          top: "16px",
+          left: "2.5%",
+          zIndex: 5,
+          color: "#757575",
+        }}
+      />
+      <RangePicker
+        placeholder={["출발 날짜", "도착 날짜"]}
+        format="YYYY-MM-DD"
+        style={{
+          width: "100%",
+          borderRadius: 4,
+          borderColor: "#C4C4C4",
+          paddingLeft: 40,
+        }}
+        size="large"
+        value={[startMoment, endMoment]}
+        onCalendarChange={onCalendarChange}
+      />
     </DatePickContainer>
   );
 }

@@ -2,6 +2,7 @@ import Layout from "components/layout/Layout";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
+import "antd/dist/antd.css";
 import GlobalStyle from "styles/GlobalStyle";
 
 const queryClient = new QueryClient();
