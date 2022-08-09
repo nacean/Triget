@@ -4,8 +4,9 @@ import PrimaryNav from "./primaryNav/PrimaryNav";
 
 // css
 const HeaderContainer = styled.header`
-  width: 100%;
+  width: 80%;
   height: 150px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
