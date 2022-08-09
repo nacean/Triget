@@ -1,7 +1,6 @@
-import { Dayjs } from "dayjs";
 import { atom } from "recoil";
 
-const endDateState = atom<Dayjs | null>({
+const endDateState = atom<string | null>({
   key: "endDateState",
   default: null,
 });
