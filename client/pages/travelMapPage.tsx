@@ -43,7 +43,7 @@ function travelMapPage() {
   );
 
   useEffect(() => {
-    window.scrollTo({ top: 2000, left: 0, behavior: "smooth" });
+    window.scrollTo({ top: 180, left: 0, behavior: "smooth" });
   });
 
   if (isSuccess) {

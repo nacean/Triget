@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { Slide, Button, CircularProgress } from "@mui/material";
@@ -71,6 +71,10 @@ function ProductPickContainer({
   const [pickedAttractions, setPickedAttractions] = useRecoilState<
     productDataType[]
   >(pickedAttractionsState);
+
+  useEffect(() => {
+    window.scrollTo({ top: 150, left: 0, behavior: "smooth" });
+  });
 
   const onBackBtnClick = () => {
     onSlideBtnClick();

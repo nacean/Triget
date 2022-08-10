@@ -4,7 +4,6 @@ import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsStat
 import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsState";
 import { productDataType } from "types/productDataType";
 import { useRecoilState } from "recoil";
-import { useEffect } from "react";
 import { Button } from "@mui/material";
 import styled from "styled-components";
 import FlightIcon from "@mui/icons-material/Flight";
@@ -39,10 +38,6 @@ const StyledHead = styled.h2`
 `;
 
 function PickedProductsContainer() {
-  useEffect(() => {
-    window.scrollTo({ top: 1070, left: 0, behavior: "smooth" });
-  });
-
   const [pickedFlight, setPickedFlight] =
     useRecoilState<flightProductType | null>(pickedFlightState);
   const [pickedAccommodations, setPickedAccommodations] = useRecoilState<
