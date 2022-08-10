@@ -1,11 +1,4 @@
-import {
-  Button,
-  Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  Paper,
-} from "@mui/material";
+import { List, ListItem } from "@mui/material";
 import fetchTravelSpec from "modules/fetchTravelSpec";
 import React, { useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -14,7 +7,7 @@ import styled from "styled-components";
 import flightProductType from "types/flightTypes/flightProductType";
 import journeyDataType from "types/journeyDataType";
 import LoadingBackdrop from "../LoadingBackDrop";
-import FlightRoute from "./flightRouteComponents/FlightRoute";
+import FlightProductComponent from "./FlightProductComponent";
 
 interface FlightPanelType {
   value: number;
@@ -29,24 +22,6 @@ const StyledPanel = styled.div`
   overflow-y: scroll;
 `;
 
-const StyledFlightRoutesContainer = styled.div`
-  width: 75%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-`;
-
-const StyledFlightPriceContainer = styled.div`
-  width: 25%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 28px;
-  font-weight: 700;
-`;
-
 function FlightPanel({
   value,
   index,
@@ -56,7 +31,6 @@ function FlightPanel({
 }: FlightPanelType) {
   const [showingFlights, setShowingFlights] =
     useState<flightProductType[]>(productArray);
-
   const [loading, setLoading] = useState<boolean>(false);
 
   const { ref: scrollRef } = useInView({
@@ -77,14 +51,6 @@ function FlightPanel({
     else setPickedFlight(newFlight);
   };
 
-  const pickedOrNotFunc = (newProduct_id: number): boolean => {
-    if (pickedFlight === null) return false;
-    if (pickedFlight._id === newProduct_id) {
-      return true;
-    }
-    return false;
-  };
-
   return (
     <StyledPanel
       role="tabpanel"
@@ -95,50 +61,11 @@ function FlightPanel({
       {value === index && (
         <List>
           {showingFlights.map((product: flightProductType) => (
-            <Paper square sx={{ marginBottom: "10px" }}>
-              <ListItem disablePadding>
-                <ListItemButton
-                  href={product.detail_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  sx={{
-                    height: 250,
-                    display: "flex",
-                  }}
-                >
-                  <StyledFlightRoutesContainer>
-                    <FlightRoute flightLeg={product.legs[0]} />
-                    <FlightRoute flightLeg={product.legs[1]} />
-                  </StyledFlightRoutesContainer>
-                  <Divider
-                    orientation="vertical"
-                    variant="middle"
-                    flexItem
-                    sx={{ backgroundColor: "#DDDCE5" }}
-                  />
-                  <StyledFlightPriceContainer>
-                    {`₩${product.price.toLocaleString()}`}
-                  </StyledFlightPriceContainer>
-                </ListItemButton>
-                <Button
-                  variant="contained"
-                  sx={{
-                    position: "absolute",
-                    bottom: 10,
-                    right: 10,
-                  }}
-                  size="large"
-                  onClick={() => {
-                    onFlightBtnClick(product);
-                  }}
-                  color={pickedOrNotFunc(product._id) ? "error" : "primary"}
-                >
-                  {pickedOrNotFunc(product._id)
-                    ? "상품 취소하기"
-                    : "상품 선택하기"}
-                </Button>
-              </ListItem>
-            </Paper>
+            <FlightProductComponent
+              pickedFlight={pickedFlight}
+              product={product}
+              onFlightBtnClick={onFlightBtnClick}
+            />
           ))}
           <ListItem ref={scrollRef} disablePadding sx={{ height: "50px" }} />
           <LoadingBackdrop loading={loading} />
