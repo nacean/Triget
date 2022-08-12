@@ -7,6 +7,7 @@ import FlightTimeAndAirport from "./FlightTimeAndAirport";
 
 interface FlightRouteType {
   flightLeg: flightLegType;
+  fontSize: number;
 }
 
 const StyledFlightRoute = styled.div`
@@ -32,7 +33,7 @@ const StyledRouteInfo = styled.div`
   align-items: center;
 `;
 
-function FlightRoute({ flightLeg }: FlightRouteType) {
+function FlightRoute({ flightLeg, fontSize }: FlightRouteType) {
   return (
     <StyledFlightRoute>
       <StyledImageContainer>
@@ -66,6 +67,7 @@ function FlightRoute({ flightLeg }: FlightRouteType) {
           flightTime={flightLeg.departure_time}
           airportInfo={flightLeg.origin}
           textRight
+          fontSize={fontSize}
         />
         <FlightDuration
           duration_time={flightLeg.duration_time}
@@ -75,6 +77,7 @@ function FlightRoute({ flightLeg }: FlightRouteType) {
           flightTime={flightLeg.arrival_time}
           airportInfo={flightLeg.destination}
           textRight={false}
+          fontSize={fontSize}
         />
       </StyledRouteInfo>
     </StyledFlightRoute>

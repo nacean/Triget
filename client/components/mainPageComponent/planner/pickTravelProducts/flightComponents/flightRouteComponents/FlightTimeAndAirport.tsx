@@ -7,6 +7,7 @@ interface FlightTimeAndAirportType {
   flightTime: string;
   airportInfo: flightAirportInfoType;
   textRight: boolean; // 텍스트를 오른쪽으로 치우쳐야 하는가
+  fontSize: number;
 }
 
 const StyledFlightTimeAndAirport = styled.div`
@@ -17,15 +18,15 @@ const StyledFlightTimeAndAirport = styled.div`
   justify-content: space-between;
 `;
 
-const StyledTime = styled.div<{ textRight: boolean }>`
-  font-size: 22px;
+const StyledTime = styled.div<{ textRight: boolean; fontSize: number }>`
+  font-size: ${props => props.fontSize}px;
   font-weight: 700;
   margin-left: ${props => (props.textRight ? "auto" : "none")};
   margin-right: ${props => (props.textRight ? "none" : "auto")};
 `;
 
-const StyledAirportCode = styled.div<{ textRight: boolean }>`
-  font-size: 22px;
+const StyledAirportCode = styled.div<{ textRight: boolean; fontSize: number }>`
+  font-size: ${props => props.fontSize}px;
   font-weight: 500;
   margin-left: ${props => (props.textRight ? "auto" : "none")};
   margin-right: ${props => (props.textRight ? "none" : "auto")};
@@ -36,11 +37,14 @@ function FlightTimeAndAirport({
   flightTime,
   airportInfo,
   textRight,
+  fontSize,
 }: FlightTimeAndAirportType) {
   const exactTime = getExactTime(flightTime);
   return (
     <StyledFlightTimeAndAirport>
-      <StyledTime textRight={textRight}>{exactTime}</StyledTime>
+      <StyledTime textRight={textRight} fontSize={fontSize}>
+        {exactTime}
+      </StyledTime>
       <Tooltip
         title={airportInfo.name}
         PopperProps={{
@@ -58,7 +62,7 @@ function FlightTimeAndAirport({
           },
         }}
       >
-        <StyledAirportCode textRight={textRight}>
+        <StyledAirportCode textRight={textRight} fontSize={fontSize}>
           {airportInfo.iata_code}
         </StyledAirportCode>
       </Tooltip>

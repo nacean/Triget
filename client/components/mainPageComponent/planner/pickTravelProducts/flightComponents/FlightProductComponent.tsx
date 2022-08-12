@@ -65,8 +65,8 @@ function FlightProductComponent({
           }}
         >
           <StyledFlightRoutesContainer>
-            <FlightRoute flightLeg={product.legs[0]} />
-            <FlightRoute flightLeg={product.legs[1]} />
+            <FlightRoute flightLeg={product.legs[0]} fontSize={22} />
+            <FlightRoute flightLeg={product.legs[1]} fontSize={22} />
           </StyledFlightRoutesContainer>
           <Divider
             orientation="vertical"
