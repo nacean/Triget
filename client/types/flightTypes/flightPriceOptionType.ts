@@ -2,7 +2,7 @@ interface flightPriceOptionType {
   _id: number;
   price: number;
   agent: string;
-  detail_url: string;
+  detailUrl: string;
 }
 
 export default flightPriceOptionType;

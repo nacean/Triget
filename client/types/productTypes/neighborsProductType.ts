@@ -1,6 +1,6 @@
 interface neightborsProductType {
   _id: number;
-  product_name: string;
+  name: string;
   subcategory: string;
   thumbnail: string;
 }
