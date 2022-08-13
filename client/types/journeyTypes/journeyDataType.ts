@@ -6,10 +6,10 @@ interface journeyDataType {
   accommodationsBudget: number;
   restaurantsBudget: number;
   attractionsBudget: number;
-  flights: productArrayType[];
-  accommodations: productArrayType[];
-  restaurants: productArrayType[];
-  attractions: productArrayType[];
+  flights: productArrayType;
+  accommodations: productArrayType;
+  restaurants: productArrayType;
+  attractions: productArrayType;
 }
 
 export default journeyDataType;
