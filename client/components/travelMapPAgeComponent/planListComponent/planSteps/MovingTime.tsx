@@ -24,7 +24,7 @@ function MovingTime({ timeObj }: MovingTimeType) {
       <ListItemText>
         <StyledMovingTime>
           <EarbudsOutlinedIcon sx={{ marginRight: "10px" }} />
-          {`${timeObj.transit_mode} ${timeObj.duration_time}분`}
+          {`${timeObj.transitMode} ${timeObj.durationTime}분`}
         </StyledMovingTime>
       </ListItemText>
     </ListItem>

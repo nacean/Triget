@@ -28,19 +28,19 @@ function PlanningBox() {
   const [slideMove, setSlideMove] = useState(false);
   const travelMutation = useMutation(fetchTravelSpec);
 
-  const journey_theme = useRecoilValue(travelKeywordState);
+  const theme = useRecoilValue(travelKeywordState);
   const place = useRecoilValue(countriesState);
-  const departure_date = useRecoilValue(startDateState);
-  const arrival_date = useRecoilValue(endDateState);
-  const people_num = useRecoilValue(peopleCntState);
+  const departureDate = useRecoilValue(startDateState);
+  const arrivalDate = useRecoilValue(endDateState);
+  const peopleNum = useRecoilValue(peopleCntState);
   const budget = useRecoilValue(budgetState);
-  const departure_airport = useRecoilValue(airportState);
+  const departureAirport = useRecoilValue(airportState);
 
   // recoil weight values
-  const airport_prior = useRecoilValue(airportWeightState);
-  const accommodation_prior = useRecoilValue(hotelWeightState);
-  const restaurant_prior = useRecoilValue(foodWeightState);
-  const activity_prior = useRecoilValue(activityWeightState);
+  const flightsPrior = useRecoilValue(airportWeightState);
+  const accommodationsPrior = useRecoilValue(hotelWeightState);
+  const restaurantsPrior = useRecoilValue(foodWeightState);
+  const attractionsPrior = useRecoilValue(activityWeightState);
 
   // post travel spec and get data
 
@@ -51,16 +51,16 @@ function PlanningBox() {
   const onSpecPostBtnClick = () => {
     travelMutation.mutate({
       place,
-      people_num,
-      departure_date,
-      arrival_date,
-      departure_airport,
+      theme,
+      peopleNum,
+      departureDate,
+      arrivalDate,
+      departureAirport,
       budget,
-      journey_theme,
-      airport_prior,
-      accommodation_prior,
-      restaurant_prior,
-      activity_prior,
+      flightsPrior,
+      accommodationsPrior,
+      restaurantsPrior,
+      attractionsPrior,
     });
 
     setSlideMove(!slideMove);

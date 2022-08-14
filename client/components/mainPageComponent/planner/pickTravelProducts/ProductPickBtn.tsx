@@ -1,10 +1,10 @@
 import { Button } from "@mui/material";
-import { productDataType } from "types/productDataType";
 import { Dispatch, SetStateAction } from "react";
+import { allProductType } from "types/productTypes/productDataType";
 
 interface ProductPickBtnType {
-  product: productDataType;
-  setPickedProducts: Dispatch<SetStateAction<productDataType[]>>;
+  product: allProductType;
+  setPickedProducts: Dispatch<SetStateAction<allProductType[]>>;
   pickOrNot: boolean;
 }
 

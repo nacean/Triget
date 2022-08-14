@@ -1,5 +1,5 @@
 interface flightAirportInfoType {
-  iata_code: string;
+  iataCode: string;
   name: string;
 }
 

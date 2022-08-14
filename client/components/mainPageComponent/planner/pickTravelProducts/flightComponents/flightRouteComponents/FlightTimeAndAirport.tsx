@@ -63,7 +63,7 @@ function FlightTimeAndAirport({
         }}
       >
         <StyledAirportCode textRight={textRight} fontSize={fontSize}>
-          {airportInfo.iata_code}
+          {airportInfo.iataCode}
         </StyledAirportCode>
       </Tooltip>
     </StyledFlightTimeAndAirport>

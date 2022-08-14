@@ -1,11 +1,12 @@
 import { List, ListItem, ListItemButton, Paper } from "@mui/material";
-import { productDataType } from "types/productDataType";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import { useInView } from "react-intersection-observer";
 import fetchTravelSpec from "modules/fetchTravelSpec";
-import journeyDataType from "types/journeyDataType";
+import journeyDataType from "types/journeyTypes/journeyDataType";
+import { allProductType } from "types/productTypes/productDataType";
+import productArrayType from "types/journeyTypes/productArrayType";
 import ProductKeywords from "./productDetails/ProductKeywords";
 import ProductLocation from "./productDetails/ProductLocation";
 import ProductName from "./productDetails/ProductName";
@@ -15,12 +16,12 @@ import ProductReviewRate from "./productDetails/ProductReviewRate";
 import ProductPickBtn from "./ProductPickBtn";
 import LoadingBackdrop from "./LoadingBackDrop";
 
-interface ProductPanelType {
+interface ProductPanelType<T extends allProductType> {
   value: number;
   index: number;
-  productArray: productDataType[];
-  pickedProducts: productDataType[];
-  setPickedProducts: Dispatch<SetStateAction<productDataType[]>>;
+  productArray: productArrayType;
+  pickedProducts: T[];
+  setPickedProducts: Dispatch<SetStateAction<T[]>>;
 }
 
 const StyledPanel = styled.div`
@@ -50,15 +51,21 @@ const StyledSeperateDiv = styled.div`
   align-items: center;
 `;
 
-function ProductPanel({
+const StyledBlankImage = styled.div`
+  width: 250px;
+  height: 250px;
+`;
+
+function ProductPanel<T extends allProductType>({
   value,
   index,
   productArray,
   pickedProducts,
   setPickedProducts,
-}: ProductPanelType) {
-  const [showingProducts, setShowingProducts] =
-    useState<productDataType[]>(productArray);
+}: ProductPanelType<T>) {
+  const [showingProducts, setShowingProducts] = useState<T[]>(
+    productArray.content as T[],
+  );
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -68,7 +75,10 @@ function ProductPanel({
       if (inView) {
         setLoading(true);
         const newProducts: journeyDataType = await fetchTravelSpec();
-        setShowingProducts([...showingProducts, ...newProducts.attractions]);
+        setShowingProducts([
+          ...showingProducts,
+          ...newProducts.attractions.content,
+        ] as T[]);
         setLoading(false);
       }
     },
@@ -91,25 +101,29 @@ function ProductPanel({
     >
       {value === index && (
         <List>
-          {showingProducts.map((product: productDataType) => {
+          {showingProducts.map((product: T) => {
             return (
               <Paper square sx={{ marginBottom: "10px" }}>
                 <ListItem disablePadding>
                   <ListItemButton
-                    href={product.product_url}
+                    href={product.detailUrl}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <Image
-                      src={product.thumbnail}
-                      alt="Product Thumbnail"
-                      width={250}
-                      height={250}
-                    />
+                    {product.thumbnail ? (
+                      <Image
+                        src={product.thumbnail}
+                        alt="Product Thumbnail"
+                        width={250}
+                        height={250}
+                      />
+                    ) : (
+                      <StyledBlankImage />
+                    )}
                     <StyledLeftProductContainer>
                       <StyledSeperateDiv>
-                        <ProductName productName={product.product_name} />
-                        <ProductReviewRate reviewRate={product.review_score} />
+                        <ProductName productName={product.name} />
+                        <ProductReviewRate reviewRate={product.rating} />
                       </StyledSeperateDiv>
                       <StyledSeperateDiv>
                         <ProductLocation
@@ -118,16 +132,18 @@ function ProductPanel({
                           productAddress={product.address}
                         />
                       </StyledSeperateDiv>
-                      <ProductKeywords keywords_array={product.keywords} />
+                      <ProductKeywords keywords={product.keywords} />
                     </StyledLeftProductContainer>
                     <StyledRightProductContainer>
                       <ProductPopularity
                         productPopularity={product.popularity}
                       />
-                      <ProductPrice
-                        productPrice={product.price}
-                        currency_code={product.currency_code}
-                      />
+                      {"price" in product && (
+                        <ProductPrice
+                          productPrice={product.price}
+                          currency_code={product.currencyCode}
+                        />
+                      )}
                     </StyledRightProductContainer>
                   </ListItemButton>
                   <ProductPickBtn

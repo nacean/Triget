@@ -6,13 +6,13 @@ import {
   Paper,
 } from "@mui/material";
 import styled from "styled-components";
-import { productDataType } from "types/productDataType";
+import { allProductType } from "types/productTypes/productDataType";
 
 interface PlanStepType {
   isPicked: boolean;
-  product: productDataType;
+  product: allProductType;
   index: number;
-  onStepClick: (product: productDataType, index: number) => void;
+  onStepClick: (product: allProductType, index: number) => void;
 }
 
 const IndexSphere = styled.div`
@@ -41,7 +41,7 @@ function PlanStep({ isPicked, product, index, onStepClick }: PlanStepType) {
         <ListItemIcon
           sx={{ fontSize: 18, color: isPicked ? "#000" : "#A4A5B6" }}
         >
-          {product.travel_time}
+          {product.travelTime}
         </ListItemIcon>
         <ListItemText>
           <Paper
@@ -58,7 +58,7 @@ function PlanStep({ isPicked, product, index, onStepClick }: PlanStepType) {
             <IndexSphere color={isPicked ? "#000" : "#A4A5B6"}>
               {index}
             </IndexSphere>
-            {product.product_name}
+            {product.name}
           </Paper>
         </ListItemText>
       </ListItemButton>

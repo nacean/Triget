@@ -2,7 +2,7 @@ import { Chip } from "@mui/material";
 import styled from "styled-components";
 
 interface ProductKeywordsType {
-  keywords_array: string[];
+  keywords: string[];
 }
 
 const StyledProductKeywordsContainer = styled.div`
@@ -13,10 +13,10 @@ const StyledProductKeywordsContainer = styled.div`
   align-items: flex-end;
 `;
 
-function ProductKeywords({ keywords_array }: ProductKeywordsType) {
+function ProductKeywords({ keywords }: ProductKeywordsType) {
   return (
     <StyledProductKeywordsContainer>
-      {keywords_array.map((keyword: string) => (
+      {keywords.map((keyword: string) => (
         <Chip
           label={`#${keyword}`}
           sx={{

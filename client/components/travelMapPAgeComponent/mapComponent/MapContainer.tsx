@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import { GoogleMap, LoadScriptNext } from "@react-google-maps/api";
-import { productDataType } from "types/productDataType";
 import { travelMovingTime } from "types/travelMovingTime";
 import { Dispatch, SetStateAction } from "react";
+import { allProductType } from "types/productTypes/productDataType";
 import MapPolyLines from "./MapPolyLines";
 import MapMarker from "./MapMarker";
 import ClickedMarkerInfo from "./ClickedMarkerInfo";
 
 interface MapContainerType {
-  travelListArray: (productDataType | travelMovingTime)[];
-  nowPickStep: productDataType | null;
-  setNowPickStep: Dispatch<SetStateAction<productDataType>>;
+  travelListArray: (allProductType | travelMovingTime)[];
+  nowPickStep: allProductType | null;
+  setNowPickStep: Dispatch<SetStateAction<allProductType>>;
   setNowPickIndex: Dispatch<SetStateAction<number>>;
 }
 
@@ -43,14 +43,13 @@ function MapContainer({
   };
 
   // 이동 시간을 제외한 순수 product만 있는 배열
-  const productsExceptMovingTime: productDataType[] = travelListArray.filter(
-    (product: productDataType | travelMovingTime) =>
-      !("transit_mode" in product),
-  ) as productDataType[];
+  const productsExceptMovingTime: allProductType[] = travelListArray.filter(
+    (product: allProductType | travelMovingTime) => !("transitMode" in product),
+  ) as allProductType[];
 
   // product 에서 path만 따로 관리, 다른 map component에 대해 사용
   const travelPaths: pathType[] = productsExceptMovingTime.map(
-    (product: productDataType) => ({
+    (product: allProductType) => ({
       lat: product.latitude,
       lng: product.longitude,
     }),
@@ -68,7 +67,7 @@ function MapContainer({
             zoomControl: true,
           }}
         >
-          {productsExceptMovingTime.map((product: productDataType) => {
+          {productsExceptMovingTime.map((product: allProductType) => {
             index += 1;
             return (
               <>

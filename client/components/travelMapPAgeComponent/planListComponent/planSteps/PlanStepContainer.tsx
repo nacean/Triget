@@ -1,14 +1,14 @@
 import { List } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { productDataType } from "types/productDataType";
+import { allProductType } from "types/productTypes/productDataType";
 import { travelMovingTime } from "types/travelMovingTime";
 import MovingTime from "./MovingTime";
 import PlanStep from "./PlanStep";
 
 interface PlanStepContainerType {
-  travelListArray: (productDataType | travelMovingTime)[];
-  setNowPickStep: Dispatch<SetStateAction<productDataType>>;
+  travelListArray: (allProductType | travelMovingTime)[];
+  setNowPickStep: Dispatch<SetStateAction<allProductType | null>>;
   nowPickIndex: number;
   setNowPickIndex: Dispatch<SetStateAction<number>>;
 }
@@ -29,16 +29,16 @@ function PlanStepContainer({
 }: PlanStepContainerType) {
   let travelIndex = 0;
 
-  const onStepClick = (productParam: productDataType, indexParam: number) => {
+  const onStepClick = (productParam: allProductType, indexParam: number) => {
     setNowPickIndex(indexParam);
     setNowPickStep(productParam);
   };
 
   const productOrTimeComponent = (
-    product: productDataType | travelMovingTime,
+    product: allProductType | travelMovingTime,
   ) => {
     // if it is time Obj
-    if ("transit_mode" in product) {
+    if ("transitMode" in product) {
       return <MovingTime timeObj={product as travelMovingTime} />;
     }
 
@@ -47,7 +47,7 @@ function PlanStepContainer({
     return (
       <PlanStep
         isPicked={nowPickIndex === travelIndex}
-        product={product as productDataType}
+        product={product as allProductType}
         index={travelIndex}
         onStepClick={onStepClick}
       />
@@ -57,7 +57,7 @@ function PlanStepContainer({
   return (
     <StyledPlanStepContainer>
       <List>
-        {travelListArray.map((product: productDataType | travelMovingTime) =>
+        {travelListArray.map((product: allProductType | travelMovingTime) =>
           productOrTimeComponent(product),
         )}
       </List>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import FlightIcon from "@mui/icons-material/Flight";
 
 interface FlightDurationType {
-  duration_time: number;
+  durationTime: number;
   stop_count: number;
 }
 
@@ -34,10 +34,10 @@ const StyledDivider = styled.div`
   background-color: #68697f;
 `;
 
-function FlightDuration({ duration_time, stop_count }: FlightDurationType) {
+function FlightDuration({ durationTime, stop_count }: FlightDurationType) {
   const calculatedTime = (): string => {
-    const hour: number = Math.floor(duration_time / 60);
-    const minute: number = duration_time % 60;
+    const hour: number = Math.floor(durationTime / 60);
+    const minute: number = durationTime % 60;
 
     return `${hour}시간 ${minute}분`;
   };

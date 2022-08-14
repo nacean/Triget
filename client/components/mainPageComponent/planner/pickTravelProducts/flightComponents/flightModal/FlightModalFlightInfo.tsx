@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import flightLegType from "types/flightTypes/flightLegType";
 import FlightRoute from "../flightRouteComponents/FlightRoute";
+import FlightModalTimeLine from "./FlightModalTimeLine";
 
 interface FlightModalFlightInfoType {
   pathName: string;
@@ -29,7 +30,7 @@ function FlightModalFlightInfo({
   pathName,
   flightLeg,
 }: FlightModalFlightInfoType) {
-  const departureDateString: string = flightLeg.departure_time.substring(0, 10);
+  const departureDateString: string = flightLeg.departure.substring(0, 10);
 
   const year = departureDateString.substring(0, 4);
   const month = Number(departureDateString.substring(5, 7)).toString();
@@ -47,6 +48,7 @@ function FlightModalFlightInfo({
       </DialogTitle>
       <DialogContent>
         <FlightRoute flightLeg={flightLeg} fontSize={18} />
+        <FlightModalTimeLine flightLeg={flightLeg} />
       </DialogContent>
     </StyledFlightModalFlightInfo>
   );

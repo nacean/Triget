@@ -1,13 +1,13 @@
 import { Button } from "@mui/material";
 import { OverlayView } from "@react-google-maps/api";
 import React, { Dispatch, SetStateAction } from "react";
-import { productDataType } from "types/productDataType";
+import { allProductType } from "types/productTypes/productDataType";
 
 interface MapMarkerType {
-  product: productDataType;
+  product: allProductType;
   productIndex: number;
-  nowPickStep: productDataType;
-  setNowPickStep: Dispatch<SetStateAction<productDataType>>;
+  nowPickStep: allProductType;
+  setNowPickStep: Dispatch<SetStateAction<allProductType>>;
   setNowPickIndex: Dispatch<SetStateAction<number>>;
 }
 

@@ -30,6 +30,7 @@
       }
     ],
     "@typescript-eslint/naming-convention": "off",
-    "no-underscore-dangle": 0 // 임시로 변수 맨 앞 언더바 허용
+    "no-underscore-dangle": 0, // 임시로 변수 맨 앞 언더바 허용
+    "react/require-default-props": "off" // optional type 사용 시 에러 발생 방지
   }
 }

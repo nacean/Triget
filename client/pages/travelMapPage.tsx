@@ -9,9 +9,14 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { productDataType } from "types/productDataType";
 import { travelMovingTime } from "types/travelMovingTime";
 import flightProductType from "types/flightTypes/flightProductType";
+import {
+  accommodationsDataType,
+  allProductType,
+  attractionsDataType,
+  restaurantsDataType,
+} from "types/productTypes/productDataType";
 
 const StyledTravelMapPage = styled.article`
   width: 100%;
@@ -22,19 +27,19 @@ const StyledTravelMapPage = styled.article`
 
 function travelMapPage() {
   //현재 고른 product 정보
-  const [nowPickStep, setNowPickStep] = useState<productDataType | null>(null);
+  const [nowPickStep, setNowPickStep] = useState<allProductType | null>(null);
   const [nowPickIndex, setNowPickIndex] = useState<number>(-1);
 
   const [pickedFlight, setPickedFlight] =
     useRecoilState<flightProductType | null>(pickedFlightState);
   const [pickedAccommodations, setPickedAccommodations] = useRecoilState<
-    productDataType[]
+    accommodationsDataType[]
   >(pickedAccommodationsState);
   const [pickedRestaurants, setPickedRestaurants] = useRecoilState<
-    productDataType[]
+    restaurantsDataType[]
   >(pickedRestaurantsState);
   const [pickedAttractions, setPickedAttractions] = useRecoilState<
-    productDataType[]
+    attractionsDataType[]
   >(pickedAttractionsState);
 
   const { data, isSuccess, isLoading, isError, error } = useQuery(
@@ -46,26 +51,32 @@ function travelMapPage() {
     window.scrollTo({ top: 180, left: 0, behavior: "smooth" });
   });
 
-  if (isSuccess) {
-    const travelListArray = data as (productDataType | travelMovingTime)[];
-
-    return (
-      <StyledTravelMapPage>
-        <MapContainer
-          travelListArray={travelListArray}
-          nowPickStep={nowPickStep}
-          setNowPickStep={setNowPickStep}
-          setNowPickIndex={setNowPickIndex}
-        />
-        <PlanContainer
-          travelListArray={travelListArray}
-          setNowPickStep={setNowPickStep}
-          nowPickIndex={nowPickIndex}
-          setNowPickIndex={setNowPickIndex}
-        />
-      </StyledTravelMapPage>
-    );
+  if (isLoading) {
+    return <div>loading...</div>;
   }
+
+  if (isError) {
+    return <div>Error!</div>;
+  }
+
+  const travelListArray = data as (allProductType | travelMovingTime)[];
+
+  return (
+    <StyledTravelMapPage>
+      <MapContainer
+        travelListArray={travelListArray}
+        nowPickStep={nowPickStep}
+        setNowPickStep={setNowPickStep}
+        setNowPickIndex={setNowPickIndex}
+      />
+      <PlanContainer
+        travelListArray={travelListArray}
+        setNowPickStep={setNowPickStep}
+        nowPickIndex={nowPickIndex}
+        setNowPickIndex={setNowPickIndex}
+      />
+    </StyledTravelMapPage>
+  );
 }
 
 export default travelMapPage;

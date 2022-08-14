@@ -1,7 +1,8 @@
 interface flightOperationType {
-  _id: string;
+  _id: number;
+  skyScannerId: number;
   name: string;
-  logo_url: string;
+  logoUrl: string;
 }
 
 export default flightOperationType;

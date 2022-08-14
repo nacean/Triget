@@ -32,13 +32,13 @@ const StyledDivider = styled.div`
 `;
 
 function FlightChipDetail({ flightLeg }: FlightChipDetailType) {
-  const departureTime = getExactTime(flightLeg.departure_time);
-  const arrivalTime = getExactTime(flightLeg.arrival_time);
+  const departureTime = getExactTime(flightLeg.departure);
+  const arrivalTime = getExactTime(flightLeg.arrival);
 
   return (
     <StyledFlightChipDetail>
       <Image
-        src={flightLeg.operatings[0].logo_url}
+        src={flightLeg.operations[0].logoUrl}
         alt="picked flight image"
         width={60}
         height={30}
@@ -46,13 +46,13 @@ function FlightChipDetail({ flightLeg }: FlightChipDetailType) {
       <StyledChipRouteContainer style={{ display: "flex" }}>
         <FlightChipTimeAndIata
           airTime={departureTime}
-          iataCode={flightLeg.origin.iata_code}
+          iataCode={flightLeg.origin.iataCode}
           textRight
         />
         <StyledDivider />
         <FlightChipTimeAndIata
           airTime={arrivalTime}
-          iataCode={flightLeg.destination.iata_code}
+          iataCode={flightLeg.destination.iataCode}
           textRight={false}
         />
       </StyledChipRouteContainer>

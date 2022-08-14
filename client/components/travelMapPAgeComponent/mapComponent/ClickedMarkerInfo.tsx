@@ -1,11 +1,11 @@
 import { Chip } from "@mui/material";
 import { InfoWindow } from "@react-google-maps/api";
 import styled from "styled-components";
-import { productDataType } from "types/productDataType";
+import { allProductType } from "types/productTypes/productDataType";
 
 interface ClickedMarkerInfoType {
-  product: productDataType;
-  nowPickStep: productDataType;
+  product: allProductType;
+  nowPickStep: allProductType;
 }
 
 const StyledInfo = styled.div`
@@ -53,7 +53,7 @@ function ClickedMarkerInfo({ product, nowPickStep }: ClickedMarkerInfoType) {
         }}
       >
         <StyledInfo>
-          <StyledInfoName>{product.product_name}</StyledInfoName>
+          <StyledInfoName>{product.name}</StyledInfoName>
           <StyledInfoTags>
             {product.keywords.map((keyword: string) => (
               <Chip

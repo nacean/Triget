@@ -9,15 +9,15 @@ import {
   SvgIconProps,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { productDataType } from "types/productDataType";
 import { SetterOrUpdater } from "recoil";
 import styled from "styled-components";
 import Image from "next/image";
+import { allProductType } from "types/productTypes/productDataType";
 
 interface PickedProductsChipsType {
   productKind: string;
-  pickedProducts: productDataType[];
-  setPickedProducts: SetterOrUpdater<productDataType[]>;
+  pickedProducts: allProductType[];
+  setPickedProducts: SetterOrUpdater<allProductType[]>;
   icon: React.ReactElement<SvgIconProps>;
 }
 
@@ -66,14 +66,16 @@ function PickedProductsChips({
               }
               sx={{ borderTopColor: "#9e9e9e" }}
             >
-              <Image
-                src={product.thumbnail}
-                alt="pickedProductImage"
-                width={50}
-                height={50}
-              />
+              {product.thumbnail !== "" && (
+                <Image
+                  src={product.thumbnail}
+                  alt="pickedProductImage"
+                  width={50}
+                  height={50}
+                />
+              )}
               <ListItemText
-                primary={product.product_name}
+                primary={product.name}
                 sx={{
                   width: "50%",
                   marginLeft: "10px",

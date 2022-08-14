@@ -38,7 +38,7 @@ function FlightRoute({ flightLeg, fontSize }: FlightRouteType) {
     <StyledFlightRoute>
       <StyledImageContainer>
         <Tooltip
-          title={flightLeg.operatings[0].name}
+          title={flightLeg.operations[0].name}
           PopperProps={{
             disablePortal: true,
             sx: {
@@ -55,7 +55,7 @@ function FlightRoute({ flightLeg, fontSize }: FlightRouteType) {
           }}
         >
           <Image
-            src={flightLeg.operatings[0].logo_url}
+            src={flightLeg.operations[0].logoUrl}
             alt="Product Thumbnail"
             width={120}
             height={60}
@@ -64,17 +64,17 @@ function FlightRoute({ flightLeg, fontSize }: FlightRouteType) {
       </StyledImageContainer>
       <StyledRouteInfo>
         <FlightTimeAndAirport
-          flightTime={flightLeg.departure_time}
+          flightTime={flightLeg.departure}
           airportInfo={flightLeg.origin}
           textRight
           fontSize={fontSize}
         />
         <FlightDuration
-          duration_time={flightLeg.duration_time}
-          stop_count={flightLeg.stop_count}
+          durationTime={flightLeg.durationInMinutes}
+          stop_count={flightLeg.stopCount}
         />
         <FlightTimeAndAirport
-          flightTime={flightLeg.arrival_time}
+          flightTime={flightLeg.arrival}
           airportInfo={flightLeg.destination}
           textRight={false}
           fontSize={fontSize}

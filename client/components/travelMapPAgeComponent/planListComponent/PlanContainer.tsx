@@ -1,14 +1,14 @@
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { productDataType } from "types/productDataType";
+import { allProductType } from "types/productTypes/productDataType";
 import { travelMovingTime } from "types/travelMovingTime";
 import PlanHeader from "./PlanHeader";
 import PlanStepContainer from "./planSteps/PlanStepContainer";
 import RescheduleBtn from "./RescheduleBtn";
 
 interface PlanContainerType {
-  travelListArray: (productDataType | travelMovingTime)[];
-  setNowPickStep: Dispatch<SetStateAction<productDataType>>;
+  travelListArray: (allProductType | travelMovingTime)[];
+  setNowPickStep: Dispatch<SetStateAction<allProductType | null>>;
   nowPickIndex: number;
   setNowPickIndex: Dispatch<SetStateAction<number>>;
 }

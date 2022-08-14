@@ -2,7 +2,6 @@ import pickedAccommodationsState from "atoms/pickProductAtoms/pickedAccommodatio
 import pickedFlightState from "atoms/pickProductAtoms/pickedFlightState";
 import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsState";
 import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsState";
-import { productDataType } from "types/productDataType";
 import { useRecoilState } from "recoil";
 import { Button } from "@mui/material";
 import styled from "styled-components";
@@ -11,6 +10,11 @@ import HotelIcon from "@mui/icons-material/Hotel";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import flightProductType from "types/flightTypes/flightProductType";
+import {
+  accommodationsDataType,
+  attractionsDataType,
+  restaurantsDataType,
+} from "types/productTypes/productDataType";
 import PickedProductsChips from "./PickedProductsChips";
 import PickedFlightChips from "./PickedFlightChipComponents/PickedFlightChips";
 
@@ -41,13 +45,13 @@ function PickedProductsContainer() {
   const [pickedFlight, setPickedFlight] =
     useRecoilState<flightProductType | null>(pickedFlightState);
   const [pickedAccommodations, setPickedAccommodations] = useRecoilState<
-    productDataType[]
+    accommodationsDataType[]
   >(pickedAccommodationsState);
   const [pickedRestaurants, setPickedRestaurants] = useRecoilState<
-    productDataType[]
+    restaurantsDataType[]
   >(pickedRestaurantsState);
   const [pickedAttractions, setPickedAttractions] = useRecoilState<
-    productDataType[]
+    attractionsDataType[]
   >(pickedAttractionsState);
 
   const onClickResetBtn = () => {
