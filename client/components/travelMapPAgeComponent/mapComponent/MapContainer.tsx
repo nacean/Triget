@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { GoogleMap, LoadScriptNext } from "@react-google-maps/api";
 import { travelMovingTime } from "types/travelMovingTime";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { allProductType } from "types/productTypes/productDataType";
 import MapPolyLines from "./MapPolyLines";
 import MapMarker from "./MapMarker";
@@ -38,9 +38,20 @@ function MapContainer({
   };
 
   const center = {
-    lat: 37.5124159,
-    lng: 127.0992765,
+    lat: nowPickStep
+      ? nowPickStep.latitude
+      : (travelListArray[0] as allProductType).latitude,
+    lng: nowPickStep
+      ? nowPickStep.longitude
+      : (travelListArray[0] as allProductType).longitude,
   };
+
+  useEffect(() => {
+    if (nowPickStep === null) {
+      setNowPickStep(travelListArray[0] as allProductType);
+      setNowPickIndex(1);
+    }
+  }, []);
 
   // 이동 시간을 제외한 순수 product만 있는 배열
   const productsExceptMovingTime: allProductType[] = travelListArray.filter(
@@ -61,7 +72,7 @@ function MapContainer({
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={16}
+          zoom={15}
           options={{
             disableDefaultUI: true,
             zoomControl: true,
