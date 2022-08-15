@@ -3,40 +3,45 @@ import pickle
 import json
 import pandas as pd
 import ast
-from pymongo import MongoClient
 from tqdm import tqdm
 
 
-def hotel_info():
-    with open("tokyo_hotels.bin", "rb") as f:
+def hotel_info(city):
+    with open(f"./data/{city}_hotels.bin", "rb") as f:
         data = pickle.load(f)
 
     hotels = []
     for i in data:
         page = json.loads(i)
-        hotels = hotels + page["result"]
+        try:
+            hotels = hotels + page["result"]
+        except:
+            continue
 
     data = defaultdict(list)
     keys = set(hotels[0].keys())
     for i in hotels:
         keys = keys.intersection(set(i.keys()))
-    print(keys)
     for i in hotels:
         for key in keys:
             data[key].append(i[key])
 
     df = pd.DataFrame(data)
-    df.to_csv("tokyo_hotels.csv")
+    df.to_csv(f"./data/{city}_hotels.csv", index=False)
 
 
-def hotel_review():
-    with open("tokyo_reviews.bin", "rb") as f:
+def hotel_review(city):
+    with open(f"./data/{city}_reviews.bin", "rb") as f:
         data = pickle.load(f)
 
     reviews = []
     for i in data:
         page = json.loads(i)
-        reviews = reviews + page["result"]
+        try:
+            reviews = reviews + page["result"]
+        except:
+            continue
+
     data = defaultdict(list)
     keys = set(reviews[0].keys())
     for i in reviews:
@@ -46,10 +51,10 @@ def hotel_review():
             data[key].append(i[key])
 
     df = pd.DataFrame(data)
-    df.to_csv("tokyo_hotels_review.csv")
+    df.to_csv(f"./data/{city}_hotels_review.csv", index=False)
 
 
-def restaurant_details(city):
+def restaurant_detail(city):
     cols = ["tripadvisor_id", "name", "thumbnail",
             "longitude", "latitude", "city", "state",
             "country", "address", "price", "currency_code",
@@ -78,7 +83,7 @@ def restaurant_details(city):
     df[cols].to_csv(f"./data/{city}_restaurant_db.csv", index=False)
 
 
-def attraction_details(city):
+def attraction_detail(city):
     cols = ["tripadvisor_id", "name", "thumbnail", "longitude", "latitude", "city", "state", "country", "address", "price",
             "currency_code", "estimated_time", "subcategory", "rating", "popularity", "detail_url", "product_website", "weekday_hours", "neighbors"]
     df = pd.read_csv(f"./data/{city}_attractions.csv")
@@ -116,9 +121,18 @@ def hotel_detail(city):
     df["rating"] = df["review_score"]
     df["popularity"] = df["review_nr"]
     df["detail_url"] = df["url"]
+    df["city"] = city[0].upper()+city[1:]
 
     df[cols].to_csv(f"./data/{city}_hotel_db.csv", index=False)
 
 
+def fill_null(city, category, column, value):
+    df = pd.read_csv(f"./data/{city}_{category}_db.csv")
+    df[column] = df[column].fillna(value)
+    df.to_csv(f"./data/{city}_{category}_db.csv", index=False)
+
+
 if __name__ == "__main__":
-    pass
+    hotel_detail("honolulu")
+    # restaurant_detail("honolulu")
+    # attraction_detail("honolulu")

@@ -5,9 +5,10 @@ import json
 from tqdm import tqdm
 import pandas as pd
 import pickle
+from config import Config
 
 
-API_KEY = "484C764ACA524F14841D32D65390C8FF"
+API_KEY = Config.API_KEY
 
 
 def nearby_search(lat, lon, category):
@@ -49,8 +50,8 @@ def get_location_details(info, path):
     data.to_csv(path, index=False)
 
 
-def get_location_photos(db_file):
-    df = pd.read_csv("./data/"+db_file)
+def get_location_photos(city, category):
+    df = pd.read_csv(f"./data/{city}_{category}_db.csv")
     url_dict = dict()
     url_list = []
     for id in tqdm(df["tripadvisor_id"].to_list()):
@@ -65,7 +66,7 @@ def get_location_photos(db_file):
             url_dict[id] = None
             url_list.append(None)
     df["thumbnail"] = url_list
-    df.to_csv("./data/"+db_file, index=False)
+    df.to_csv(f"./data/{city}_{category}_db.csv", index=False)
 
 
 def get_location_reviews(city, category):
@@ -100,4 +101,6 @@ if __name__ == "__main__":
     # with open(f"./data/{category}_id.bin", "rb") as f:
     #     data = pickle.load(f)
     #     get_location_details(data, f"./data/{city}_{category}.csv")
-    get_location_reviews("tokyo", "attraction")
+    for i in ["attraction", "restaurant"]:
+        get_location_reviews("honolulu", i)
+        get_location_photos("honolulu", i)

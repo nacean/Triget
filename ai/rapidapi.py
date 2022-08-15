@@ -3,15 +3,37 @@ import pickle
 import pandas as pd
 
 from tqdm import tqdm
+from config import Config
 
 
-def search_hotel():
+def get_dest_id(city):
+    city = city[0].upper() + city[1:]
+    url = "https://booking-com.p.rapidapi.com/v1/hotels/locations"
+
+    querystring = {"locale": "en-gb", "name": "Honolulu"}
+
+    headers = {
+        "X-RapidAPI-Key": Config.RAPID_API_KEY,
+        "X-RapidAPI-Host": "booking-com.p.rapidapi.com"
+    }
+
+    response = requests.request(
+        "GET", url, headers=headers, params=querystring)
+
+    print(response.text)
+
+
+def search_hotel(city):
     url = "https://booking-com.p.rapidapi.com/v1/hotels/search"
+    id_table = {
+        "tokyo": "-246227",
+        "honolulu": "20030916"
+    }
 
     querystring = {
         "checkout_date": "2022-10-01",
         "units": "metric",
-        "dest_id": "-246227",
+        "dest_id": id_table[city],
         "dest_type": "city",
         "locale": "en-gb",
         "adults_number": "2",
@@ -23,7 +45,7 @@ def search_hotel():
         "categories_filter_ids": "class::2,class::4,free_cancellation::1", "include_adjacency": "true"}
 
     headers = {
-        "X-RapidAPI-Key": "be2ef5122fmshd2190130c6389bep1f9720jsnea6487bddd10",
+        "X-RapidAPI-Key": Config.RAPID_API_KEY,
         "X-RapidAPI-Host": "booking-com.p.rapidapi.com"
     }
 
@@ -35,13 +57,13 @@ def search_hotel():
             "GET", url, headers=headers, params=querystring)
         data.append(response.text)
 
-    with open("tokyo_hotels.bin", "wb") as f:
+    with open(f"./data/{city}_hotels.bin", "wb") as f:
         pickle.dump(data, f)
 
 
-def hotel_reviews():
+def hotel_reviews(city):
     url = "https://booking-com.p.rapidapi.com/v1/hotels/reviews"
-    df = pd.read_csv("tokyo_hotels.csv")
+    df = pd.read_csv(f"./data/{city}_hotels.csv")
     ids = df["hotel_id"].to_list()
     data = []
     for id in tqdm(ids[:20]):
@@ -49,7 +71,7 @@ def hotel_reviews():
                        "language_filter": "en-gb,de,fr", "customer_type": "solo_traveller,review_category_group_of_friends"}
 
         headers = {
-            "X-RapidAPI-Key": "be2ef5122fmshd2190130c6389bep1f9720jsnea6487bddd10",
+            "X-RapidAPI-Key": Config.RAPID_API_KEY,
             "X-RapidAPI-Host": "booking-com.p.rapidapi.com"
         }
 
@@ -60,9 +82,9 @@ def hotel_reviews():
 
     print(data)
 
-    with open("tokyo_reviews.bin", "wb") as f:
+    with open(f"./data/{city}_reviews.bin", "wb") as f:
         pickle.dump(data, f)
 
 
 if __name__ == "__main__":
-    hotel_reviews()
+    hotel_reviews("honolulu")
