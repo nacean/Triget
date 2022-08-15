@@ -6,7 +6,7 @@ function getExactTime(flightTime: string): string {
 
   if (isAfternoon) {
     const exactHour: number = hour > 12 ? hour - 12 : hour;
-    return `오후 ${exactHour}:${minute}`;
+    return `오후 ${exactHour}:${minute < 10 ? "0" : ""}${minute}`;
   }
   return `오전 ${hour}:${minute}`;
 }
