@@ -7,6 +7,7 @@ import fetchTravelSpec from "modules/fetchTravelSpec";
 import journeyDataType from "types/journeyTypes/journeyDataType";
 import { allProductType } from "types/productTypes/productDataType";
 import productArrayType from "types/journeyTypes/productArrayType";
+import { Empty } from "antd";
 import ProductKeywords from "./productDetails/ProductKeywords";
 import ProductLocation from "./productDetails/ProductLocation";
 import ProductName from "./productDetails/ProductName";
@@ -53,9 +54,11 @@ const StyledSeperateDiv = styled.div`
   align-items: center;
 `;
 
-const StyledBlankImage = styled.div`
-  width: 250px;
-  height: 250px;
+const StyledImage = styled.div`
+  width: 13.5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 function ProductPanel<T extends allProductType>({
@@ -112,16 +115,22 @@ function ProductPanel<T extends allProductType>({
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {product.thumbnail ? (
-                      <Image
-                        src={product.thumbnail}
-                        alt="Product Thumbnail"
-                        width={250}
-                        height={250}
-                      />
-                    ) : (
-                      <StyledBlankImage />
-                    )}
+                    <StyledImage>
+                      {product.thumbnail ? (
+                        <Image
+                          src={product.thumbnail}
+                          alt="Product Thumbnail"
+                          width={250}
+                          height={250}
+                          style={{ borderRadius: 10 }}
+                        />
+                      ) : (
+                        <Empty
+                          description="No Image"
+                          imageStyle={{ width: "100%", height: "30%" }}
+                        />
+                      )}
+                    </StyledImage>
                     <StyledLeftProductContainer>
                       <StyledSeperateDiv>
                         <ProductName productName={product.name} />
