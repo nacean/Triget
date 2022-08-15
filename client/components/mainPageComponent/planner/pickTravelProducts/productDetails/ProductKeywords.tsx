@@ -7,7 +7,8 @@ interface ProductKeywordsType {
 
 const StyledProductKeywordsContainer = styled.div`
   width: 100%;
-  margin-top: 145px;
+  margin-top: auto;
+  margin-bottom: 5px;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;

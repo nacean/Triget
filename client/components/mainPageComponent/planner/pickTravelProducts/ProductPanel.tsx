@@ -31,8 +31,10 @@ const StyledPanel = styled.div`
 
 const StyledLeftProductContainer = styled.div`
   width: 65%;
-  margin-left: 20px;
   height: 250px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
 `;
 
 const StyledRightProductContainer = styled.div`
