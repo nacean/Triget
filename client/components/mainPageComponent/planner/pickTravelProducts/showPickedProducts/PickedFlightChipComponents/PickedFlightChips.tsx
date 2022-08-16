@@ -60,7 +60,11 @@ function PickedFlightChips({
                   <DeleteIcon />
                 </IconButton>
               }
-              sx={{ borderTopColor: "#9e9e9e", display: "block" }}
+              sx={{
+                borderTopColor: "#9e9e9e",
+                display: "block",
+                paddingLeft: 1,
+              }}
             >
               <FlightChipDetail flightLeg={pickedFlight.legs[0]} />
               <FlightChipDetail flightLeg={pickedFlight.legs[1]} />

@@ -40,7 +40,7 @@ function FlightChipDetail({ flightLeg }: FlightChipDetailType) {
       <Image
         src={flightLeg.operations[0].logoUrl}
         alt="picked flight image"
-        width={60}
+        width={40}
         height={30}
       />
       <StyledChipRouteContainer style={{ display: "flex" }}>

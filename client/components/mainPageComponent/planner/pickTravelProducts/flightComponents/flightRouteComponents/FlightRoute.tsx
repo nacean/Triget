@@ -57,7 +57,7 @@ function FlightRoute({ flightLeg, fontSize }: FlightRouteType) {
           <Image
             src={flightLeg.operations[0].logoUrl}
             alt="Product Thumbnail"
-            width={120}
+            width={80}
             height={60}
           />
         </Tooltip>
