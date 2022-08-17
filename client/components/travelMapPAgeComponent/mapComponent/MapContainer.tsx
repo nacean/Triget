@@ -68,7 +68,7 @@ function MapContainer({
 
   return (
     <StyledMapContainer>
-      <LoadScriptNext googleMapsApiKey={process.env.MAP_API_KEY}>
+      <LoadScriptNext googleMapsApiKey={process.env.NEXT_PUBLIC_MAP_API_KEY}>
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
