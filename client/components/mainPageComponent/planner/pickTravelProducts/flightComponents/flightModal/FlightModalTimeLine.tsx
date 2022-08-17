@@ -16,13 +16,9 @@ const StyledTimeLineContainer = styled.div`
 `;
 
 function FlightModalTimeLine({ flightLeg }: FlightModalTimeLineType) {
-  const mergedFlightLeg: flightLegType[] = flightLeg.segments
-    ? [flightLeg, ...flightLeg.segments]
-    : [flightLeg];
-
   return (
     <StyledTimeLineContainer>
-      {mergedFlightLeg.map((legParam: flightLegType) => (
+      {flightLeg.segments.map((legParam: flightLegType) => (
         <Timeline sx={{ width: "70%" }}>
           <FlightModalContent
             startTime={legParam.departure}
