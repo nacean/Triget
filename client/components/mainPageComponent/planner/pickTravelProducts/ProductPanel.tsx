@@ -149,7 +149,7 @@ function ProductPanel<T extends allProductType>({
                       <ProductPopularity
                         productPopularity={product.popularity}
                       />
-                      {"price" in product && (
+                      {"price" in product && product.price !== 0 && (
                         <ProductPrice
                           productPrice={product.price}
                           currency_code={product.currencyCode}
