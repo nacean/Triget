@@ -46,9 +46,9 @@ function FlightProductComponent({
     setOpenModal(true);
   };
 
-  const pickedOrNotFunc = (newProduct_id: number): boolean => {
+  const pickedOrNotFunc = (newProductid: string): boolean => {
     if (pickedFlight === null) return false;
-    if (pickedFlight._id === newProduct_id) {
+    if (pickedFlight.id === newProductid) {
       return true;
     }
     return false;
@@ -89,9 +89,9 @@ function FlightProductComponent({
           onClick={() => {
             onFlightBtnClick(product);
           }}
-          color={pickedOrNotFunc(product._id) ? "error" : "primary"}
+          color={pickedOrNotFunc(product.id) ? "error" : "primary"}
         >
-          {pickedOrNotFunc(product._id) ? "상품 취소하기" : "상품 선택하기"}
+          {pickedOrNotFunc(product.id) ? "상품 취소하기" : "상품 선택하기"}
         </Button>
       </ListItem>
       <FlightModalContainer

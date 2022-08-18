@@ -1,14 +1,14 @@
 import { List } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { allProductType } from "types/productTypes/productDataType";
+import { productDataType } from "types/productTypes/productDataType";
 import { travelMovingTime } from "types/travelMovingTime";
 import MovingTime from "./MovingTime";
 import PlanStep from "./PlanStep";
 
 interface PlanStepContainerType {
-  travelListArray: (allProductType | travelMovingTime)[];
-  setNowPickStep: Dispatch<SetStateAction<allProductType | null>>;
+  travelListArray: (productDataType | travelMovingTime)[];
+  setNowPickStep: Dispatch<SetStateAction<productDataType | null>>;
   nowPickIndex: number;
   setNowPickIndex: Dispatch<SetStateAction<number>>;
 }
@@ -29,13 +29,13 @@ function PlanStepContainer({
 }: PlanStepContainerType) {
   let travelIndex = 0;
 
-  const onStepClick = (productParam: allProductType, indexParam: number) => {
+  const onStepClick = (productParam: productDataType, indexParam: number) => {
     setNowPickIndex(indexParam);
     setNowPickStep(productParam);
   };
 
   const productOrTimeComponent = (
-    product: allProductType | travelMovingTime,
+    product: productDataType | travelMovingTime,
   ) => {
     // if it is time Obj
     if ("transitMode" in product) {
@@ -47,7 +47,7 @@ function PlanStepContainer({
     return (
       <PlanStep
         isPicked={nowPickIndex === travelIndex}
-        product={product as allProductType}
+        product={product as productDataType}
         index={travelIndex}
         onStepClick={onStepClick}
       />
@@ -57,7 +57,7 @@ function PlanStepContainer({
   return (
     <StyledPlanStepContainer>
       <List>
-        {travelListArray.map((product: allProductType | travelMovingTime) =>
+        {travelListArray.map((product: productDataType | travelMovingTime) =>
           productOrTimeComponent(product),
         )}
       </List>

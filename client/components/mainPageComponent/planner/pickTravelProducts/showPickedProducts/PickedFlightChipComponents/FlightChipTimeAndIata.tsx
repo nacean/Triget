@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 interface FlightChipTimeAndIataType {
   airTime: string;
-  iataCode: string;
+  iata: string;
   textRight: boolean;
 }
 
@@ -30,13 +30,13 @@ const StyledIataCode = styled.div<{ textRight: boolean }>`
 
 function FlightChipTimeAndIata({
   airTime,
-  iataCode,
+  iata,
   textRight,
 }: FlightChipTimeAndIataType) {
   return (
     <StyledTimeAndIataContainer textRight={textRight}>
       <StyledTime textRight={textRight}>{airTime}</StyledTime>
-      <StyledIataCode textRight={textRight}>{iataCode}</StyledIataCode>
+      <StyledIataCode textRight={textRight}>{iata}</StyledIataCode>
     </StyledTimeAndIataContainer>
   );
 }

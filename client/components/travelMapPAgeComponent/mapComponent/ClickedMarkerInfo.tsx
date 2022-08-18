@@ -1,11 +1,11 @@
 import { Chip } from "@mui/material";
 import { InfoWindow } from "@react-google-maps/api";
 import styled from "styled-components";
-import { allProductType } from "types/productTypes/productDataType";
+import { productDataType } from "types/productTypes/productDataType";
 
 interface ClickedMarkerInfoType {
-  product: allProductType;
-  nowPickStep: allProductType;
+  product: productDataType;
+  nowPickStep: productDataType;
 }
 
 const StyledInfo = styled.div`
@@ -37,7 +37,7 @@ function ClickedMarkerInfo({ product, nowPickStep }: ClickedMarkerInfoType) {
     lng: nowPickStep.longitude,
   };
 
-  let isPicked = product._id === nowPickStep._id;
+  let isPicked = product.id === nowPickStep.id;
 
   // infoBox 사용하는게 좋을 수도 ??
   return (

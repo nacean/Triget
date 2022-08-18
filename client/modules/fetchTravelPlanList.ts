@@ -4,7 +4,7 @@ async function fetchTravelPlanList() {
       resolve([
         {
           travelTime: "12:30",
-          _id: {
+          id: {
             timestamp: 1659346219,
             date: "2022-08-01T09:30:19.000+00:00",
           },
@@ -32,7 +32,7 @@ async function fetchTravelPlanList() {
         },
         {
           travelTime: "12:30",
-          _id: {
+          id: {
             timestamp: 1659346219,
             date: "2022-08-01T09:30:19.000+00:00",
           },
@@ -60,7 +60,7 @@ async function fetchTravelPlanList() {
         },
         {
           travelTime: "12:30",
-          _id: {
+          id: {
             timestamp: 1659346219,
             date: "2022-08-01T09:30:19.000+00:00",
           },
@@ -88,7 +88,7 @@ async function fetchTravelPlanList() {
         },
         {
           travelTime: "12:30",
-          _id: {
+          id: {
             timestamp: 1659346219,
             date: "2022-08-01T09:30:19.000+00:00",
           },

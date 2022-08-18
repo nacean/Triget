@@ -1,7 +1,7 @@
 import { atom } from "recoil";
-import { accommodationsDataType } from "types/productTypes/productDataType";
+import productDataType from "types/productTypes/productDataType";
 
-const pickedAccommodationsState = atom<accommodationsDataType[]>({
+const pickedAccommodationsState = atom<productDataType[]>({
   key: "pickedAccommodationsState",
   default: [],
 });

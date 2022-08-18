@@ -12,11 +12,7 @@ import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsStat
 import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsState";
 import flightProductType from "types/flightTypes/flightProductType";
 import journeyDataType from "types/journeyTypes/journeyDataType";
-import {
-  accommodationsDataType,
-  attractionsDataType,
-  restaurantsDataType,
-} from "types/productTypes/productDataType";
+import productDataType from "types/productTypes/productDataType";
 import ProductMenu from "./ProductMenu";
 import ProductPanel from "./ProductPanel";
 import PickedProductsContainer from "./showPickedProducts/PickedProductsContainer";
@@ -67,13 +63,13 @@ function ProductPickContainer({
   const [pickedFlight, setPickedFlight] =
     useRecoilState<flightProductType | null>(pickedFlightState);
   const [pickedAccommodations, setPickedAccommodations] = useRecoilState<
-    accommodationsDataType[]
+    productDataType[]
   >(pickedAccommodationsState);
   const [pickedRestaurants, setPickedRestaurants] = useRecoilState<
-    restaurantsDataType[]
+    productDataType[]
   >(pickedRestaurantsState);
   const [pickedAttractions, setPickedAttractions] = useRecoilState<
-    attractionsDataType[]
+    productDataType[]
   >(pickedAttractionsState);
 
   useEffect(() => {
@@ -132,21 +128,21 @@ function ProductPickContainer({
               pickedFlight={pickedFlight}
               setPickedFlight={setPickedFlight}
             />
-            <ProductPanel<accommodationsDataType>
+            <ProductPanel
               value={menuNum}
               index={1}
               productArray={accommodations}
               pickedProducts={pickedAccommodations}
               setPickedProducts={setPickedAccommodations}
             />
-            <ProductPanel<restaurantsDataType>
+            <ProductPanel
               value={menuNum}
               index={2}
               productArray={restaurants}
               pickedProducts={pickedRestaurants}
               setPickedProducts={setPickedRestaurants}
             />
-            <ProductPanel<attractionsDataType>
+            <ProductPanel
               value={menuNum}
               index={3}
               productArray={attractions}

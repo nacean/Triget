@@ -1,10 +1,10 @@
 import { Button } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
-import { allProductType } from "types/productTypes/productDataType";
+import { productDataType } from "types/productTypes/productDataType";
 
 interface ProductPickBtnType {
-  product: allProductType;
-  setPickedProducts: Dispatch<SetStateAction<allProductType[]>>;
+  product: productDataType;
+  setPickedProducts: Dispatch<SetStateAction<productDataType[]>>;
   pickOrNot: boolean;
 }
 
@@ -16,7 +16,7 @@ function ProductPickBtn({
   const onProductBtnClick = () => {
     if (pickOrNot) {
       setPickedProducts(productArray =>
-        productArray.filter(productParam => product._id !== productParam._id),
+        productArray.filter(productParam => product.id !== productParam.id),
       );
     } else {
       setPickedProducts(productArray => [...productArray, product]);

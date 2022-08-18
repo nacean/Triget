@@ -1,6 +1,5 @@
 interface flightOperationType {
-  _id: number;
-  skyScannerId: number;
+  id: string;
   name: string;
   logoUrl: string;
 }

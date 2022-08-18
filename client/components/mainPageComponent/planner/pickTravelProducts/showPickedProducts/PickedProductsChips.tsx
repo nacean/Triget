@@ -12,12 +12,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { SetterOrUpdater } from "recoil";
 import styled from "styled-components";
 import Image from "next/image";
-import { allProductType } from "types/productTypes/productDataType";
+import { productDataType } from "types/productTypes/productDataType";
 
 interface PickedProductsChipsType {
   productKind: string;
-  pickedProducts: allProductType[];
-  setPickedProducts: SetterOrUpdater<allProductType[]>;
+  pickedProducts: productDataType[];
+  setPickedProducts: SetterOrUpdater<productDataType[]>;
   icon: React.ReactElement<SvgIconProps>;
 }
 
@@ -32,9 +32,9 @@ function PickedProductsChips({
   setPickedProducts,
   icon,
 }: PickedProductsChipsType) {
-  const onItemDelete = (newProduct_id: number) => {
+  const onItemDelete = (newProductid: string) => {
     setPickedProducts(
-      pickedProducts.filter(productParam => productParam._id !== newProduct_id),
+      pickedProducts.filter(productParam => productParam.id !== newProductid),
     );
   };
 
@@ -58,7 +58,7 @@ function PickedProductsChips({
                   edge="end"
                   aria-label="delete"
                   onClick={() => {
-                    onItemDelete(product._id);
+                    onItemDelete(product.id);
                   }}
                 >
                   <DeleteIcon />

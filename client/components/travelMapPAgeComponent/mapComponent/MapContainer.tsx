@@ -2,15 +2,15 @@ import styled from "styled-components";
 import { GoogleMap, LoadScriptNext } from "@react-google-maps/api";
 import { travelMovingTime } from "types/travelMovingTime";
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { allProductType } from "types/productTypes/productDataType";
+import { productDataType } from "types/productTypes/productDataType";
 import MapPolyLines from "./MapPolyLines";
 import MapMarker from "./MapMarker";
 import ClickedMarkerInfo from "./ClickedMarkerInfo";
 
 interface MapContainerType {
-  travelListArray: (allProductType | travelMovingTime)[];
-  nowPickStep: allProductType | null;
-  setNowPickStep: Dispatch<SetStateAction<allProductType>>;
+  travelListArray: (productDataType | travelMovingTime)[];
+  nowPickStep: productDataType | null;
+  setNowPickStep: Dispatch<SetStateAction<productDataType>>;
   setNowPickIndex: Dispatch<SetStateAction<number>>;
 }
 
@@ -40,27 +40,28 @@ function MapContainer({
   const center = {
     lat: nowPickStep
       ? nowPickStep.latitude
-      : (travelListArray[0] as allProductType).latitude,
+      : (travelListArray[0] as productDataType).latitude,
     lng: nowPickStep
       ? nowPickStep.longitude
-      : (travelListArray[0] as allProductType).longitude,
+      : (travelListArray[0] as productDataType).longitude,
   };
 
   useEffect(() => {
     if (nowPickStep === null) {
-      setNowPickStep(travelListArray[0] as allProductType);
+      setNowPickStep(travelListArray[0] as productDataType);
       setNowPickIndex(1);
     }
   }, []);
 
   // 이동 시간을 제외한 순수 product만 있는 배열
-  const productsExceptMovingTime: allProductType[] = travelListArray.filter(
-    (product: allProductType | travelMovingTime) => !("transitMode" in product),
-  ) as allProductType[];
+  const productsExceptMovingTime: productDataType[] = travelListArray.filter(
+    (product: productDataType | travelMovingTime) =>
+      !("transitMode" in product),
+  ) as productDataType[];
 
   // product 에서 path만 따로 관리, 다른 map component에 대해 사용
   const travelPaths: pathType[] = productsExceptMovingTime.map(
-    (product: allProductType) => ({
+    (product: productDataType) => ({
       lat: product.latitude,
       lng: product.longitude,
     }),
@@ -78,7 +79,7 @@ function MapContainer({
             zoomControl: true,
           }}
         >
-          {productsExceptMovingTime.map((product: allProductType) => {
+          {productsExceptMovingTime.map((product: productDataType) => {
             index += 1;
             return (
               <>

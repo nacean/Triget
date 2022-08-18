@@ -1,3 +1,4 @@
+import flightArrayType from "./flightArrayType";
 import productArrayType from "./productArrayType";
 
 interface journeyDataType {
@@ -6,7 +7,7 @@ interface journeyDataType {
   accommodationsBudget: number;
   restaurantsBudget: number;
   attractionsBudget: number;
-  flights: productArrayType;
+  flights: flightArrayType;
   accommodations: productArrayType;
   restaurants: productArrayType;
   attractions: productArrayType;

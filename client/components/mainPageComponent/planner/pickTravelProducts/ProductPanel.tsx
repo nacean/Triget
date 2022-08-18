@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useInView } from "react-intersection-observer";
 import fetchTravelSpec from "modules/fetchTravelSpec";
 import journeyDataType from "types/journeyTypes/journeyDataType";
-import { allProductType } from "types/productTypes/productDataType";
+import { productDataType } from "types/productTypes/productDataType";
 import productArrayType from "types/journeyTypes/productArrayType";
 import { Empty } from "antd";
 import ProductKeywords from "./productDetails/ProductKeywords";
@@ -17,12 +17,12 @@ import ProductReviewRate from "./productDetails/ProductReviewRate";
 import ProductPickBtn from "./ProductPickBtn";
 import LoadingBackdrop from "./LoadingBackDrop";
 
-interface ProductPanelType<T extends allProductType> {
+interface ProductPanelType {
   value: number;
   index: number;
   productArray: productArrayType;
-  pickedProducts: T[];
-  setPickedProducts: Dispatch<SetStateAction<T[]>>;
+  pickedProducts: productDataType[];
+  setPickedProducts: Dispatch<SetStateAction<productDataType[]>>;
 }
 
 const StyledPanel = styled.div`
@@ -61,15 +61,15 @@ const StyledImage = styled.div`
   align-items: center;
 `;
 
-function ProductPanel<T extends allProductType>({
+function ProductPanel({
   value,
   index,
   productArray,
   pickedProducts,
   setPickedProducts,
-}: ProductPanelType<T>) {
-  const [showingProducts, setShowingProducts] = useState<T[]>(
-    productArray.content as T[],
+}: ProductPanelType) {
+  const [showingProducts, setShowingProducts] = useState<productDataType[]>(
+    productArray.content as productDataType[],
   );
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -83,16 +83,16 @@ function ProductPanel<T extends allProductType>({
         setShowingProducts([
           ...showingProducts,
           ...newProducts.attractions.content,
-        ] as T[]);
+        ] as productDataType[]);
         setLoading(false);
       }
     },
   });
 
-  const isInPickedArray = (newProduct_id: number): boolean => {
+  const isInPickedArray = (newProductid: string): boolean => {
     return (
       pickedProducts.findIndex(
-        productParam => newProduct_id === productParam._id,
+        productParam => newProductid === productParam.id,
       ) !== -1
     );
   };
@@ -160,7 +160,7 @@ function ProductPanel<T extends allProductType>({
                   <ProductPickBtn
                     product={product}
                     setPickedProducts={setPickedProducts}
-                    pickOrNot={isInPickedArray(product._id)}
+                    pickOrNot={isInPickedArray(product.id)}
                   />
                 </ListItem>
               </Paper>

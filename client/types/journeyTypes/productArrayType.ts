@@ -1,16 +1,7 @@
-import flightProductType from "types/flightTypes/flightProductType";
-import {
-  accommodationsDataType,
-  attractionsDataType,
-  restaurantsDataType,
-} from "types/productTypes/productDataType";
+import productDataType from "types/productTypes/productDataType";
 
 interface productArrayType {
-  content:
-    | flightProductType[]
-    | accommodationsDataType[]
-    | restaurantsDataType[]
-    | attractionsDataType[];
+  content: productDataType[];
   last: boolean;
   numberOfElements: number;
   empty: boolean;

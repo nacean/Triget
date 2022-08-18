@@ -5,15 +5,15 @@ import { useInView } from "react-intersection-observer";
 import { SetterOrUpdater } from "recoil";
 import styled from "styled-components";
 import flightProductType from "types/flightTypes/flightProductType";
+import flightArrayType from "types/journeyTypes/flightArrayType";
 import journeyDataType from "types/journeyTypes/journeyDataType";
-import productArrayType from "types/journeyTypes/productArrayType";
 import LoadingBackdrop from "../LoadingBackDrop";
 import FlightProductComponent from "./FlightProductComponent";
 
 interface FlightPanelType {
   value: number;
   index: number;
-  productArray: productArrayType;
+  productArray: flightArrayType;
   pickedFlight: flightProductType | null;
   setPickedFlight: SetterOrUpdater<flightProductType>;
 }
@@ -31,7 +31,7 @@ function FlightPanel({
   setPickedFlight,
 }: FlightPanelType) {
   const [showingFlights, setShowingFlights] = useState<flightProductType[]>(
-    productArray.content as flightProductType[],
+    productArray.content,
   );
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -41,10 +41,7 @@ function FlightPanel({
       if (inView) {
         setLoading(true);
         const newProducts: journeyDataType = await fetchTravelSpec();
-        setShowingFlights([
-          ...showingFlights,
-          ...(newProducts.flights.content as flightProductType[]),
-        ]);
+        setShowingFlights([...showingFlights, ...newProducts.flights.content]);
         setLoading(false);
       }
     },
@@ -52,7 +49,7 @@ function FlightPanel({
 
   const onFlightBtnClick = (newFlight: flightProductType) => {
     if (pickedFlight === null) setPickedFlight(newFlight);
-    else if (pickedFlight._id === newFlight._id) setPickedFlight(null);
+    else if (pickedFlight.id === newFlight.id) setPickedFlight(null);
     else setPickedFlight(newFlight);
   };
 

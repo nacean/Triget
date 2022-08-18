@@ -46,13 +46,13 @@ function FlightChipDetail({ flightLeg }: FlightChipDetailType) {
       <StyledChipRouteContainer style={{ display: "flex" }}>
         <FlightChipTimeAndIata
           airTime={departureTime}
-          iataCode={flightLeg.origin.iataCode}
+          iata={flightLeg.origin.iata}
           textRight
         />
         <StyledDivider />
         <FlightChipTimeAndIata
           airTime={arrivalTime}
-          iataCode={flightLeg.destination.iataCode}
+          iata={flightLeg.destination.iata}
           textRight={false}
         />
       </StyledChipRouteContainer>

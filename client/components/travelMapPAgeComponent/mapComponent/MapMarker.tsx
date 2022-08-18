@@ -1,13 +1,13 @@
 import { Button } from "@mui/material";
 import { OverlayView } from "@react-google-maps/api";
 import React, { Dispatch, SetStateAction } from "react";
-import { allProductType } from "types/productTypes/productDataType";
+import { productDataType } from "types/productTypes/productDataType";
 
 interface MapMarkerType {
-  product: allProductType;
+  product: productDataType;
   productIndex: number;
-  nowPickStep: allProductType;
-  setNowPickStep: Dispatch<SetStateAction<allProductType>>;
+  nowPickStep: productDataType;
+  setNowPickStep: Dispatch<SetStateAction<productDataType>>;
   setNowPickIndex: Dispatch<SetStateAction<number>>;
 }
 
@@ -52,7 +52,7 @@ function MapMarker({
   const nowBtnColor = () => {
     if (nowPickStep === null) return nonSelectedMarkerColor;
 
-    if (product._id === nowPickStep._id) return selectedMarkerColor;
+    if (product.id === nowPickStep.id) return selectedMarkerColor;
 
     return nonSelectedMarkerColor;
   };

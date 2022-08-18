@@ -1,8 +1,5 @@
-import neightborsProductType from "./neighborsProductType";
-import objectIdType from "./objectIdType";
-
 interface productDataType {
-  travelTime?: string; // 나중에 일정표 생성 시 몇시에 이 상품을 이용할 것인가
+  id: string;
   name: string;
   thumbnail: string;
   subcategory: string;
@@ -10,37 +7,17 @@ interface productDataType {
   latitude: number;
   city: string;
   state: string;
-  country: string;
+  country: string | null;
   address: string;
-  currencyCode: string;
+  price: number | null;
+  currencyCode: string | null;
   rating: number;
   popularity: number;
   detailUrl: string;
+  productWebsite: string | null;
+  weekdayHours: string | null;
   keywords?: string[];
+  travelTime?: string; // 나중에 일정표 생성 시 몇시에 이 상품을 이용할 것인가
 }
 
-export interface accommodationsDataType extends productDataType {
-  _id: number;
-  bookingsId: string;
-  price: number;
-}
-
-export interface restaurantsDataType extends productDataType {
-  _id: number;
-  price: number;
-  weekdayHours: string;
-  productWebsite: string;
-}
-
-export interface attractionsDataType extends productDataType {
-  _id: number;
-  tripadvisorId: string;
-  weekdayHours: string[];
-  productWebsite: string;
-  neighbors: neightborsProductType[];
-}
-
-export type allProductType =
-  | accommodationsDataType
-  | restaurantsDataType
-  | attractionsDataType;
+export default productDataType;

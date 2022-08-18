@@ -46,7 +46,7 @@ function FlightModalContent({
       </TimelineSeparator>
       <TimelineContent>
         <StyledExactTime>{getExactTime(startTime)}</StyledExactTime>
-        <span>{`${airportInfo.iataCode} ${airportInfo.name}`}</span>
+        <span>{`${airportInfo.iata} ${airportInfo.name}`}</span>
       </TimelineContent>
     </TimelineItem>
   );

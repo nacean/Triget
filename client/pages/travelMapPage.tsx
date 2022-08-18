@@ -13,7 +13,7 @@ import { travelMovingTime } from "types/travelMovingTime";
 import flightProductType from "types/flightTypes/flightProductType";
 import {
   accommodationsDataType,
-  allProductType,
+  productDataType,
   attractionsDataType,
   restaurantsDataType,
 } from "types/productTypes/productDataType";
@@ -26,8 +26,8 @@ const StyledTravelMapPage = styled.article`
 `;
 
 function travelMapPage() {
-  //현재 고른 product 정보
-  const [nowPickStep, setNowPickStep] = useState<allProductType | null>(null);
+  // 현재 고른 product 정보
+  const [nowPickStep, setNowPickStep] = useState<productDataType | null>(null);
   const [nowPickIndex, setNowPickIndex] = useState<number>(-1);
 
   const [pickedFlight, setPickedFlight] =
@@ -59,7 +59,7 @@ function travelMapPage() {
     return <div>Error!</div>;
   }
 
-  const travelListArray = data as (allProductType | travelMovingTime)[];
+  const travelListArray = data as (productDataType | travelMovingTime)[];
 
   return (
     <StyledTravelMapPage>

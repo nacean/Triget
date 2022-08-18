@@ -1,5 +1,5 @@
 interface flightPriceOptionType {
-  _id: number;
+  id: string;
   price: number;
   agent: string;
   detailUrl: string;
