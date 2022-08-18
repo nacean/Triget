@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { GoogleMap, LoadScriptNext } from "@react-google-maps/api";
 import { travelMovingTime } from "types/travelMovingTime";
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { productDataType } from "types/productTypes/productDataType";
+import productDataType from "types/productTypes/productDataType";
 import MapPolyLines from "./MapPolyLines";
 import MapMarker from "./MapMarker";
 import ClickedMarkerInfo from "./ClickedMarkerInfo";

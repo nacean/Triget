@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { productDataType } from "types/productTypes/productDataType";
+import productDataType from "types/productTypes/productDataType";
 import { travelMovingTime } from "types/travelMovingTime";
 import PlanHeader from "./PlanHeader";
 import PlanStepContainer from "./planSteps/PlanStepContainer";

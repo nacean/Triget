@@ -1,7 +1,9 @@
 import { Chip } from "@mui/material";
 import { InfoWindow } from "@react-google-maps/api";
+import keywordsToKorean from "modules/keywordModule/keywordsToKorean";
+import Image from "next/image";
 import styled from "styled-components";
-import { productDataType } from "types/productTypes/productDataType";
+import productDataType from "types/productTypes/productDataType";
 
 interface ClickedMarkerInfoType {
   product: productDataType;
@@ -9,24 +11,36 @@ interface ClickedMarkerInfoType {
 }
 
 const StyledInfo = styled.div`
-  width: 10vw;
-  min-height: 7vw;
+  min-width: 8vw;
+  min-height: 4vw;
   background-color: "#000";
+  display: flex;
+  align-items: center;
+`;
+
+const StyledDescriptionContainer = styled.div`
+  height: 75px;
+  margin-left: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 
 const StyledInfoName = styled.div`
-  width: 100%;
   font-size: 16px;
   font-weight: 500;
-  padding-top: 5px;
 `;
 
 const StyledInfoTags = styled.div`
   display: flex;
   flex-wrap: wrap;
+`;
+
+const StyledImage = styled.div`
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  overflow: hidden;
 `;
 
 function ClickedMarkerInfo({ product, nowPickStep }: ClickedMarkerInfoType) {
@@ -53,22 +67,26 @@ function ClickedMarkerInfo({ product, nowPickStep }: ClickedMarkerInfoType) {
         }}
       >
         <StyledInfo>
-          <StyledInfoName>{product.name}</StyledInfoName>
-          <StyledInfoTags>
-            {product.keywords.map((keyword: string) => (
-              <Chip
-                label={`#${keyword}`}
-                variant="outlined"
-                sx={{
-                  color: "#000",
-                  fontWeight: 400,
-                  marginRight: "0.2vw",
-                  marginBottom: "0.2vh",
-                }}
-                size="small"
-              />
-            ))}
-          </StyledInfoTags>
+          <StyledImage>
+            <Image width={75} height={75} src={product.thumbnail} />
+          </StyledImage>
+          <StyledDescriptionContainer>
+            <StyledInfoName>{product.name}</StyledInfoName>
+            <StyledInfoTags>
+              {product.keywords.map((keyword: string) => (
+                <Chip
+                  label={`#${keywordsToKorean(keyword)}`}
+                  variant="outlined"
+                  sx={{
+                    color: "#000",
+                    fontWeight: 400,
+                    marginRight: "0.2vw",
+                  }}
+                  size="small"
+                />
+              ))}
+            </StyledInfoTags>
+          </StyledDescriptionContainer>
         </StyledInfo>
       </InfoWindow>
     )

@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
-import { productDataType } from "types/productTypes/productDataType";
+import productDataType from "types/productTypes/productDataType";
 
 interface ProductPickBtnType {
   product: productDataType;

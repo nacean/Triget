@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useInView } from "react-intersection-observer";
 import fetchTravelSpec from "modules/fetchTravelSpec";
 import journeyDataType from "types/journeyTypes/journeyDataType";
-import { productDataType } from "types/productTypes/productDataType";
+import productDataType from "types/productTypes/productDataType";
 import productArrayType from "types/journeyTypes/productArrayType";
 import { Empty } from "antd";
 import ProductKeywords from "./productDetails/ProductKeywords";

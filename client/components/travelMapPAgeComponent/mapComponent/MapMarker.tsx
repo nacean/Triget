@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { OverlayView } from "@react-google-maps/api";
 import React, { Dispatch, SetStateAction } from "react";
-import { productDataType } from "types/productTypes/productDataType";
+import productDataType from "types/productTypes/productDataType";
 
 interface MapMarkerType {
   product: productDataType;

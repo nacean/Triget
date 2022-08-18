@@ -12,7 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { SetterOrUpdater } from "recoil";
 import styled from "styled-components";
 import Image from "next/image";
-import { productDataType } from "types/productTypes/productDataType";
+import productDataType from "types/productTypes/productDataType";
 
 interface PickedProductsChipsType {
   productKind: string;

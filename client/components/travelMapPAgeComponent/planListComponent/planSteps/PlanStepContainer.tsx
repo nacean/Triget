@@ -1,7 +1,7 @@
 import { List } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { productDataType } from "types/productTypes/productDataType";
+import productDataType from "types/productTypes/productDataType";
 import { travelMovingTime } from "types/travelMovingTime";
 import MovingTime from "./MovingTime";
 import PlanStep from "./PlanStep";
