@@ -13,7 +13,7 @@ const StyledProductPrice = styled.div`
 
 function ProductPrice({ productPrice, currency_code }: ProductPriceType) {
   return (
-    <StyledProductPrice>{`${productPrice} ${currency_code}`}</StyledProductPrice>
+    <StyledProductPrice>{`${productPrice.toLocaleString()} ${currency_code}`}</StyledProductPrice>
   );
 }
 
