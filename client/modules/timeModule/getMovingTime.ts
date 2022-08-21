@@ -1,6 +1,6 @@
 function getMovingTime(durationTime: number): string {
-  const hour: string = (durationTime / 60).toFixed();
-  let minute: string = (durationTime % 60).toFixed();
+  const hour: string = Math.floor(durationTime / 60).toString();
+  let minute: string = Math.floor(durationTime % 60).toString();
 
   if (minute.length === 1) minute += "0";
 
