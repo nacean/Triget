@@ -106,7 +106,7 @@ function ProductPanel({
     >
       {value === index && (
         <List>
-          {showingProducts.map((product: T) => {
+          {showingProducts.map((product: productDataType) => {
             return (
               <Paper square sx={{ marginBottom: "10px" }}>
                 <ListItem disablePadding>

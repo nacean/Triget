@@ -1,4 +1,3 @@
-import { Tooltip } from "@mui/material";
 import Image from "next/image";
 import styled from "styled-components";
 import flightLegType from "types/flightTypes/flightLegType";
@@ -18,11 +17,17 @@ const StyledFlightRoute = styled.div`
   align-items: center;
 `;
 
-const StyledImageContainer = styled.div`
+const StyledAirlineName = styled.p`
+  margin-left: 1vw;
+  font-size: 22px;
+  font-weight: 700;
+`;
+
+const StyledNameContainer = styled.div`
   width: 30%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  padding-left: 5%;
 `;
 
 const StyledRouteInfo = styled.div`
@@ -36,32 +41,16 @@ const StyledRouteInfo = styled.div`
 function FlightRoute({ flightLeg, fontSize }: FlightRouteType) {
   return (
     <StyledFlightRoute>
-      <StyledImageContainer>
-        <Tooltip
-          title={flightLeg.operations[0].name}
-          PopperProps={{
-            disablePortal: true,
-            sx: {
-              "& .MuiTooltip-tooltip": {
-                backgroundColor: "#fff",
-                color: "#000",
-                fontSize: 12,
-                WebkitBoxShadow:
-                  "0px 10px 13px -7px #000000, 0px 0px 5px 1px rgba(0,0,0,0)",
-                boxShadow:
-                  "0px 10px 13px -7px #000000, 0px 0px 5px 1px rgba(0,0,0,0)",
-              },
-            },
-          }}
-        >
-          <Image
-            src={flightLeg.operations[0].logoUrl}
-            alt="Product Thumbnail"
-            width={80}
-            height={60}
-          />
-        </Tooltip>
-      </StyledImageContainer>
+      <StyledNameContainer>
+        <Image
+          src={flightLeg.operations[0].logoUrl}
+          alt="Product Thumbnail"
+          width={35}
+          height={30}
+          style={{ borderRadius: 5 }}
+        />
+        <StyledAirlineName>{flightLeg.operations[0].name}</StyledAirlineName>
+      </StyledNameContainer>
       <StyledRouteInfo>
         <FlightTimeAndAirport
           flightTime={flightLeg.departure}
