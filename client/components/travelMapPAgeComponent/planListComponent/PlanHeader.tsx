@@ -33,6 +33,12 @@ const keywords = [
   },
 ];
 
+const keywordMap = new Map();
+
+keywords.forEach(keyword => {
+  keywordMap.set(keyword.value, keyword.label);
+});
+
 const StyledPlanHeader = styled.h2`
   width: 100%;
   height: 100px;
@@ -46,7 +52,11 @@ const StyledPlanHeader = styled.h2`
 
 function PlanHeader() {
   const travelDescription = useRecoilValue(travelKeywordState);
-  return <StyledPlanHeader>{`# ${travelDescription}`}</StyledPlanHeader>;
+  return (
+    <StyledPlanHeader>{`# ${keywordMap.get(
+      travelDescription,
+    )}`}</StyledPlanHeader>
+  );
 }
 
 export default PlanHeader;
