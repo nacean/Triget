@@ -1,4 +1,5 @@
 import { Tooltip } from "@mui/material";
+import getExactDate from "modules/timeModule/getExactDate";
 import getExactTime from "modules/timeModule/getExactTime";
 import styled from "styled-components";
 import flightAirportInfoType from "types/flightTypes/flightAirportInfoType";
@@ -25,6 +26,14 @@ const StyledTime = styled.div<{ textRight: boolean; fontSize: number }>`
   margin-right: ${props => (props.textRight ? "none" : "auto")};
 `;
 
+const StyledDate = styled.div<{ textRight: boolean }>`
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: ${props => (props.textRight ? "auto" : "none")};
+  margin-right: ${props => (props.textRight ? "none" : "auto")};
+  color: #68697f;
+`;
+
 const StyledAirportCode = styled.div<{ textRight: boolean; fontSize: number }>`
   font-size: ${props => props.fontSize}px;
   font-weight: 500;
@@ -40,8 +49,10 @@ function FlightTimeAndAirport({
   fontSize,
 }: FlightTimeAndAirportType) {
   const exactTime = getExactTime(flightTime);
+  const exactDate = getExactDate(flightTime);
   return (
     <StyledFlightTimeAndAirport>
+      <StyledDate textRight={textRight}>{exactDate}</StyledDate>
       <StyledTime textRight={textRight} fontSize={fontSize}>
         {exactTime}
       </StyledTime>
