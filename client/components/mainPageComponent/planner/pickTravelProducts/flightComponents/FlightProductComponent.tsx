@@ -54,6 +54,16 @@ function FlightProductComponent({
     return false;
   };
 
+  const flightBtnText = () => {
+    if (pickedFlight) {
+      if (pickedOrNotFunc(product.id)) return "선택 취소하기";
+
+      return "선택 변경하기";
+    }
+
+    return "상품 선택하기";
+  };
+
   return (
     <Paper square sx={{ marginBottom: "10px" }}>
       <ListItem disablePadding>
@@ -91,7 +101,7 @@ function FlightProductComponent({
           }}
           color={pickedOrNotFunc(product.id) ? "error" : "primary"}
         >
-          {pickedOrNotFunc(product.id) ? "상품 취소하기" : "상품 선택하기"}
+          {flightBtnText()}
         </Button>
       </ListItem>
       <FlightModalContainer
