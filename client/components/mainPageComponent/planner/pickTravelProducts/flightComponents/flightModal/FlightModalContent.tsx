@@ -20,6 +20,7 @@ const StyledExactTime = styled.span`
   display: inline-block;
   width: 4.5vw;
   height: 20px;
+  margin-right: 3%;
 `;
 
 const StyledMovingTime = styled.div`
@@ -43,7 +44,7 @@ const StyledWaitingTime = styled.div`
 `;
 
 const StyledWaitingComment = styled.p`
-  width: 6vw;
+  width: 6.5vw;
   height: 30px;
   position: absolute;
   top: 8%;
