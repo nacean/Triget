@@ -3,6 +3,7 @@ async function fetchTravelPlanList() {
     setTimeout(() => {
       resolve([
         {
+          travelTime: "11:30",
           id: "62e79d5f0fa687e66ea5e78a",
           name: "Loople",
           thumbnail:
@@ -29,10 +30,11 @@ async function fetchTravelPlanList() {
           keywords: ["relaxing", "cheap"],
         },
         {
-          transitMode: "도보",
-          durationTime: 30,
+          transitMode: "자동차",
+          durationTime: 18,
         },
         {
+          travelTime: "13:00",
           id: "62e79ccf0fa687e66ea5e6d9",
           name: "Coffee Wrights Kuramae",
           thumbnail:
@@ -57,10 +59,11 @@ async function fetchTravelPlanList() {
           keywords: ["relaxing", "active"],
         },
         {
-          transitMode: "도보",
-          durationTime: 30,
+          transitMode: "자동차",
+          durationTime: 18,
         },
         {
+          travelTime: "16:00",
           id: "62e79d5f0fa687e66ea5e7f2",
           name: "Arigato Japan Food Tours",
           thumbnail:
@@ -86,10 +89,11 @@ async function fetchTravelPlanList() {
           keywords: ["learn", "relaxing"],
         },
         {
-          transitMode: "도보",
-          durationTime: 30,
+          transitMode: "자동차",
+          durationTime: 15,
         },
         {
+          travelTime: "18:30",
           id: "62e79ccf0fa687e66ea5e6fe",
           name: "Kagurazaka Kurosu",
           thumbnail:
@@ -113,11 +117,12 @@ async function fetchTravelPlanList() {
           keywords: ["relaxing"],
         },
         {
-          transitMode: "도보",
-          durationTime: 30,
+          transitMode: "자동차",
+          durationTime: 20,
         },
 
         {
+          travelTime: "20:00",
           id: "62e79d2b0fa687e66ea5e722",
           name: "Mitsui Garden Hotel Toyosu BAYSIDE CROSS Tokyo",
           thumbnail:
