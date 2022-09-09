@@ -11,12 +11,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { travelMovingTime } from "types/travelMovingTime";
 import flightProductType from "types/flightTypes/flightProductType";
-import {
-  accommodationsDataType,
-  productDataType,
-  attractionsDataType,
-  restaurantsDataType,
-} from "types/productTypes/productDataType";
+import productDataType from "types/productTypes/productDataType";
 
 const StyledTravelMapPage = styled.article`
   width: 100%;
@@ -33,13 +28,13 @@ function travelMapPage() {
   const [pickedFlight, setPickedFlight] =
     useRecoilState<flightProductType | null>(pickedFlightState);
   const [pickedAccommodations, setPickedAccommodations] = useRecoilState<
-    accommodationsDataType[]
+    productDataType.accommodationsDataType[]
   >(pickedAccommodationsState);
   const [pickedRestaurants, setPickedRestaurants] = useRecoilState<
-    restaurantsDataType[]
+    productDataType.restaurantsDataType[]
   >(pickedRestaurantsState);
   const [pickedAttractions, setPickedAttractions] = useRecoilState<
-    attractionsDataType[]
+    productDataType.attractionsDataType[]
   >(pickedAttractionsState);
 
   const { data, isSuccess, isLoading, isError, error } = useQuery(
