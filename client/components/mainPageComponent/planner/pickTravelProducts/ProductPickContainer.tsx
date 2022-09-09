@@ -73,7 +73,8 @@ function ProductPickContainer({
   >(pickedAttractionsState);
 
   useEffect(() => {
-    window.scrollTo({ top: 150, left: 0, behavior: "smooth" });
+    if (slideMove) window.scrollTo({ top: 150, left: 0, behavior: "smooth" });
+    else window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   });
 
   const onBackBtnClick = () => {
