@@ -1,3 +1,4 @@
+import LoginPageContainer from "components/loginPageComponent/container/LoginPageContainer";
 import styled from "styled-components";
 
 const StyledLoginPage = styled.section`
@@ -7,7 +8,11 @@ const StyledLoginPage = styled.section`
 `;
 
 function loginPage() {
-  return <StyledLoginPage>loginPage</StyledLoginPage>;
+  return (
+    <StyledLoginPage>
+      <LoginPageContainer />
+    </StyledLoginPage>
+  );
 }
 
 export default loginPage;
