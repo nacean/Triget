@@ -1,4 +1,5 @@
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import Link from "next/link";
 import styled from "styled-components";
 import LoginTitle from "../title/LoginTitle";
 
@@ -7,6 +8,13 @@ const StyledLoginPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const StyledSignUpLink = styled.a`
+  transition: none;
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 function LoginPageContainer() {
@@ -28,6 +36,17 @@ function LoginPageContainer() {
         margin="normal"
         type="password"
       />
+      <Button
+        variant="contained"
+        fullWidth
+        size="large"
+        sx={{ height: 56, margin: "20px 0" }}
+      >
+        로그인
+      </Button>
+      <Link href="/signUp" passHref>
+        <StyledSignUpLink>회원가입 하기</StyledSignUpLink>
+      </Link>
     </StyledLoginPageContainer>
   );
 }
