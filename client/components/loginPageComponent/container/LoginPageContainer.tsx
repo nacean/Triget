@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Button, Divider, TextField } from "@mui/material";
 import Link from "next/link";
 import styled from "styled-components";
 import LoginTitle from "../title/LoginTitle";
@@ -47,6 +47,9 @@ function LoginPageContainer() {
       <Link href="/signUp" passHref>
         <StyledSignUpLink>회원가입 하기</StyledSignUpLink>
       </Link>
+      <Divider flexItem sx={{ marginTop: 6, height: 9, color: "#a6a6a6" }}>
+        SNS 로그인
+      </Divider>
     </StyledLoginPageContainer>
   );
 }
