@@ -83,7 +83,7 @@ function LoginPageContainer() {
       >
         로그인
       </Button>
-      <Link href="/signUp" passHref>
+      <Link href="/signUpPage" passHref>
         <StyledSignUpLink>회원가입 하기</StyledSignUpLink>
       </Link>
       <Divider flexItem sx={{ marginTop: 6, height: 9, color: "#a6a6a6" }}>
