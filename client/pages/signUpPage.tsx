@@ -1,4 +1,4 @@
-import SignUpPageContainer from "components/signUpPageComponent/container/signUpPageContainer";
+import SignUpPageContainer from "components/signUpPageComponent/container/SignUpPageContainer";
 import styled from "styled-components";
 
 const StyledSignUpPage = styled.section`
