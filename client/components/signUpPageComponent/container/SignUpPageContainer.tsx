@@ -1,4 +1,5 @@
 import { Button, TextField } from "@mui/material";
+import { useRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 
@@ -12,11 +13,17 @@ const StyledSignUpTitle = styled.h2`
 `;
 
 function SignUpPageContainer() {
+  const router = useRouter();
+
+  const onBackBtnClick = () => {
+    router.push("/loginPage");
+  };
+
   return (
     <StyledSignUpPageContainer>
       <StyledSignUpTitle>회원가입</StyledSignUpTitle>
       <TextField
-        id="idForm"
+        id="nickNameForm"
         label="닉네임"
         variant="outlined"
         fullWidth
@@ -41,7 +48,7 @@ function SignUpPageContainer() {
         required
       />
       <TextField
-        id="passwordForm"
+        id="passwordConfirmForm"
         label="비밀번호 확인"
         variant="outlined"
         fullWidth
@@ -55,13 +62,20 @@ function SignUpPageContainer() {
         size="large"
         sx={{ height: 56, margin: "20px 0" }}
       >
-        로그인
+        회원가입
       </Button>
       <Button
         variant="contained"
         fullWidth
         size="large"
-        sx={{ height: 56, backgroundColor: "#515151" }}
+        sx={{
+          height: 56,
+          backgroundColor: "#515151",
+          ":hover": {
+            backgroundColor: "#373737",
+          },
+        }}
+        onClick={onBackBtnClick}
       >
         뒤로가기
       </Button>
