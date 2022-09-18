@@ -3,6 +3,7 @@ import userState from "atoms/loginAtoms/userState";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
+import GoogleLogin from "react-google-login";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import userType from "types/userTypes/userType";
@@ -50,6 +51,10 @@ function LoginPageContainer() {
     router.push("/");
   };
 
+  const responseGoogle = response => {
+    console.log(response);
+  };
+
   return (
     <StyledLoginPageContainer>
       <LoginTitle />
@@ -89,6 +94,11 @@ function LoginPageContainer() {
       <Divider flexItem sx={{ marginTop: 6, height: 9, color: "#a6a6a6" }}>
         SNS 로그인
       </Divider>
+      <GoogleLogin
+        clientId={process.env.NEXT_PUBLIC_CLIENT_ID}
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+      />
     </StyledLoginPageContainer>
   );
 }
