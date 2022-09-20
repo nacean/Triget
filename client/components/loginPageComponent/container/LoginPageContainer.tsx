@@ -91,7 +91,10 @@ function LoginPageContainer() {
       <Link href="/signUpPage" passHref>
         <StyledSignUpLink>회원가입 하기</StyledSignUpLink>
       </Link>
-      <Divider flexItem sx={{ marginTop: 6, height: 9, color: "#a6a6a6" }}>
+      <Divider
+        flexItem
+        sx={{ marginTop: 6, marginBottom: 3.5, height: 9, color: "#a6a6a6" }}
+      >
         SNS 로그인
       </Divider>
       <GoogleLogin
