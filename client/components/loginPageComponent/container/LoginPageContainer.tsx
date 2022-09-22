@@ -10,21 +10,26 @@ import {
 import userState from "atoms/loginAtoms/userState";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import userType from "types/userTypes/userType";
 import { theme } from "styles/theme";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useCookies } from "react-cookie";
 import LoginTitle from "../title/LoginTitle";
 import RememberId from "../rememberId/RememberId";
 
 const StyledLoginPageContainer = styled.div`
-  width: 28%;
+  width: 35%;
+  padding: 4.5%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.1);
 `;
 
 function LoginPageContainer() {
@@ -40,6 +45,12 @@ function LoginPageContainer() {
 
   // global userID, PW
   const setUser = useSetRecoilState<userType | null>(userState);
+
+  // id cookie
+  const [Cookies, setIdCookie, removeCookie] = useCookies(["idCookie"]);
+
+  // remember id state
+  const [rememberId, setRememberId] = useState<boolean>(false);
 
   const onIDChange = (
     idEvent: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -58,6 +69,11 @@ function LoginPageContainer() {
   };
 
   const onLoginBtnClick = () => {
+    if (rememberId) {
+      setIdCookie("idCookie", userID, { maxAge: 604800 });
+    } else {
+      removeCookie("idCookie");
+    }
     setUser({ userID, userPW });
     router.push("/");
   };
@@ -65,6 +81,15 @@ function LoginPageContainer() {
   const responseGoogle = response => {
     console.log(response);
   };
+
+  useEffect(() => {
+    if (Cookies.idCookie !== undefined) {
+      setUserID(Cookies.idCookie);
+      setRememberId(true);
+    } else {
+      setUserID("");
+    }
+  }, []);
 
   return (
     <StyledLoginPageContainer>
@@ -137,7 +162,7 @@ function LoginPageContainer() {
         value={userPW}
         onChange={onPWChange}
       />
-      <RememberId />
+      <RememberId rememberId={rememberId} setRememberId={setRememberId} />
       <Button
         variant="contained"
         fullWidth
