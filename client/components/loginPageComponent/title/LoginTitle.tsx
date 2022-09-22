@@ -17,6 +17,7 @@ const StyledLoginMainName = styled.h2`
 
 const StyledTitleParagraph = styled.p`
   font-size: 16px;
+  font-weight: 300;
 `;
 
 const StyledSmallTitle = styled.span`
