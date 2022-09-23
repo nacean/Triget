@@ -27,7 +27,7 @@ function MyPageLink() {
   return (
     <Link
       className="myPageLink"
-      href={user ? "/myPage" : "/loginPage"}
+      href={user ? "/MyPage" : "/loginPage"}
       passHref
     >
       <MyPageAnchor>
