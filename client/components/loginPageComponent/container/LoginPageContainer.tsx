@@ -5,6 +5,7 @@ import {
   Divider,
   IconButton,
   InputAdornment,
+  Paper,
   TextField,
 } from "@mui/material";
 import userState from "atoms/loginAtoms/userState";
@@ -18,8 +19,10 @@ import userType from "types/userTypes/userType";
 import { theme } from "styles/theme";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useCookies } from "react-cookie";
+import Image from "next/image";
 import LoginTitle from "../title/LoginTitle";
 import RememberId from "../rememberId/RememberId";
+import GoogleImg from "../../../assets/Google__G__Logo.svg";
 
 const StyledLoginPageContainer = styled.div`
   width: 35%;
@@ -30,6 +33,18 @@ const StyledLoginPageContainer = styled.div`
   border-radius: 10px;
   -webkit-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.1);
+`;
+
+const StyledLogoBtn = styled.button`
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.25);
 `;
 
 function LoginPageContainer() {
@@ -210,9 +225,18 @@ function LoginPageContainer() {
         SNS 로그인
       </Divider>
       <GoogleLogin
-        clientId={process.env.NEXT_PUBLIC_CLIENT_ID}
+        clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+        render={renderProps => (
+          <StyledLogoBtn
+            onClick={renderProps.onClick}
+            disabled={renderProps.disabled}
+          >
+            <Image src={GoogleImg} alt="googleLogo" width={20} height={20} />
+          </StyledLogoBtn>
+        )}
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
+        cookiePolicy="single_host_origin"
       />
     </StyledLoginPageContainer>
   );
