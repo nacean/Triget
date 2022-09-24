@@ -7,6 +7,7 @@ import userType from "types/userTypes/userType";
 const StyledUserProfileContainer = styled.div`
   width: 100%;
   height: 130px;
+  margin-bottom: 70px;
   padding: 0 1%;
   display: flex;
   justify-content: space-between;

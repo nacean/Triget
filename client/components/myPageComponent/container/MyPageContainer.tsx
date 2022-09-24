@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import SavedPlansContainer from "../savedPlans/SavedPlansContainer";
 import UserProfile from "../userProfile/UserProfile";
 
 const StyledMyPageContainer = styled.section`
@@ -13,6 +14,7 @@ function MyPageContainer() {
   return (
     <StyledMyPageContainer>
       <UserProfile />
+      <SavedPlansContainer />
     </StyledMyPageContainer>
   );
 }
