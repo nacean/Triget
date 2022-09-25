@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { theme } from "styles/theme";
-import SavedPlan from "./SavedPlan";
+import SavedPlan from "./planComponent/SavedPlan";
 
 const StyledSavedPlansContainer = styled.div`
-  width: 100%;
+  width: 90%;
 `;
 
 const StyledPlansHeader = styled.p`
