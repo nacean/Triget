@@ -1,9 +1,13 @@
-import { Button, IconButton, Tooltip } from "@mui/material";
+import { Button, Fade, IconButton, Tooltip } from "@mui/material";
 import styled from "styled-components";
 import { theme } from "styles/theme";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+
+interface RightContentType {
+  viewManipulateBtns: boolean;
+}
 
 const StyledCardRight = styled.div`
   display: flex;
@@ -17,9 +21,11 @@ const StyledManipulateBtnContainer = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
+  height: 40px;
 `;
 
 const IconBtn = styled(IconButton)`
+  transition: all 1s;
   border-radius: 100%;
   background-color: #f5f5f5;
   margin-left: 8px;
@@ -36,31 +42,34 @@ const StyledCurrency = styled.span`
 `;
 
 const StyledViewPlanBtn = styled(Button)`
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: ${theme.colors.mainblue};
-  padding: 10px 60px;
+  width: 170px;
+  height: 45px;
 `;
 
-function RightContent() {
+function RightContent({ viewManipulateBtns }: RightContentType) {
   return (
     <StyledCardRight>
-      <StyledManipulateBtnContainer>
-        <Tooltip title="수정하기" arrow>
-          <IconBtn>
-            <ShareOutlinedIcon fontSize="small" />
-          </IconBtn>
-        </Tooltip>
-        <Tooltip title="공유하기" arrow>
-          <IconBtn>
-            <EditOutlinedIcon fontSize="small" />
-          </IconBtn>
-        </Tooltip>
-        <Tooltip title="삭제하기" arrow>
-          <IconBtn>
-            <DeleteOutlinedIcon fontSize="small" />
-          </IconBtn>
-        </Tooltip>
-      </StyledManipulateBtnContainer>
+      <Fade in={viewManipulateBtns}>
+        <StyledManipulateBtnContainer>
+          <Tooltip title="수정하기" arrow>
+            <IconBtn>
+              <ShareOutlinedIcon fontSize="small" />
+            </IconBtn>
+          </Tooltip>
+          <Tooltip title="공유하기" arrow>
+            <IconBtn>
+              <EditOutlinedIcon fontSize="small" />
+            </IconBtn>
+          </Tooltip>
+          <Tooltip title="삭제하기" arrow>
+            <IconBtn>
+              <DeleteOutlinedIcon fontSize="small" />
+            </IconBtn>
+          </Tooltip>
+        </StyledManipulateBtnContainer>
+      </Fade>
       <StyledPrice>
         5,000,0000<StyledCurrency>원</StyledCurrency>
       </StyledPrice>

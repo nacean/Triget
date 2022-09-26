@@ -1,5 +1,6 @@
 import { Paper } from "@mui/material";
 import Image from "next/image";
+import { useState } from "react";
 import styled from "styled-components";
 import LeftContent from "./LeftContent";
 import RightContent from "./RightContent";
@@ -23,8 +24,22 @@ const StyledPlanContent = styled.div`
 `;
 
 function SavedPlan() {
+  const [viewManipulateBtns, setViewManipulateBtns] = useState<boolean>(false);
+
+  const onPlanMouseOver = () => {
+    setViewManipulateBtns(true);
+  };
+
+  const onPlanMouseOut = () => {
+    setViewManipulateBtns(false);
+  };
+
   return (
-    <StyledPlan elevation={3}>
+    <StyledPlan
+      elevation={3}
+      onMouseOver={onPlanMouseOver}
+      onMouseOut={onPlanMouseOut}
+    >
       <StyledPlanImg>
         <Image
           layout="fill"
@@ -35,7 +50,7 @@ function SavedPlan() {
       </StyledPlanImg>
       <StyledPlanContent>
         <LeftContent />
-        <RightContent />
+        <RightContent viewManipulateBtns={viewManipulateBtns} />
       </StyledPlanContent>
     </StyledPlan>
   );
