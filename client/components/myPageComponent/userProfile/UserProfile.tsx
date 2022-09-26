@@ -34,7 +34,7 @@ function UserProfile() {
     <StyledUserProfileContainer>
       <StyledUserInfo>
         <Avatar />
-        <StyledUserName>{user.userID}</StyledUserName>
+        <StyledUserName>{user ? user.userID : null}</StyledUserName>
       </StyledUserInfo>
       <Button variant="outlined" size="large" color="inherit">
         프로필 편집

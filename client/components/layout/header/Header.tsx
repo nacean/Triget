@@ -5,7 +5,7 @@ import PrimaryNav from "./primaryNav/PrimaryNav";
 // css
 const HeaderContainer = styled.header`
   width: 80%;
-  height: 150px;
+  height: 120px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,6 @@ function Header() {
   return (
     <HeaderContainer>
       <PrimaryNav />
-      <MenuNav />
     </HeaderContainer>
   );
 }

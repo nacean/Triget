@@ -46,6 +46,7 @@ function SavedPlan() {
           src="https://www.visitbritain.com/sites/default/files/consumer/paragraphs-bundles/image-gallery-with-text/london_skyline_vb34141644.jpg"
           alt="Card Image"
           style={{ borderRadius: "4px" }}
+          priority
         />
       </StyledPlanImg>
       <StyledPlanContent>

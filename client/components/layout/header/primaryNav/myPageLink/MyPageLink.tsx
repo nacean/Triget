@@ -2,9 +2,8 @@ import Link from "next/link";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import styled from "styled-components";
 import userState from "atoms/loginAtoms/userState";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import userType from "types/userTypes/userType";
-import { useEffect } from "react";
 
 const MyPageAnchor = styled.a`
   font-size: 20px;
@@ -24,15 +23,7 @@ const StyledMyPageLogo = styled.div`
 
 // Navigation 에서 myPage로 가는 버튼
 function MyPageLink() {
-  const [user, setUser] = useRecoilState<userType | null>(userState);
-
-  useEffect(() => {
-    const userID: string = localStorage.getItem("userID");
-    const userPW: string = localStorage.getItem("userPW");
-    if (userID && userPW) {
-      setUser({ userID, userPW });
-    }
-  }, []);
+  const user = useRecoilValue<userType | null>(userState);
 
   return (
     <Link
