@@ -5,7 +5,6 @@ import {
   Divider,
   IconButton,
   InputAdornment,
-  Paper,
   TextField,
 } from "@mui/material";
 import userState from "atoms/loginAtoms/userState";
@@ -90,6 +89,8 @@ function LoginPageContainer() {
       removeCookie("idCookie");
     }
     setUser({ userID, userPW });
+    localStorage.setItem("userID", userID);
+    localStorage.setItem("userPW", userPW);
     router.push("/");
   };
 
