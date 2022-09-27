@@ -8,11 +8,8 @@ interface flightSegmentType {
   departure: string;
   arrival: string;
   durationInMinutes: number;
-  timeDeltaInDays: number;
-  stopCount: number;
-  isSmallestStops: boolean;
-  operations: flightOperationType[]; // 항상 요소 2개 [출발항공,도착항공]
-  airportChangeIn: string[];
+  flightNumber: string;
+  operation: flightOperationType; // 항상 요소 2개 [출발항공,도착항공]
 }
 
 export default flightSegmentType;
