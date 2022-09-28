@@ -8,18 +8,20 @@ import RightContent from "./RightContent";
 const StyledPlan = styled(Paper)`
   display: flex;
   margin-bottom: 40px;
-  height: 240px;
+  height: 220px;
+  border-radius: 20px;
+  overflow: hidden;
 `;
 
 const StyledPlanImg = styled.div`
   position: relative;
-  width: 21%;
+  width: 22%;
   height: 100%;
 `;
 
 const StyledPlanContent = styled.div`
   display: flex;
-  padding: 30px 2.7vw;
+  padding: 20px 2vw;
   flex-grow: 1;
 `;
 
@@ -45,7 +47,7 @@ function SavedPlan() {
           layout="fill"
           src="https://www.visitbritain.com/sites/default/files/consumer/paragraphs-bundles/image-gallery-with-text/london_skyline_vb34141644.jpg"
           alt="Card Image"
-          style={{ borderRadius: "4px" }}
+          style={{ borderRadius: "20px" }}
           priority
         />
       </StyledPlanImg>

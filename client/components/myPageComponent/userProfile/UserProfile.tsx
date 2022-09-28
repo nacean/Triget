@@ -1,20 +1,21 @@
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Chip } from "@mui/material";
 import userState from "atoms/loginAtoms/userState";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import userType from "types/userTypes/userType";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 const StyledUserProfileContainer = styled.div`
   width: 100%;
-  height: 130px;
+  padding: 0 20%;
+  height: 150px;
   margin-bottom: 70px;
-  padding: 0 1%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  -webkit-box-shadow: 0 8px 8px -6px rgba(0, 0, 0, 0.12);
-  -moz-box-shadow: 0 8px 8px -6px rgba(0, 0, 0, 0.12);
-  box-shadow: 0 8px 8px -6px rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 8px 18px -6px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 8px 18px -6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 18px -6px rgba(0, 0, 0, 0.15);
 `;
 
 const StyledUserInfo = styled.div`
@@ -28,6 +29,10 @@ const StyledUserName = styled.p`
   margin-left: 15%;
 `;
 
+const EditProfileBtn = styled(Chip)`
+  padding: 20px 10px;
+`;
+
 function UserProfile() {
   const user = useRecoilValue<userType>(userState);
   return (
@@ -36,9 +41,11 @@ function UserProfile() {
         <Avatar />
         <StyledUserName>{user ? user.userID : null}</StyledUserName>
       </StyledUserInfo>
-      <Button variant="outlined" size="large" color="inherit">
-        프로필 편집
-      </Button>
+      <EditProfileBtn
+        icon={<EditOutlinedIcon sx={{ fontSize: 18 }} />}
+        label="프로필 편집"
+        clickable
+      />
     </StyledUserProfileContainer>
   );
 }

@@ -3,11 +3,11 @@ import { theme } from "styles/theme";
 import SavedPlan from "./planComponent/SavedPlan";
 
 const StyledSavedPlansContainer = styled.div`
-  width: 90%;
+  width: 60%;
 `;
 
 const StyledPlansHeader = styled.p`
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 600;
   margin-bottom: 30px;
 `;
