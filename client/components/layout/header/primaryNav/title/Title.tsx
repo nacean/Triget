@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { theme } from "styles/theme";
 
 const TitleAnchor = styled.a`
-  font-size: 40px;
+  font-size: 32px;
   transition: 0.3s all;
   color: ${theme.colors.mainblue};
   font-style: italic;

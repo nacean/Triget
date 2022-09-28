@@ -11,7 +11,7 @@ interface LayoutType {
 }
 
 const StyledMain = styled.main`
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
 `;
 

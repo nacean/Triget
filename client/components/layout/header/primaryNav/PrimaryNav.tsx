@@ -5,7 +5,7 @@ import Title from "./title/Title";
 // css
 const PrimaryNavContainer = styled.nav`
   width: 100%;
-  height: 80%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
