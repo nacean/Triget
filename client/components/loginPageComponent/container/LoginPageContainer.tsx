@@ -11,7 +11,6 @@ import userState from "atoms/loginAtoms/userState";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
-import GoogleLogin from "react-google-login";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import userType from "types/userTypes/userType";
@@ -19,12 +18,13 @@ import { theme } from "styles/theme";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useCookies } from "react-cookie";
 import Image from "next/image";
+import { useGoogleLogin } from "@react-oauth/google";
 import LoginTitle from "../title/LoginTitle";
 import RememberId from "../rememberId/RememberId";
 import GoogleImg from "../../../assets/Google__G__Logo.svg";
 
 const StyledLoginPageContainer = styled.div`
-  width: 35%;
+  width: 30%;
   padding: 4.5%;
   display: flex;
   flex-direction: column;
@@ -40,10 +40,15 @@ const StyledLogoBtn = styled.button`
   border-radius: 100%;
   border: none;
   display: flex;
+  background-color: white;
   justify-content: center;
   align-items: center;
+  transition: 0.3s all;
   -webkit-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.25);
+  &:hover {
+    background-color: #eeeeee;
+  }
 `;
 
 function LoginPageContainer() {
@@ -94,9 +99,10 @@ function LoginPageContainer() {
     router.push("/");
   };
 
-  const responseGoogle = response => {
-    console.log(response);
-  };
+  const googleLogin = useGoogleLogin({
+    onSuccess: tokenResponse => console.log(tokenResponse),
+    onError: () => console.log("login failed"),
+  });
 
   useEffect(() => {
     if (Cookies.idCookie !== undefined) {
@@ -193,6 +199,7 @@ function LoginPageContainer() {
           fontWeight: 400,
         }}
         onClick={onLoginBtnClick}
+        disabled={userID === "" || userPW === ""}
       >
         로그인
       </Button>
@@ -225,20 +232,13 @@ function LoginPageContainer() {
       >
         SNS 로그인
       </Divider>
-      <GoogleLogin
-        clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-        render={renderProps => (
-          <StyledLogoBtn
-            onClick={renderProps.onClick}
-            disabled={renderProps.disabled}
-          >
-            <Image src={GoogleImg} alt="googleLogo" width={20} height={20} />
-          </StyledLogoBtn>
-        )}
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy="single_host_origin"
-      />
+      <StyledLogoBtn
+        onClick={() => {
+          googleLogin();
+        }}
+      >
+        <Image src={GoogleImg} alt="googleLogo" width={20} height={20} />
+      </StyledLogoBtn>
     </StyledLoginPageContainer>
   );
 }

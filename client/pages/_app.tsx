@@ -7,6 +7,7 @@ import GlobalStyle from "styles/GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import { theme } from "styles/theme";
 import { CookiesProvider } from "react-cookie";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const queryClient = new QueryClient();
 
@@ -14,14 +15,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
-        <CookiesProvider>
-          <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
-        </CookiesProvider>
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_CLIENT_ID}>
+          <CookiesProvider>
+            <ThemeProvider theme={theme}>
+              <GlobalStyle />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ThemeProvider>
+          </CookiesProvider>
+        </GoogleOAuthProvider>
       </QueryClientProvider>
     </RecoilRoot>
   );
