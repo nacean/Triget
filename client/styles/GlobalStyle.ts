@@ -130,7 +130,7 @@ table {
 
 html,
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Pretendard';
 }
 
 a {
