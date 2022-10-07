@@ -5,26 +5,33 @@ import styled from "styled-components";
 import { theme } from "styles/theme";
 
 const StyledSignUpPageContainer = styled.div`
-  width: 30%;
-  padding: 3% 4%;
+  width: 528px;
+  padding: 71px 64px 127px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  -webkit-box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.08);
 `;
 
 const StyledSignUpTitle = styled.h2`
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 40px;
+  width: 165px;
+  height: 40px;
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 0.89;
+  letter-spacing: -1px;
+  margin-bottom: 49px;
+  color: #1a1a1a;
 `;
 
 const StyledForm = styled(TextField)`
-  border-radius: 30px;
+  border-radius: 8px;
   background-color: #fafafa;
-  color: AFB1B2;
+  color: #abadae;
+  font-size: 18px;
 `;
 
 function SignUpPageContainer() {
@@ -37,7 +44,7 @@ function SignUpPageContainer() {
   return (
     <StyledSignUpPageContainer>
       <StyledSignUpTitle>회원가입</StyledSignUpTitle>
-      <StyledForm
+      <TextField
         id="nickNameForm"
         label="닉네임"
         variant="outlined"
@@ -76,13 +83,14 @@ function SignUpPageContainer() {
         fullWidth
         size="large"
         sx={{
-          height: 56,
-          margin: "20px 0",
+          height: "56px",
+          marginTop: "49px",
+          marginBottom: "16px",
           backgroundColor: theme.colors.mainblue,
-          borderRadius: 10,
+          borderRadius: "32px",
           boxShadow: 0,
-          fontSize: 17,
-          fontWeight: 400,
+          fontSize: "18px",
+          fontWeight: "normal",
         }}
       >
         회원가입
@@ -95,10 +103,10 @@ function SignUpPageContainer() {
           height: 56,
           backgroundColor: "#2D2D39",
           color: "#fff",
-          borderRadius: 10,
+          borderRadius: "32px",
           boxShadow: 0,
-          fontSize: 17,
-          fontWeight: 400,
+          fontSize: "18px",
+          fontWeight: "normal",
           ":hover": {
             backgroundColor: "#2d2d39d7",
             boxShadow: 0,
