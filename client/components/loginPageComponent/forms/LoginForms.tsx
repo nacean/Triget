@@ -61,9 +61,6 @@ function LoginForms({ userID, setUserID, userPW, setUserPW }: LoginFormsType) {
         }}
         value={userID}
         onChange={onIDChange}
-        sx={{
-          ":hover": {},
-        }}
       />
       <TextField
         id="passwordForm"

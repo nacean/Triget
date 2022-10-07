@@ -17,10 +17,14 @@ function LoginBtn({ onLoginBtnClick, userID, userPW }: LoginBtnType) {
         height: 56,
         margin: "20px 0",
         backgroundColor: theme.colors.mainblue,
-        borderRadius: 10,
+        borderRadius: "32px",
         boxShadow: 0,
-        fontSize: 17,
-        fontWeight: 400,
+        fontSize: 18,
+        fontWeight: "normal",
+        "&:disabled": {
+          backgroundColor: "#c8cbd3",
+          color: "#fff",
+        },
       }}
       onClick={onLoginBtnClick}
       disabled={userID === "" || userPW === ""}

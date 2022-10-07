@@ -10,15 +10,15 @@ function SignUpBtn() {
         size="large"
         sx={{
           height: 56,
-          backgroundColor: "#F4F5F6",
-          color: "#98999B",
+          backgroundColor: "#f4f5f6",
+          color: "#5d6063",
           borderRadius: 10,
           boxShadow: 0,
-          fontSize: 17,
-          fontWeight: 400,
+          fontSize: 18,
+          fontWeight: "normal",
           ":hover": {
-            color: "#98999B",
-            backgroundColor: "#e4e4e4",
+            color: "#5d6063",
+            backgroundColor: "#dfdfdf",
             boxShadow: 0,
           },
         }}

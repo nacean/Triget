@@ -80,7 +80,13 @@ function LoginPageContainer() {
       <SignUpBtn />
       <Divider
         flexItem
-        sx={{ marginTop: 7, marginBottom: 3.5, height: 9, color: "#a6a6a6" }}
+        sx={{
+          marginTop: 7,
+          marginBottom: 3.5,
+          height: 7,
+          color: "#999999",
+          letterSpacing: "-0.16px",
+        }}
       >
         SNS 로그인
       </Divider>
