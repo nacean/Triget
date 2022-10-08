@@ -40,7 +40,7 @@ function AirportForm() {
         ),
       }}
       sx={{
-        width: "13%",
+        width: "49%",
       }}
     >
       {airports.map(airportParam => (

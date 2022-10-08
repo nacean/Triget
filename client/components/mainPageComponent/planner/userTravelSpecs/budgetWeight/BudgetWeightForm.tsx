@@ -8,18 +8,19 @@ import styled from "styled-components";
 import WeightTemplate from "./WeightTemplate";
 
 const BudgetWeightFormContainer = styled.div`
-  margin-top: 10px;
   width: 100%;
 `;
 
 const BudgetWeightIntroduce = styled.h2`
-  font-weight: 500;
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.23;
+  letter-spacing: -0.72px;
+  margin-bottom: 32px;
 `;
 
 const WeightBox = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `;

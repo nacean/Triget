@@ -28,8 +28,7 @@ function PeopleCntForm() {
         ),
       }}
       sx={{
-        width: "15%",
-        marginRight: "30px",
+        width: "49%",
       }}
       value={peopleCntValue}
       onChange={onPeopleCntChange}

@@ -58,11 +58,10 @@ function KeyWordForm() {
           </InputAdornment>
         ),
       }}
-      sx={{
-        width: "65%",
-      }}
+      fullWidth
       value={travelKeywordValue}
       onChange={onTravelKeywordChange}
+      sx={{ marginBottom: "16px" }}
     >
       {keywords.map(keywordParam => (
         <MenuItem key={keywordParam.value} value={keywordParam.value}>

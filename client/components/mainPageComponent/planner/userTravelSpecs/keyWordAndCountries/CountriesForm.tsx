@@ -36,7 +36,7 @@ function CountriesForm() {
       value={countryValue}
       onChange={onCountryChange}
       noOptionsText="일치하는 여행지가 없습니다"
-      sx={{ width: "30%" }}
+      fullWidth
       renderInput={params => (
         <TextField
           {...params}

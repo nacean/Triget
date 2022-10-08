@@ -1,4 +1,4 @@
-import { Button, Slide } from "@mui/material";
+import { Button, Divider, Slide } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import styled from "styled-components";
 import BudgetWeightForm from "./budgetWeight/BudgetWeightForm";
@@ -12,12 +12,13 @@ interface TravelSpecContainerType {
 
 const StyledTravelSpecContainer = styled.section`
   position: relative;
-  width: 100%;
-  height: 500px;
-  padding: 30px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 15px -1px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 15px -1px rgba(0, 0, 0, 0.2);
+  width: 992px;
+  height: 1050px;
+  margin: 0 auto;
+  padding: 40px 36px;
+  border-radius: 20px;
+  -webkit-box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,6 +33,7 @@ function TravelSpecContainer({
       <StyledTravelSpecContainer>
         <KeyWordAndCountriesBox />
         <RestBox />
+        <Divider flexItem light sx={{ margin: "48px 0" }} />
         <BudgetWeightForm />
         <Button
           variant="contained"
@@ -40,7 +42,7 @@ function TravelSpecContainer({
           sx={{
             position: "absolute",
             bottom: 20,
-            right: 20,
+            right: 35,
             backgroundColor: "#424242",
             borderRadius: "12px",
             ":hover": {

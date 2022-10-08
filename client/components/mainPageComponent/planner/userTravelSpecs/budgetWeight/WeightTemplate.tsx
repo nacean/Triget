@@ -1,25 +1,27 @@
-import { Slider } from "@mui/material";
+import { Paper, Slider } from "@mui/material";
 import budgetState from "atoms/plannerAtoms/budgetState";
 import React, { ChangeEvent } from "react";
 import { SetterOrUpdater, useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { theme } from "styles/theme";
 
-const WeightTemplateContainer = styled.div`
-  display: flex;
-  align-items: center;
-  width: 500px;
+const WeightTemplateContainer = styled(Paper)`
+  position: relative;
+  width: 440px;
+  height: 150px;
+  padding: 19px 24px 25px 23px;
+  border-radius: 8px;
+  border: 1px solid #ebebeb;
 `;
 
 const WeightSubject = styled.h3`
-  width: 8vw;
   height: 40px;
-  margin-right: 0.5vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #f6f8fa;
-  background-color: #f6f8fa;
-  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -0.56px;
+  margin-bottom: 4px;
+  color: #1a1a1a;
 `;
 
 const sliderMark = [
@@ -77,35 +79,36 @@ function WeightTemplate({
   };
 
   return (
-    <WeightTemplateContainer>
+    <WeightTemplateContainer variant="outlined">
       <WeightSubject>{subjectName}</WeightSubject>
       <Slider
         size="medium"
         aria-label={`${subjectName}-label`}
         valueLabelDisplay="auto"
-        sx={{ color: "#bababa", position: "relative", top: 8, left: 5 }}
+        sx={{
+          display: "block",
+          width: "375px",
+          margin: "0 auto",
+          color: "#e6e6e6",
+          "& .MuiSlider-thumb": {
+            backgroundColor: "#fff",
+            border: `5.5px solid ${theme.colors.mainblue}`,
+          },
+          "& 	.MuiSlider-markLabel": {
+            fontSize: "13px",
+          },
+          "& .MuiSlider-rail": {
+            height: 7,
+            backgroundColor: "e6e6e6",
+            opacity: 1,
+          },
+        }}
         value={weightValue}
         onChange={onWeightChange}
         min={1}
         max={5}
         marks={sliderMark}
       />
-      {/* <TextField
-        id={`${subjectName}Weight-textfield`}
-        label={subjectName}
-        variant="outlined"
-        placeholder="예산"
-        size="small"
-        InputProps={{
-          endAdornment: <InputAdornment position="end">원</InputAdornment>,
-        }}
-        sx={{
-          width: "50%",
-          marginLeft: "0.5vw",
-        }}
-        value={weightValue.toLocaleString()}
-        onChange={onWeightChange}
-      /> */}
     </WeightTemplateContainer>
   );
 }

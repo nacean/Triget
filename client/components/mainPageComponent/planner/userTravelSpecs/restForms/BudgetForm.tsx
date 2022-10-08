@@ -31,7 +31,7 @@ function BudgetForm() {
         endAdornment: <InputAdornment position="end">원</InputAdornment>,
       }}
       sx={{
-        width: "15%",
+        width: "100%",
         marginRight: "30px",
       }}
       value={budgetValue.toLocaleString()}

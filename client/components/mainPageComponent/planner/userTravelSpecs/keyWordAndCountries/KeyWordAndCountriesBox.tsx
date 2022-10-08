@@ -4,8 +4,7 @@ import KeyWordForm from "./KeyWordForm";
 
 const KeyWordAndCountriesContainer = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  margin-bottom: 40px;
 `;
 
 function KeyWordAndCountriesBox() {

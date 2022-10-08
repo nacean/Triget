@@ -10,9 +10,7 @@ const { RangePicker } = DatePicker;
 
 const DatePickContainer = styled.div`
   position: relative;
-  display: flex;
-  width: 25%;
-  margin-right: 30px;
+  width: 100%;
 `;
 function DurationForm() {
   const [startDateValue, setStartDateValue] = useRecoilState<string | null>(
@@ -41,7 +39,7 @@ function DurationForm() {
         sx={{
           position: "absolute",
           top: "16px",
-          left: "2.5%",
+          left: "10px",
           zIndex: 5,
           color: "#757575",
         }}
@@ -51,6 +49,7 @@ function DurationForm() {
         format="YYYY-MM-DD"
         style={{
           width: "100%",
+          height: "56px",
           borderRadius: 4,
           borderColor: "#C4C4C4",
           paddingLeft: 40,
