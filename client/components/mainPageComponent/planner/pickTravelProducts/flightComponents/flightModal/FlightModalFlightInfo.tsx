@@ -16,12 +16,14 @@ const StyledFlightModalFlightInfo = styled.div`
 `;
 
 const StyledPathName = styled.span`
-  margin-right: 1%;
+  font-weight: bold;
+  font-size: 22px;
+  margin-right: 14px;
 `;
 const StyledDepartureDate = styled.span`
   font-size: 16px;
   font-weight: 400;
-  color: #696a80;
+  color: #abadae;
 `;
 
 const week: string[] = ["일", "월", "화", "수", "목", "금", "토"];
@@ -46,8 +48,14 @@ function FlightModalFlightInfo({
         <StyledPathName>{pathName}</StyledPathName>
         <StyledDepartureDate>{exactDepartureDate}</StyledDepartureDate>
       </DialogTitle>
-      <DialogContent>
-        <FlightRoute flightLeg={flightLeg} fontSize={18} />
+      <DialogContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-end",
+        }}
+      >
+        <FlightRoute flightLeg={flightLeg} fontSize={18} containerWidth={632} />
         <FlightModalTimeLine flightLeg={flightLeg} />
       </DialogContent>
     </StyledFlightModalFlightInfo>

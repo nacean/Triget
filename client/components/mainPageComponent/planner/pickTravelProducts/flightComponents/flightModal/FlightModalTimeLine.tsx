@@ -10,11 +10,11 @@ interface FlightModalTimeLineType {
 }
 
 const StyledTimeLineContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+  width: 632px;
+  padding: 24px 24px 24px 24px;
+  border-bottom-left-radius: 7.2px;
+  border-bottom-right-radius: 7.2px;
+  border: solid 0.9px #ebebeb;
 `;
 
 function FlightModalTimeLine({ flightLeg }: FlightModalTimeLineType) {
@@ -67,7 +67,7 @@ function FlightModalTimeLine({ flightLeg }: FlightModalTimeLineType) {
 
   return (
     <StyledTimeLineContainer>
-      <Timeline sx={{ width: "80%" }}>{getTimeLineComponent()}</Timeline>
+      <Timeline>{getTimeLineComponent()}</Timeline>
     </StyledTimeLineContainer>
   );
 }

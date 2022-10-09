@@ -86,8 +86,16 @@ function FlightProductComponent({
         sx={{ width: "100%", height: "100%" }}
       >
         <StyledFlightRoutesContainer>
-          <FlightRoute flightLeg={product.legs[0]} fontSize={22} />
-          <FlightRoute flightLeg={product.legs[1]} fontSize={22} />
+          <FlightRoute
+            flightLeg={product.legs[0]}
+            fontSize={22}
+            containerWidth={560}
+          />
+          <FlightRoute
+            flightLeg={product.legs[1]}
+            fontSize={22}
+            containerWidth={560}
+          />
         </StyledFlightRoutesContainer>
         <StyledRightContainer>
           <StyledFlightPriceContainer>

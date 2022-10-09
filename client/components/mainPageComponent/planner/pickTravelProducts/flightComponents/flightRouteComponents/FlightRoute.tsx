@@ -9,6 +9,7 @@ import FlightTimeAndAirport from "./FlightTimeAndAirport";
 interface FlightRouteType {
   flightLeg: flightLegType;
   fontSize: number;
+  containerWidth: number;
 }
 
 const StyledFlightRoute = styled.div`
@@ -34,11 +35,15 @@ const StyledNameContainer = styled.div`
   align-items: center;
 `;
 
-const StyledRouteInfo = styled(Paper)`
-  width: 560px;
+const StyledRouteInfo = styled(Paper)<{ containerWidth: number }>`
+  width: ${props => props.containerWidth}px;
   height: 128px;
   padding: 16px 18.1px 16px 18px;
   border-radius: 7.2px;
+  border-bottom-left-radius: ${props =>
+    props.containerWidth === 632 ? 0 : 7.2}px;
+  border-bottom-right-radius: ${props =>
+    props.containerWidth === 632 ? 0 : 7.2}px;
   border: solid 0.9px #ebebeb;
   background-color: #fafafa;
   display: flex;
@@ -56,7 +61,7 @@ const StyledDivider = styled.div`
   background-color: #68697f;
 `;
 
-function FlightRoute({ flightLeg, fontSize }: FlightRouteType) {
+function FlightRoute({ flightLeg, fontSize, containerWidth }: FlightRouteType) {
   return (
     <StyledFlightRoute>
       <StyledNameContainer>
@@ -69,7 +74,7 @@ function FlightRoute({ flightLeg, fontSize }: FlightRouteType) {
         />
         <StyledAirlineName>{flightLeg.operations[0].name}</StyledAirlineName>
       </StyledNameContainer>
-      <StyledRouteInfo variant="outlined">
+      <StyledRouteInfo variant="outlined" containerWidth={containerWidth}>
         <FlightTimeAndAirport
           flightTime={flightLeg.departure}
           airportInfo={flightLeg.origin}
