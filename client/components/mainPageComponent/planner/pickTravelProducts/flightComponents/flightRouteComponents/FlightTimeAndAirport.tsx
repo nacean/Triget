@@ -2,6 +2,7 @@ import { Tooltip } from "@mui/material";
 import getExactDate from "modules/timeModule/getExactDate";
 import getExactTime from "modules/timeModule/getExactTime";
 import styled from "styled-components";
+import { theme } from "styles/theme";
 import flightAirportInfoType from "types/flightTypes/flightAirportInfoType";
 
 interface FlightTimeAndAirportType {
@@ -13,33 +14,34 @@ interface FlightTimeAndAirportType {
 
 const StyledFlightTimeAndAirport = styled.div`
   width: 30%;
-  height: 100%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 
-const StyledTime = styled.div<{ textRight: boolean; fontSize: number }>`
+const StyledAirportCode = styled.div<{ textRight: boolean; fontSize: number }>`
   font-size: ${props => props.fontSize}px;
-  font-weight: 700;
-  margin-left: ${props => (props.textRight ? "auto" : "none")};
-  margin-right: ${props => (props.textRight ? "none" : "auto")};
+  font-weight: bold;
+  margin-left: ${props => (props.textRight ? "none" : "auto")};
+  margin-right: ${props => (props.textRight ? "auto" : "none")};
+  color: #1a1a1a;
+`;
+
+const StyledTime = styled.div<{ textRight: boolean; fontSize: number }>`
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: ${props => (props.textRight ? "none" : "auto")};
+  margin-right: ${props => (props.textRight ? "auto" : "none")};
+  color: ${theme.colors.mainblue};
 `;
 
 const StyledDate = styled.div<{ textRight: boolean }>`
   font-size: 14px;
-  font-weight: 500;
-  margin-left: ${props => (props.textRight ? "auto" : "none")};
-  margin-right: ${props => (props.textRight ? "none" : "auto")};
-  color: #68697f;
-`;
-
-const StyledAirportCode = styled.div<{ textRight: boolean; fontSize: number }>`
-  font-size: ${props => props.fontSize}px;
-  font-weight: 500;
-  margin-left: ${props => (props.textRight ? "auto" : "none")};
-  margin-right: ${props => (props.textRight ? "none" : "auto")};
-  color: #68697f;
+  font-weight: normal;
+  margin-left: ${props => (props.textRight ? "none" : "auto")};
+  margin-right: ${props => (props.textRight ? "auto" : "none")};
+  color: #abadae;
 `;
 
 function FlightTimeAndAirport({
@@ -52,10 +54,6 @@ function FlightTimeAndAirport({
   const exactDate = getExactDate(flightTime);
   return (
     <StyledFlightTimeAndAirport>
-      <StyledDate textRight={textRight}>{exactDate}</StyledDate>
-      <StyledTime textRight={textRight} fontSize={fontSize}>
-        {exactTime}
-      </StyledTime>
       <Tooltip
         title={airportInfo.name}
         PopperProps={{
@@ -77,6 +75,10 @@ function FlightTimeAndAirport({
           {airportInfo.iata}
         </StyledAirportCode>
       </Tooltip>
+      <StyledTime textRight={textRight} fontSize={fontSize}>
+        {exactTime}
+      </StyledTime>
+      <StyledDate textRight={textRight}>{exactDate}</StyledDate>
     </StyledFlightTimeAndAirport>
   );
 }

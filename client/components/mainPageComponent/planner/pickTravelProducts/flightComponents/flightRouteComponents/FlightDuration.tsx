@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import FlightIcon from "@mui/icons-material/Flight";
 
 interface FlightDurationType {
   durationTime: number;
@@ -9,29 +8,21 @@ interface FlightDurationType {
 const StyledFlightDuration = styled.div`
   width: 30%;
   height: 100%;
-  margin: 0 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
+  align-items: flex-end;
 `;
 
 const StyledDuration = styled.div`
-  text-align: center;
+  height: 24px;
+  font-weight: 600;
 `;
 
 const StyledDirect = styled.div<{ stop_count: number }>`
-  text-align: center;
-  color: ${props => (props.stop_count ? "#d1435b" : "#00a698")};
-`;
-
-const StyledDivider = styled.div`
-  position: relative;
-  width: 80%;
-  height: 0.25rem;
-  margin: 0.375rem;
-  padding: 0;
-  border-radius: 0.375rem;
-  background-color: #68697f;
+  height: 24px;
+  font-weight: 600;
+  color: ${props => (props.stop_count ? "#ff555d" : "#00b172")};
 `;
 
 function FlightDuration({ durationTime, stop_count }: FlightDurationType) {
@@ -44,22 +35,10 @@ function FlightDuration({ durationTime, stop_count }: FlightDurationType) {
 
   return (
     <StyledFlightDuration>
-      <StyledDuration>{calculatedTime()}</StyledDuration>
-      <StyledDivider>
-        <FlightIcon
-          sx={{
-            position: "absolute",
-            top: "50%",
-            right: "-1.75rem",
-            marginTop: "-12px",
-            transform: "rotate(90deg)",
-            color: "#68697f",
-          }}
-        />
-      </StyledDivider>
       <StyledDirect stop_count={stop_count}>
         {stop_count ? `${stop_count}회 경유` : "직항"}
       </StyledDirect>
+      <StyledDuration>{calculatedTime()}</StyledDuration>
     </StyledFlightDuration>
   );
 }

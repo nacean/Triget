@@ -19,8 +19,13 @@ interface FlightPanelType {
 }
 
 const StyledPanel = styled.div`
-  width: 100%;
-  overflow-y: scroll;
+  width: 992px;
+  overflow: scroll;
+  background-color: #ebebeb;
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+  }
 `;
 
 function FlightPanel({
@@ -61,7 +66,7 @@ function FlightPanel({
       aria-labelledby={`productMenu-${index}`}
     >
       {value === index && (
-        <List>
+        <List sx={{ backgroundColor: "#ebebeb" }}>
           {showingFlights.map((product: flightProductType) => (
             <FlightProductComponent
               pickedFlight={pickedFlight}

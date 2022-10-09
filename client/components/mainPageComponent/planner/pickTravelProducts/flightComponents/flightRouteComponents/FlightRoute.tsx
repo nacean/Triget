@@ -1,6 +1,8 @@
+import { Paper } from "@mui/material";
 import Image from "next/image";
 import styled from "styled-components";
 import flightLegType from "types/flightTypes/flightLegType";
+import FlightIcon from "@mui/icons-material/Flight";
 import FlightDuration from "./FlightDuration";
 import FlightTimeAndAirport from "./FlightTimeAndAirport";
 
@@ -11,31 +13,47 @@ interface FlightRouteType {
 
 const StyledFlightRoute = styled.div`
   width: 100%;
-  height: 50%;
+  height: 45%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 `;
 
-const StyledAirlineName = styled.p`
-  margin-left: 1vw;
-  font-size: 22px;
-  font-weight: 700;
+const StyledAirlineName = styled.span`
+  margin-left: 8.3px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  line-height: 1.6;
+  color: #1a1a1a;
 `;
 
 const StyledNameContainer = styled.div`
-  width: 30%;
+  width: 20%;
+  height: 24px;
   display: flex;
   align-items: center;
-  padding-left: 5%;
 `;
 
-const StyledRouteInfo = styled.div`
-  width: 70%;
-  height: 60%;
+const StyledRouteInfo = styled(Paper)`
+  width: 560px;
+  height: 128px;
+  padding: 16px 18.1px 16px 18px;
+  border-radius: 7.2px;
+  border: solid 0.9px #ebebeb;
+  background-color: #fafafa;
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const StyledDivider = styled.div`
+  position: relative;
+  width: 5%;
+  height: 0.125rem;
+  margin: 0.375rem;
+  padding: 0;
+  border-radius: 0.375rem;
+  background-color: #68697f;
 `;
 
 function FlightRoute({ flightLeg, fontSize }: FlightRouteType) {
@@ -45,28 +63,37 @@ function FlightRoute({ flightLeg, fontSize }: FlightRouteType) {
         <Image
           src={flightLeg.operations[0].logoUrl}
           alt="Product Thumbnail"
-          width={35}
-          height={30}
-          style={{ borderRadius: 5 }}
+          width={24}
+          height={24}
+          style={{ borderRadius: "10px" }}
         />
         <StyledAirlineName>{flightLeg.operations[0].name}</StyledAirlineName>
       </StyledNameContainer>
-      <StyledRouteInfo>
+      <StyledRouteInfo variant="outlined">
         <FlightTimeAndAirport
           flightTime={flightLeg.departure}
           airportInfo={flightLeg.origin}
           textRight
           fontSize={fontSize}
         />
-        <FlightDuration
-          durationTime={flightLeg.durationInMinutes}
-          stop_count={flightLeg.stopCount}
+        <StyledDivider />
+        <FlightIcon
+          sx={{
+            height: "300px",
+            transform: "rotate(90deg)",
+            color: "#68697f",
+          }}
         />
+        <StyledDivider />
         <FlightTimeAndAirport
           flightTime={flightLeg.arrival}
           airportInfo={flightLeg.destination}
           textRight={false}
           fontSize={fontSize}
+        />
+        <FlightDuration
+          durationTime={flightLeg.durationInMinutes}
+          stop_count={flightLeg.stopCount}
         />
       </StyledRouteInfo>
     </StyledFlightRoute>

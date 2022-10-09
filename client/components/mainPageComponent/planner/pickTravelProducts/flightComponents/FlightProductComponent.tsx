@@ -1,12 +1,7 @@
-import {
-  Paper,
-  ListItem,
-  ListItemButton,
-  Divider,
-  Button,
-} from "@mui/material";
+import { Paper, ListItem, ListItemButton, Button } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
+import { theme } from "styles/theme";
 import flightProductType from "types/flightTypes/flightProductType";
 import FlightModalContainer from "./flightModal/FlightModalContainer";
 import FlightRoute from "./flightRouteComponents/FlightRoute";
@@ -17,22 +12,41 @@ interface FlightProductComponentType {
   onFlightBtnClick: (product: flightProductType) => void;
 }
 
+const StyledFlightPaper = styled(Paper)`
+  height: 321px;
+  margin-bottom: 22px;
+  padding: 18px 18px 18px 18px;
+  border-radius: 20px;
+  box-shadow: 0 1px 27px 0 rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 0 1px 27px 0 rgba(0, 0, 0, 0.08);
+`;
+
 const StyledFlightRoutesContainer = styled.div`
   width: 75%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 const StyledFlightPriceContainer = styled.div`
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 32px;
+`;
+
+const StyledCurrency = styled.span`
+  font-size: 19px;
+  font-weight: normal;
+`;
+
+const StyledRightContainer = styled.div`
   width: 25%;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 28px;
-  font-weight: 700;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
 `;
 
 function FlightProductComponent({
@@ -65,51 +79,43 @@ function FlightProductComponent({
   };
 
   return (
-    <Paper square sx={{ marginBottom: "10px" }}>
-      <ListItem disablePadding>
-        <ListItemButton
-          onClick={onModalClick}
-          sx={{
-            height: 250,
-            display: "flex",
-          }}
-        >
-          <StyledFlightRoutesContainer>
-            <FlightRoute flightLeg={product.legs[0]} fontSize={22} />
-            <FlightRoute flightLeg={product.legs[1]} fontSize={22} />
-          </StyledFlightRoutesContainer>
-          <Divider
-            orientation="vertical"
-            variant="middle"
-            flexItem
-            sx={{ backgroundColor: "#DDDCE5" }}
-          />
+    <StyledFlightPaper>
+      <ListItemButton
+        onClick={onModalClick}
+        sx={{ width: "100%", height: "100%" }}
+      >
+        <StyledFlightRoutesContainer>
+          <FlightRoute flightLeg={product.legs[0]} fontSize={22} />
+          <FlightRoute flightLeg={product.legs[1]} fontSize={22} />
+        </StyledFlightRoutesContainer>
+        <StyledRightContainer>
           <StyledFlightPriceContainer>
-            {`₩${product.price.toLocaleString()}`}
+            {`${product.price.toLocaleString()}`}
+            <StyledCurrency>원</StyledCurrency>
           </StyledFlightPriceContainer>
-        </ListItemButton>
-        <Button
-          variant="contained"
-          sx={{
-            position: "absolute",
-            bottom: 10,
-            right: 10,
-          }}
-          size="large"
-          onClick={() => {
-            onFlightBtnClick(product);
-          }}
-          color={pickedOrNotFunc(product.id) ? "error" : "primary"}
-        >
-          {flightBtnText()}
-        </Button>
-      </ListItem>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => {
+              onFlightBtnClick(product);
+            }}
+            color={pickedOrNotFunc(product.id) ? "error" : "primary"}
+            sx={{
+              backgroundColor: theme.colors.mainblue,
+              width: 160,
+              borderRadius: "7.1px",
+            }}
+          >
+            {flightBtnText()}
+          </Button>
+        </StyledRightContainer>
+      </ListItemButton>
       <FlightModalContainer
         openModal={openModal}
         setOpenModal={setOpenModal}
         product={product}
       />
-    </Paper>
+    </StyledFlightPaper>
   );
 }
 
