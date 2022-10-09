@@ -2,8 +2,10 @@ import { DefaultTheme } from "styled-components";
 
 const colors = {
   mainblue: "#3090FF",
+  cacelRed: "#ff555d",
   textwhite: "#F4F9FF",
-  textlightgrey: "#A6B1BD",
+  textBlack: "#191919",
+  textlightgrey: "#a6b1bd",
 };
 
 export type ColorsTypes = typeof colors;
