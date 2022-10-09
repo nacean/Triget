@@ -5,8 +5,12 @@ interface ProductNameType {
 }
 
 const StyledProductName = styled.h2`
-  font-size: 26px;
-  font-weight: 500;
+  max-width: 420px;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.19;
+  letter-spacing: -0.6px;
+  color: #1a1a1a;
 `;
 
 function ProductName({ productName }: ProductNameType) {

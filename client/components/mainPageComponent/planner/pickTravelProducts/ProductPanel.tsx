@@ -26,39 +26,49 @@ interface ProductPanelType {
 }
 
 const StyledPanel = styled.div`
-  width: 100%;
-  overflow-y: scroll;
+  width: 992px;
+  overflow: scroll;
+  background-color: #ebebeb;
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+  }
+`;
+
+const StyledProductPaper = styled(Paper)`
+  position: relative;
+  width: 992px;
+  height: 248px;
+  margin-bottom: 22px;
+  border-radius: 20px;
+  box-shadow: 0 1px 27px 0 rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 0 1px 27px 0 rgba(0, 0, 0, 0.08);
+`;
+
+const StyledProductInfoContainer = styled.div`
+  height: 248px;
+  padding: 18px 24px 18px 24px;
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+`;
+
+const StyledImage = styled.div`
+  width: 280px;
+  height: 100%;
 `;
 
 const StyledLeftProductContainer = styled.div`
-  width: 65%;
-  height: 250px;
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  justify-content: space-between;
 `;
 
 const StyledRightProductContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 18%;
-  height: 250px;
-`;
-
-const StyledSeperateDiv = styled.div`
-  width: 100%;
-  padding-bottom: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-`;
-
-const StyledImage = styled.div`
-  width: 13.5vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
 `;
 
 function ProductPanel({
@@ -108,41 +118,38 @@ function ProductPanel({
         <List>
           {showingProducts.map((product: productDataType) => {
             return (
-              <Paper square sx={{ marginBottom: "10px" }}>
-                <ListItem disablePadding>
-                  <ListItemButton
-                    href={product.detailUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <StyledImage>
-                      {product.thumbnail ? (
-                        <Image
-                          src={product.thumbnail}
-                          alt="Product Thumbnail"
-                          width={250}
-                          height={250}
-                          style={{ borderRadius: 10 }}
-                        />
-                      ) : (
-                        <Empty
-                          description="No Image"
-                          imageStyle={{ width: "100%", height: "30%" }}
-                        />
-                      )}
-                    </StyledImage>
+              <StyledProductPaper>
+                <ListItemButton
+                  href={product.detailUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  sx={{ padding: 0 }}
+                >
+                  <StyledImage>
+                    {product.thumbnail ? (
+                      <Image
+                        src={product.thumbnail}
+                        alt="Product Thumbnail"
+                        width={280}
+                        height={248}
+                        style={{ borderRadius: 20 }}
+                      />
+                    ) : (
+                      <Empty
+                        description="No Image"
+                        imageStyle={{ width: "100%", height: "100%" }}
+                      />
+                    )}
+                  </StyledImage>
+                  <StyledProductInfoContainer>
                     <StyledLeftProductContainer>
-                      <StyledSeperateDiv>
-                        <ProductName productName={product.name} />
-                        <ProductReviewRate reviewRate={product.rating} />
-                      </StyledSeperateDiv>
-                      <StyledSeperateDiv>
-                        <ProductLocation
-                          productCity={product.city}
-                          productDistrict={product.state}
-                          productAddress={product.address}
-                        />
-                      </StyledSeperateDiv>
+                      <ProductName productName={product.name} />
+                      <ProductReviewRate reviewRate={product.rating} />
+                      <ProductLocation
+                        productCity={product.city}
+                        productDistrict={product.state}
+                        productAddress={product.address}
+                      />
                       <ProductKeywords keywords={product.keywords} />
                     </StyledLeftProductContainer>
                     <StyledRightProductContainer>
@@ -156,14 +163,14 @@ function ProductPanel({
                         />
                       )}
                     </StyledRightProductContainer>
-                  </ListItemButton>
-                  <ProductPickBtn
-                    product={product}
-                    setPickedProducts={setPickedProducts}
-                    pickOrNot={isInPickedArray(product.id)}
-                  />
-                </ListItem>
-              </Paper>
+                  </StyledProductInfoContainer>
+                </ListItemButton>
+                <ProductPickBtn
+                  product={product}
+                  setPickedProducts={setPickedProducts}
+                  pickOrNot={isInPickedArray(product.id)}
+                />
+              </StyledProductPaper>
             );
           })}
           <ListItem ref={scrollRef} disablePadding sx={{ height: "50px" }} />

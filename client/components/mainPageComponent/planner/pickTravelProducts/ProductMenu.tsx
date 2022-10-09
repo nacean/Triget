@@ -1,10 +1,30 @@
 import { AppBar, Tab, Tabs } from "@mui/material";
 import React, { Dispatch, SetStateAction } from "react";
+import styled from "styled-components";
+import { theme } from "styles/theme";
 
 interface ProductMenuType {
   menuNum: number;
   setMenuNum: Dispatch<SetStateAction<number>>;
 }
+
+const StyledTabsContainer = styled(Tabs)`
+  margin: 0 auto;
+  width: 992px;
+  & .MuiTabs-indicator {
+    background-color: ${theme.colors.mainblue};
+    height: 3.5px;
+  }
+`;
+
+const StyledTab = styled(Tab)`
+  font-size: 24px;
+  font-weight: bold;
+  height: 60px;
+  &.Mui-selected {
+    color: ${theme.colors.mainblue};
+  }
+`;
 
 function ProductMenu({ menuNum, setMenuNum }: ProductMenuType) {
   const menuProps = (index: number) => {
@@ -19,34 +39,27 @@ function ProductMenu({ menuNum, setMenuNum }: ProductMenuType) {
   };
 
   return (
-    <AppBar position="static" color="inherit">
-      <Tabs
+    <AppBar
+      position="static"
+      color="inherit"
+      sx={{
+        width: "100%",
+        boxShadow: "none",
+        marginBottom: "24px",
+      }}
+    >
+      <StyledTabsContainer
         textColor="inherit"
         variant="fullWidth"
         aria-label="products-menus"
         value={menuNum}
         onChange={onMenuChange}
-        TabIndicatorProps={{
-          style: { backgroundColor: "#000", height: 1.5 },
-        }}
       >
-        <Tab
-          label="항공"
-          {...menuProps(0)}
-          sx={{ fontSize: 24, borderRight: "1px solid #00000030" }}
-        />
-        <Tab
-          label="숙박"
-          {...menuProps(1)}
-          sx={{ fontSize: 24, borderRight: "1px solid #00000030" }}
-        />
-        <Tab
-          label="식당"
-          {...menuProps(3)}
-          sx={{ fontSize: 24, borderRight: "1px solid #00000030" }}
-        />
-        <Tab label="액티비티" {...menuProps(4)} sx={{ fontSize: 24 }} />
-      </Tabs>
+        <StyledTab label="항공" {...menuProps(0)} />
+        <StyledTab label="숙박" {...menuProps(1)} />
+        <StyledTab label="식당" {...menuProps(3)} />
+        <StyledTab label="액티비티" {...menuProps(4)} />
+      </StyledTabsContainer>
     </AppBar>
   );
 }

@@ -10,6 +10,9 @@ const StyledProductLocation = styled.span`
   display: flex;
   align-items: center;
   font-size: 16px;
+  line-height: 1.59;
+  letter-spacing: -0.45px;
+  color: #abadae;
 `;
 
 const StyledAddress = styled.span`

@@ -22,9 +22,15 @@ function ProductKeywords({ keywords }: ProductKeywordsType) {
         <Chip
           label={`#${keywordsToKorean(keyword)}`}
           sx={{
-            height: "40px",
+            height: "32px",
             marginRight: "5px",
-            fontSize: "16px",
+            borderRadius: "16px",
+            padding: "4px 0",
+            backgroundColor: "#eee",
+            fontSize: "15px",
+            color: "#787878",
+            lineHeight: 1.9,
+            letterSpacing: "-0.38px",
             fontWeight: 500,
           }}
         />

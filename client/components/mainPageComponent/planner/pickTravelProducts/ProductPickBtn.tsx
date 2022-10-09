@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MouseEvent, SetStateAction } from "react";
+import { theme } from "styles/theme";
 import productDataType from "types/productTypes/productDataType";
 
 interface ProductPickBtnType {
@@ -13,7 +14,8 @@ function ProductPickBtn({
   setPickedProducts,
   pickOrNot,
 }: ProductPickBtnType) {
-  const onProductBtnClick = () => {
+  const onProductBtnClick = (e: MouseEvent) => {
+    e.stopPropagation();
     if (pickOrNot) {
       setPickedProducts(productArray =>
         productArray.filter(productParam => product.id !== productParam.id),
@@ -26,14 +28,21 @@ function ProductPickBtn({
   return (
     <Button
       variant="contained"
-      sx={{
-        position: "absolute",
-        bottom: 10,
-        right: 10,
-      }}
       size="large"
       onClick={onProductBtnClick}
       color={pickOrNot ? "error" : "primary"}
+      sx={{
+        position: "absolute",
+        zIndex: 6,
+        right: 24,
+        bottom: 18,
+        width: 160,
+        height: 40,
+        borderRadius: "7.1px",
+        backgroundColor: pickOrNot
+          ? theme.colors.cacelRed
+          : theme.colors.mainblue,
+      }}
     >
       {pickOrNot ? "상품 취소하기" : "상품 선택하기"}
     </Button>

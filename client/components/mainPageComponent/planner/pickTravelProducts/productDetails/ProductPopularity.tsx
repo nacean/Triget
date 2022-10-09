@@ -1,5 +1,6 @@
 import { Paper } from "@mui/material";
 import styled from "styled-components";
+import { theme } from "styles/theme";
 
 interface ProductPopularityType {
   productPopularity: number;
@@ -10,6 +11,7 @@ const StyledProductPopularity = styled.div`
   align-items: center;
   font-size: 14px;
   font-weight: 300;
+  color: #1a1a1a;
 `;
 
 function ProductPopularity({ productPopularity }: ProductPopularityType) {
@@ -22,13 +24,13 @@ function ProductPopularity({ productPopularity }: ProductPopularityType) {
           width: "40px",
           height: "40px",
           color: "white",
-          backgroundColor: "#0288d1",
+          backgroundColor: theme.colors.mainblue,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           marginLeft: "10px",
           fontWeight: 700,
-          fontSize: "18px",
+          fontSize: "15px",
         }}
       >
         {productPopularity}

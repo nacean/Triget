@@ -6,14 +6,25 @@ interface ProductPriceType {
 }
 
 const StyledProductPrice = styled.div`
-  margin-top: 110px;
   font-size: 28px;
+  font-weight: bold;
+  line-height: 1.02;
+  letter-spacing: -0.7px;
+  color: #1a1a1a;
   font-weight: 700;
+  margin-bottom: 60px;
+`;
+const StyledCurrency = styled.span`
+  font-size: 18px;
+  font-weight: normal;
 `;
 
 function ProductPrice({ productPrice, currency_code }: ProductPriceType) {
   return (
-    <StyledProductPrice>{`${productPrice.toLocaleString()} ${currency_code}`}</StyledProductPrice>
+    <StyledProductPrice>
+      {`${productPrice.toLocaleString()}`}
+      <StyledCurrency>{currency_code}</StyledCurrency>
+    </StyledProductPrice>
   );
 }
 

@@ -11,7 +11,7 @@ function ProductReviewRate({ reviewRate }: ProductReviewRateType) {
       defaultValue={reviewRate}
       precision={0.5}
       readOnly
-      sx={{ marginLeft: "10px" }}
+      sx={{ margin: "8px 0" }}
     />
   );
 }

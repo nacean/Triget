@@ -24,25 +24,23 @@ interface ProductPickContainerType {
   travelMutation: UseMutationResult;
 }
 
+const StyledProductListContainer = styled.section`
+  width: 100%;
+  position: relative;
+  background-color: #ebebeb;
+`;
+
 const StyledProductPickContainer = styled.div`
   position: relative;
-  width: 80%;
-  height: 800px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 15px -1px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 15px -1px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 1000px;
+  background-color: #ebebeb;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
   justify-content: ${props =>
     props.className === "cannot" ? "center" : "none"};
-`;
-
-const StyledProductListContainer = styled.section`
-  position: relative;
-  width: 100%;
-  display: flex;
 `;
 
 const LoadingParagraph = styled.p`
@@ -120,8 +118,8 @@ function ProductPickContainer({
     return (
       <Slide direction="left" in={slideMove} mountOnEnter unmountOnExit>
         <StyledProductListContainer>
+          <ProductMenu menuNum={menuNum} setMenuNum={setMenuNum} />
           <StyledProductPickContainer>
-            <ProductMenu menuNum={menuNum} setMenuNum={setMenuNum} />
             <FlightPanel
               value={menuNum}
               index={0}
@@ -169,7 +167,7 @@ function ProductPickContainer({
               뒤로가기
             </Button>
           </StyledProductPickContainer>
-          <PickedProductsContainer />
+          {/* <PickedProductsContainer /> */}
           <Button
             variant="contained"
             endIcon={<SearchIcon />}
