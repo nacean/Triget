@@ -1,4 +1,4 @@
-import { Paper, ListItem, ListItemButton, Button } from "@mui/material";
+import { Paper, ListItemButton, Button } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
 import { theme } from "styles/theme";
@@ -13,6 +13,7 @@ interface FlightProductComponentType {
 }
 
 const StyledFlightPaper = styled(Paper)`
+  position: relative;
   height: 321px;
   margin-bottom: 22px;
   padding: 18px 18px 18px 18px;
@@ -32,7 +33,7 @@ const StyledFlightRoutesContainer = styled.div`
 const StyledFlightPriceContainer = styled.div`
   font-size: 30px;
   font-weight: bold;
-  margin-bottom: 32px;
+  margin-bottom: 70px;
 `;
 
 const StyledCurrency = styled.span`
@@ -93,23 +94,28 @@ function FlightProductComponent({
             {`${product.price.toLocaleString()}`}
             <StyledCurrency>원</StyledCurrency>
           </StyledFlightPriceContainer>
-          <Button
-            variant="contained"
-            size="large"
-            onClick={() => {
-              onFlightBtnClick(product);
-            }}
-            color={pickedOrNotFunc(product.id) ? "error" : "primary"}
-            sx={{
-              backgroundColor: theme.colors.mainblue,
-              width: 160,
-              borderRadius: "7.1px",
-            }}
-          >
-            {flightBtnText()}
-          </Button>
         </StyledRightContainer>
       </ListItemButton>
+      <Button
+        variant="contained"
+        size="large"
+        onClick={() => {
+          onFlightBtnClick(product);
+        }}
+        color={pickedOrNotFunc(product.id) ? "error" : "primary"}
+        sx={{
+          position: "absolute",
+          bottom: 26,
+          right: 34,
+          backgroundColor: pickedOrNotFunc(product.id)
+            ? theme.colors.cacelRed
+            : theme.colors.mainblue,
+          width: 160,
+          borderRadius: "7.1px",
+        }}
+      >
+        {flightBtnText()}
+      </Button>
       <FlightModalContainer
         openModal={openModal}
         setOpenModal={setOpenModal}
