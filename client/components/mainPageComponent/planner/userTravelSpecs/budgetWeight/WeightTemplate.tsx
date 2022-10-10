@@ -94,12 +94,17 @@ function WeightTemplate({
             backgroundColor: "#fff",
             border: `5.5px solid ${theme.colors.mainblue}`,
           },
-          "& 	.MuiSlider-markLabel": {
+          "& .MuiSlider-markLabel": {
             fontSize: "13px",
           },
           "& .MuiSlider-rail": {
             height: 7,
             backgroundColor: "e6e6e6",
+            opacity: 1,
+          },
+          "& .MuiSlider-track": {
+            height: 7,
+            backgroundColor: theme.colors.mainblue,
             opacity: 1,
           },
         }}
