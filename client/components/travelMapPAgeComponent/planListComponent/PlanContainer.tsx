@@ -4,7 +4,7 @@ import productDataType from "types/productTypes/productDataType";
 import { travelMovingTime } from "types/travelMovingTime";
 import PlanHeader from "./PlanHeader";
 import PlanStepContainer from "./planSteps/PlanStepContainer";
-import RescheduleBtn from "./RescheduleBtn";
+import PlanBtns from "./PlanBtns";
 
 interface PlanContainerType {
   travelListArray: (productDataType | travelMovingTime)[];
@@ -14,9 +14,10 @@ interface PlanContainerType {
 }
 
 const StyledPlanContainer = styled.section`
-  width: 35%;
+  flex-grow: 1;
   height: 100%;
-  border: 1px solid #dee2e6;
+  padding: 0 30px;
+  background-color: #fafafa;
   display: flex;
   flex-direction: column;
 `;
@@ -36,7 +37,7 @@ function PlanContainer({
         nowPickIndex={nowPickIndex}
         setNowPickIndex={setNowPickIndex}
       />
-      <RescheduleBtn />
+      <PlanBtns />
     </StyledPlanContainer>
   );
 }

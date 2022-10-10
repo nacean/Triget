@@ -11,29 +11,30 @@ interface ClickedMarkerInfoType {
 }
 
 const StyledInfo = styled.div`
-  min-width: 8vw;
-  min-height: 4vw;
   background-color: "#000";
   display: flex;
-  align-items: center;
 `;
 
 const StyledDescriptionContainer = styled.div`
-  height: 75px;
-  margin-left: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  margin-left: 16px;
+  height: 100%;
 `;
 
 const StyledInfoName = styled.div`
-  font-size: 16px;
-  font-weight: 500;
+  min-height: 75px;
+  width: 70%;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.33;
+  letter-spacing: -0.42px;
+  color: #1a1a1a;
 `;
 
 const StyledInfoTags = styled.div`
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
 `;
 
 const StyledImage = styled.div`
@@ -78,9 +79,17 @@ function ClickedMarkerInfo({ product, nowPickStep }: ClickedMarkerInfoType) {
                   label={`#${keywordsToKorean(keyword)}`}
                   variant="outlined"
                   sx={{
-                    color: "#000",
-                    fontWeight: 400,
+                    lineHeight: 1.9,
+                    letterSpacing: "-0.3px",
+                    fontSize: 12,
+                    fontWeight: 500,
+                    borderRadius: 12.8,
+                    border: "none",
+                    color: "#787878",
+                    padding: "5px 5px",
+                    backgroundColor: "#eee",
                     marginRight: "0.2vw",
+                    marginBottom: "0.2vw",
                   }}
                   size="small"
                 />

@@ -21,7 +21,6 @@ interface pathType {
 
 const StyledMapContainer = styled.section`
   width: 65%;
-  border: 1px solid #dee2e6;
 `;
 
 function MapContainer({
@@ -98,7 +97,8 @@ function MapContainer({
               </>
             );
           })}
-          <MapPolyLines travelPaths={travelPaths} />
+          <MapPolyLines travelPaths={travelPaths} shadow={false} />
+          <MapPolyLines travelPaths={travelPaths} shadow />
         </GoogleMap>
       </LoadScriptNext>
     </StyledMapContainer>

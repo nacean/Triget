@@ -17,7 +17,6 @@ const StyledTravelMapPage = styled.article`
   width: 100%;
   display: flex;
   height: 900px;
-  margin-top: 50px;
 `;
 
 function travelMapPage() {

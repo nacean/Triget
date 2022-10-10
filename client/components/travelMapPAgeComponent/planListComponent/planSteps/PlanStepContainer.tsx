@@ -15,7 +15,6 @@ interface PlanStepContainerType {
 
 const StyledPlanStepContainer = styled.div`
   width: 100%;
-  padding: 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,7 +55,7 @@ function PlanStepContainer({
 
   return (
     <StyledPlanStepContainer>
-      <List>
+      <List sx={{ width: "100%" }}>
         {travelListArray.map((product: productDataType | travelMovingTime) =>
           productOrTimeComponent(product),
         )}

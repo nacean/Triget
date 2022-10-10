@@ -42,10 +42,12 @@ keywords.forEach(keyword => {
 const StyledPlanHeader = styled.h2`
   width: 100%;
   height: 100px;
-  padding: 0 25px;
-  background-color: #f8f9fb;
-  font-size: 28px;
-  font-weight: 500;
+  padding-top: 64px;
+  padding-bottom: 17px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #000;
+  font-size: 26px;
+  font-weight: bold;
   display: flex;
   align-items: center;
 `;

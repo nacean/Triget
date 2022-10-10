@@ -9,21 +9,22 @@ interface MovingTimeType {
 
 const StyledMovingTime = styled.div`
   width: 100%;
-  height: 50px;
+  height: 100%;
   display: flex;
   align-items: center;
-  padding-left: 2.9vw;
+  padding-left: 35px;
   color: #5c5e6b;
   border-left: 1px solid #5c5e6b;
-  margin-left: 8%;
+  margin-left: 106px;
+  font-size: 15px;
 `;
 
 function MovingTime({ timeObj }: MovingTimeType) {
   return (
-    <ListItem sx={{ width: "100%", height: "64px" }} disablePadding>
+    <ListItem sx={{ width: "100%", height: "54px" }} disablePadding>
       <ListItemText>
         <StyledMovingTime>
-          <EarbudsOutlinedIcon sx={{ marginRight: "10px" }} />
+          <EarbudsOutlinedIcon sx={{ marginRight: "10px" }} fontSize="small" />
           {`${timeObj.transitMode} ${timeObj.durationTime}분`}
         </StyledMovingTime>
       </ListItemText>

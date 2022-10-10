@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { OverlayView } from "@react-google-maps/api";
 import React, { Dispatch, SetStateAction } from "react";
+import { theme } from "styles/theme";
 import productDataType from "types/productTypes/productDataType";
 
 interface MapMarkerType {
@@ -18,19 +19,20 @@ const getPixelPositionOffset = (width: number, height: number) => ({
 });
 
 const selectedMarkerColor = {
-  backgroundColor: "#000",
+  backgroundColor: theme.colors.mainblue,
+  border: "3px solid #fff",
   color: "#fff",
   "&:hover": {
-    backgroundColor: "#000",
+    backgroundColor: theme.colors.mainblue,
   },
 };
 
 const nonSelectedMarkerColor = {
-  backgroundColor: "#fff",
-  color: "#838593",
-  border: "1px solid #CACBDB",
+  backgroundColor: theme.colors.mainblue,
+  border: "3px solid #fff",
+  color: "#fff",
   "&:hover": {
-    backgroundColor: "#CACBDB",
+    backgroundColor: "#1a1a1a",
   },
 };
 
@@ -70,12 +72,13 @@ function MapMarker({
           minWidth: 0,
           padding: 0,
           borderRadius: "100%",
-          fontSize: "18px",
-          fontWeight: 300,
+          fontSize: 16,
+          fontWeight: "bold",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           zIndex: 10,
+          boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.5)",
           ...nowBtnColor(),
         }}
         onClick={onMarkerClick}

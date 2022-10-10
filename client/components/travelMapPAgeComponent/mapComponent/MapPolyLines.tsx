@@ -7,12 +7,13 @@ interface pathType {
 
 interface MapPolyLinesType {
   travelPaths: pathType[];
+  shadow: boolean;
 }
 
 const polyLinesOptions = {
-  strokeColor: "#000",
-  strokeOpacity: 0.8,
-  strokeWeight: 1.5,
+  strokeColor: "#fff",
+  strokeOpacity: 1,
+  strokeWeight: 6,
   clickable: false,
   draggable: false,
   editable: false,
@@ -21,8 +22,21 @@ const polyLinesOptions = {
   zIndex: -1,
 };
 
-function MapPolyLines({ travelPaths }: MapPolyLinesType) {
-  return <Polyline path={travelPaths} options={polyLinesOptions} />;
+const polyLinesShadowOptions = {
+  ...polyLinesOptions,
+  strokeOpacity: 0.06,
+  strokeWeight: 9,
+  strokeColor: "#000",
+  zIndex: -2,
+};
+
+function MapPolyLines({ travelPaths, shadow }: MapPolyLinesType) {
+  return (
+    <Polyline
+      path={travelPaths}
+      options={shadow ? polyLinesShadowOptions : polyLinesOptions}
+    />
+  );
 }
 
 export default MapPolyLines;
