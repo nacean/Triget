@@ -55,7 +55,7 @@ function FlightModalFlightInfo({
           alignItems: "flex-end",
         }}
       >
-        <FlightRoute flightLeg={flightLeg} fontSize={18} containerWidth={632} />
+        <FlightRoute flightLeg={flightLeg} fontSize={18} containerwidth={632} />
         <FlightModalTimeLine flightLeg={flightLeg} />
       </DialogContent>
     </StyledFlightModalFlightInfo>

@@ -89,12 +89,12 @@ function FlightProductComponent({
           <FlightRoute
             flightLeg={product.legs[0]}
             fontSize={22}
-            containerWidth={560}
+            containerwidth={560}
           />
           <FlightRoute
             flightLeg={product.legs[1]}
             fontSize={22}
-            containerWidth={560}
+            containerwidth={560}
           />
         </StyledFlightRoutesContainer>
         <StyledRightContainer>

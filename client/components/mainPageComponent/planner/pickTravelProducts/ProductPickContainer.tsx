@@ -27,11 +27,12 @@ interface ProductPickContainerType {
 const StyledProductListContainer = styled.section`
   width: 100%;
   position: relative;
+  z-index: 1000;
+  overflow: hidden;
   background-color: #ebebeb;
 `;
 
 const StyledProductPickContainer = styled.div`
-  position: relative;
   width: 100%;
   height: 1000px;
   background-color: #ebebeb;
@@ -167,7 +168,7 @@ function ProductPickContainer({
               뒤로가기
             </Button>
           </StyledProductPickContainer>
-          {/* <PickedProductsContainer /> */}
+          <PickedProductsContainer />
           <Button
             variant="contained"
             endIcon={<SearchIcon />}
@@ -178,6 +179,7 @@ function ProductPickContainer({
               bottom: 20,
               right: 10,
               borderRadius: "12px",
+              zIndex: 2000,
             }}
             onClick={onMakePlanBtnClick}
           >

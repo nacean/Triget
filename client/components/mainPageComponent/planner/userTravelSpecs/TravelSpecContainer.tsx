@@ -15,6 +15,7 @@ const StyledTravelSpecContainer = styled.section`
   width: 992px;
   height: 1050px;
   margin: 0 auto;
+  margin-bottom: 64px;
   padding: 40px 36px;
   border-radius: 20px;
   -webkit-box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.08);
