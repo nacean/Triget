@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import styled from "styled-components";
-import { Slide, Button, CircularProgress } from "@mui/material";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import SearchIcon from "@mui/icons-material/Search";
+import { Slide, CircularProgress } from "@mui/material";
 import { UseMutationResult } from "react-query";
 import { useRecoilState } from "recoil";
 import pickedFlightState from "atoms/pickProductAtoms/pickedFlightState";
@@ -54,8 +51,6 @@ function ProductPickContainer({
   onSlideBtnClick,
   travelMutation,
 }: ProductPickContainerType) {
-  const router = useRouter();
-
   const { data, isLoading, isError, error, isSuccess } = travelMutation;
 
   const [menuNum, setMenuNum] = useState(0);
@@ -70,23 +65,6 @@ function ProductPickContainer({
   const [pickedAttractions, setPickedAttractions] = useRecoilState<
     productDataType[]
   >(pickedAttractionsState);
-
-  useEffect(() => {
-    if (slideMove) window.scrollTo({ top: 150, left: 0, behavior: "smooth" });
-    else window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  });
-
-  const onBackBtnClick = () => {
-    onSlideBtnClick();
-    setPickedFlight(null);
-    setPickedAccommodations([]);
-    setPickedRestaurants([]);
-    setPickedAttractions([]);
-  };
-
-  const onMakePlanBtnClick = () => {
-    router.push("/travelMapPage");
-  };
 
   if (isError)
     return (
@@ -149,42 +127,8 @@ function ProductPickContainer({
               pickedProducts={pickedAttractions}
               setPickedProducts={setPickedAttractions}
             />
-            <Button
-              variant="contained"
-              startIcon={<ChevronLeftIcon />}
-              size="large"
-              sx={{
-                position: "absolute",
-                bottom: 20,
-                left: 20,
-                backgroundColor: "#424242",
-                borderRadius: "12px",
-                ":hover": {
-                  backgroundColor: "#616161",
-                },
-              }}
-              onClick={onBackBtnClick}
-            >
-              뒤로가기
-            </Button>
+            <PickedProductsContainer onSlideBtnClick={onSlideBtnClick} />
           </StyledProductPickContainer>
-          <PickedProductsContainer />
-          <Button
-            variant="contained"
-            endIcon={<SearchIcon />}
-            size="large"
-            color="info"
-            sx={{
-              position: "absolute",
-              bottom: 20,
-              right: 10,
-              borderRadius: "12px",
-              zIndex: 2000,
-            }}
-            onClick={onMakePlanBtnClick}
-          >
-            일정표 생성
-          </Button>
         </StyledProductListContainer>
       </Slide>
     );
