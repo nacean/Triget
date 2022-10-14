@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import MenuNav from "./menuNav/MenuNav";
 import PrimaryNav from "./primaryNav/PrimaryNav";
 
 // css

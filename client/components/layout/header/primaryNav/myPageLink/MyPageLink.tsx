@@ -4,13 +4,17 @@ import styled from "styled-components";
 import userState from "atoms/loginAtoms/userState";
 import { useRecoilValue } from "recoil";
 import userType from "types/userTypes/userType";
+import { theme } from "styles/theme";
 
 const MyPageAnchor = styled.a`
   font-size: 16px;
   font-weight: 500;
   display: flex;
   align-items: center;
-  color: #6f767d;
+  color: #8f9094;
+  &:hover {
+    color: ${theme.colors.mainblue};
+  }
 `;
 
 const MyPageWord = styled.div`
@@ -36,7 +40,13 @@ function MyPageLink() {
         <MyPageWord>{user ? "마이페이지" : "로그인"}</MyPageWord>
         {user && (
           <StyledMyPageLogo>
-            <PersonIcon sx={{ fontSize: "30px", color: "#6F767D" }} />
+            <PersonIcon
+              sx={{
+                fontSize: "24px",
+                color: "inherit",
+                marginBottom: "2px",
+              }}
+            />
           </StyledMyPageLogo>
         )}
       </MyPageAnchor>
