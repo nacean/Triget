@@ -1,4 +1,4 @@
-import { Button, Divider } from "@mui/material";
+import { Backdrop, Button, Divider } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import styled from "styled-components";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -21,6 +21,7 @@ import { useState } from "react";
 import RestBox from "./restForms/RestBox";
 import KeyWordAndCountriesBox from "./keyWordAndCountries/KeyWordAndCountriesBox";
 import BudgetWeightForm from "./budgetWeight/BudgetWeightForm";
+import LoadingProduct from "./loadingProduct/LoadingProduct";
 
 const StyledTravelSpecContainer = styled.section`
   position: relative;
@@ -82,8 +83,8 @@ function TravelSpecContainer() {
       {
         onSuccess: data => {
           setRecommendProduct(data);
-          setLoading(false);
           router.push("/ProductPickPage");
+          setLoading(false);
         },
       },
     );
@@ -113,6 +114,9 @@ function TravelSpecContainer() {
       >
         맞춤상품 선택
       </Button>
+      <Backdrop open={loading} sx={{ zIndex: 2000 }}>
+        <LoadingProduct />
+      </Backdrop>
     </StyledTravelSpecContainer>
   );
 }
