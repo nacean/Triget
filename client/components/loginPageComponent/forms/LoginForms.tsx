@@ -49,7 +49,11 @@ function LoginForms({ userID, setUserID, userPW, setUserPW }: LoginFormsType) {
             <InputAdornment
               position="start"
               sx={{
-                color: `${theme.colors.textlightgrey}`,
+                color: `${
+                  userID !== ""
+                    ? theme.colors.mainblue
+                    : theme.colors.textlightgrey
+                }`,
               }}
             >
               <PersonOutlineOutlinedIcon color="inherit" />
@@ -61,6 +65,12 @@ function LoginForms({ userID, setUserID, userPW, setUserPW }: LoginFormsType) {
         }}
         value={userID}
         onChange={onIDChange}
+        sx={{
+          "& .MuiInputBase-root::before": {
+            borderBottomColor:
+              userID !== "" ? theme.colors.mainblue : "#e6e6e6",
+          },
+        }}
       />
       <TextField
         id="passwordForm"
@@ -75,7 +85,11 @@ function LoginForms({ userID, setUserID, userPW, setUserPW }: LoginFormsType) {
             <InputAdornment
               position="start"
               sx={{
-                color: `${theme.colors.textlightgrey}`,
+                color: `${
+                  userPW !== ""
+                    ? theme.colors.mainblue
+                    : theme.colors.textlightgrey
+                }`,
               }}
             >
               <HttpsOutlinedIcon color="inherit" />
@@ -101,6 +115,12 @@ function LoginForms({ userID, setUserID, userPW, setUserPW }: LoginFormsType) {
         }}
         value={userPW}
         onChange={onPWChange}
+        sx={{
+          "& .MuiInputBase-root::before": {
+            borderBottomColor:
+              userPW !== "" ? theme.colors.mainblue : "#e6e6e6",
+          },
+        }}
       />
     </StyledLoginForms>
   );
