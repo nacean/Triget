@@ -19,10 +19,6 @@ import { useRouter } from "next/router";
 import PickedProductsChips from "./PickedProductsChips";
 import PickedFlightChips from "./PickedFlightChipComponents/PickedFlightChips";
 
-interface PickedProductsContainerType {
-  onSlideBtnClick: () => void;
-}
-
 const StyledPickedProductsContainer = styled.div`
   width: 100%;
   height: 300px;
@@ -75,9 +71,7 @@ const StyledPickedProducts = styled.div`
   justify-content: space-between;
 `;
 
-function PickedProductsContainer({
-  onSlideBtnClick,
-}: PickedProductsContainerType) {
+function PickedProductsContainer() {
   const router = useRouter();
 
   const [pickedFlight, setPickedFlight] =
@@ -109,11 +103,12 @@ function PickedProductsContainer({
   };
 
   const onBackBtnClick = () => {
-    onSlideBtnClick();
     setPickedFlight(null);
     setPickedAccommodations([]);
     setPickedRestaurants([]);
     setPickedAttractions([]);
+
+    router.push("/");
   };
 
   const onMakePlanBtnClick = () => {

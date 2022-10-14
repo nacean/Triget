@@ -1,10 +1,11 @@
-import PlanningBox from "components/mainPageComponent/planner/PlanningBox";
+import TravelSpecContainer from "components/mainPageComponent/planner/userTravelSpecs/TravelSpecContainer";
 import styled from "styled-components";
 
 const StyledMainPage = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: visible;
 `;
 
 const MainAsk = styled.h1`
@@ -26,7 +27,7 @@ function MainPage() {
         <br style={{ margin: "20px 20px" }} />
         하고 싶으신가요?
       </MainAsk>
-      <PlanningBox />
+      <TravelSpecContainer />
     </StyledMainPage>
   );
 }

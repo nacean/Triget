@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { Slide, CircularProgress } from "@mui/material";
-import { UseMutationResult } from "react-query";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import pickedFlightState from "atoms/pickProductAtoms/pickedFlightState";
 import pickedAccommodationsState from "atoms/pickProductAtoms/pickedAccommodationsState";
 import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsState";
@@ -10,16 +8,11 @@ import pickedAttractionsState from "atoms/pickProductAtoms/pickedAttractionsStat
 import flightProductType from "types/flightTypes/flightProductType";
 import journeyDataType from "types/journeyTypes/journeyDataType";
 import productDataType from "types/productTypes/productDataType";
+import recommendProductState from "atoms/recommendProductAtoms/recommendProductState";
 import ProductMenu from "./ProductMenu";
 import ProductPanel from "./ProductPanel";
 import PickedProductsContainer from "./showPickedProducts/PickedProductsContainer";
 import FlightPanel from "./flightComponents/FlightPanel";
-
-interface ProductPickContainerType {
-  slideMove: boolean;
-  onSlideBtnClick: () => void;
-  travelMutation: UseMutationResult;
-}
 
 const StyledProductListContainer = styled.section`
   width: 100%;
@@ -41,19 +34,12 @@ const StyledProductPickContainer = styled.div`
     props.className === "cannot" ? "center" : "none"};
 `;
 
-const LoadingParagraph = styled.p`
-  font-size: 20px;
-  margin-top: 20px;
-`;
-
-function ProductPickContainer({
-  slideMove,
-  onSlideBtnClick,
-  travelMutation,
-}: ProductPickContainerType) {
-  const { data, isLoading, isError, error, isSuccess } = travelMutation;
-
+function ProductPickContainer() {
   const [menuNum, setMenuNum] = useState(0);
+
+  // recommend Data from server
+  const recommendProduct = useRecoilValue(recommendProductState);
+
   const [pickedFlight, setPickedFlight] =
     useRecoilState<flightProductType | null>(pickedFlightState);
   const [pickedAccommodations, setPickedAccommodations] = useRecoilState<
@@ -66,73 +52,45 @@ function ProductPickContainer({
     productDataType[]
   >(pickedAttractionsState);
 
-  if (isError)
-    return (
-      <Slide direction="left" in={slideMove} mountOnEnter unmountOnExit>
-        <StyledProductPickContainer className="cannot">
-          {`There is Error. Error name : ${error}`}
-        </StyledProductPickContainer>
-      </Slide>
-    );
+  const { flights, accommodations, restaurants, attractions } =
+    recommendProduct as journeyDataType;
 
-  if (isLoading)
-    return (
-      <Slide direction="left" in={slideMove} mountOnEnter unmountOnExit>
-        <StyledProductPickContainer
-          style={{ width: "100%" }}
-          className="cannot"
-        >
-          <CircularProgress size={100} sx={{ color: "#606060" }} />
-          <LoadingParagraph>
-            맞춤 상품을 가져오는 중입니다. 잠시만 기다려주세요.
-          </LoadingParagraph>
-        </StyledProductPickContainer>
-      </Slide>
-    );
-
-  if (isSuccess) {
-    const { flights, accommodations, restaurants, attractions } =
-      data as journeyDataType;
-
-    return (
-      <Slide direction="left" in={slideMove} mountOnEnter unmountOnExit>
-        <StyledProductListContainer>
-          <ProductMenu menuNum={menuNum} setMenuNum={setMenuNum} />
-          <StyledProductPickContainer>
-            <FlightPanel
-              value={menuNum}
-              index={0}
-              productArray={flights}
-              pickedFlight={pickedFlight}
-              setPickedFlight={setPickedFlight}
-            />
-            <ProductPanel
-              value={menuNum}
-              index={1}
-              productArray={accommodations}
-              pickedProducts={pickedAccommodations}
-              setPickedProducts={setPickedAccommodations}
-            />
-            <ProductPanel
-              value={menuNum}
-              index={2}
-              productArray={restaurants}
-              pickedProducts={pickedRestaurants}
-              setPickedProducts={setPickedRestaurants}
-            />
-            <ProductPanel
-              value={menuNum}
-              index={3}
-              productArray={attractions}
-              pickedProducts={pickedAttractions}
-              setPickedProducts={setPickedAttractions}
-            />
-            <PickedProductsContainer onSlideBtnClick={onSlideBtnClick} />
-          </StyledProductPickContainer>
-        </StyledProductListContainer>
-      </Slide>
-    );
-  }
+  return (
+    <StyledProductListContainer>
+      <ProductMenu menuNum={menuNum} setMenuNum={setMenuNum} />
+      <StyledProductPickContainer>
+        <FlightPanel
+          value={menuNum}
+          index={0}
+          productArray={flights}
+          pickedFlight={pickedFlight}
+          setPickedFlight={setPickedFlight}
+        />
+        <ProductPanel
+          value={menuNum}
+          index={1}
+          productArray={accommodations}
+          pickedProducts={pickedAccommodations}
+          setPickedProducts={setPickedAccommodations}
+        />
+        <ProductPanel
+          value={menuNum}
+          index={2}
+          productArray={restaurants}
+          pickedProducts={pickedRestaurants}
+          setPickedProducts={setPickedRestaurants}
+        />
+        <ProductPanel
+          value={menuNum}
+          index={3}
+          productArray={attractions}
+          pickedProducts={pickedAttractions}
+          setPickedProducts={setPickedAttractions}
+        />
+        <PickedProductsContainer />
+      </StyledProductPickContainer>
+    </StyledProductListContainer>
+  );
 }
 
 export default ProductPickContainer;

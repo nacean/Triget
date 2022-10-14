@@ -5,7 +5,7 @@ import pickedRestaurantsState from "atoms/pickProductAtoms/pickedRestaurantsStat
 import MapContainer from "components/travelMapPAgeComponent/mapComponent/MapContainer";
 import PlanContainer from "components/travelMapPAgeComponent/planListComponent/PlanContainer";
 import fetchTravelPlanList from "modules/fetchTravelPlanList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
@@ -40,10 +40,6 @@ function travelMapPage() {
     "travelList",
     fetchTravelPlanList,
   );
-
-  useEffect(() => {
-    window.scrollTo({ top: 180, left: 0, behavior: "smooth" });
-  });
 
   if (isLoading) {
     return <div>loading...</div>;
