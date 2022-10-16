@@ -1,7 +1,8 @@
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import styled from "styled-components";
+import StyledTextField from "styles/styledTemplate/StyledTextField";
 import { theme } from "styles/theme";
 
 const StyledSignUpPageContainer = styled.div`
@@ -25,22 +26,6 @@ const StyledSignUpTitle = styled.h2`
   letter-spacing: -1px;
   margin-bottom: 49px;
   color: #1a1a1a;
-`;
-
-const StyledTextField = styled(TextField)`
-  & .MuiOutlinedInput-notchedOutline {
-    border-color: #ebebeb;
-    background-color: #fafafa;
-  }
-  & .MuiInputBase-input {
-    z-index: 1300;
-  }
-  & .MuiFormLabel-root {
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: -0.45px;
-    color: #abadae;
-  }
 `;
 
 function SignUpPageContainer() {

@@ -1,7 +1,9 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment } from "@mui/material";
 import GroupIcon from "@mui/icons-material/Group";
 import peopleCntState from "atoms/plannerAtoms/peopleCntState";
 import { useRecoilState } from "recoil";
+import StyledTextField from "styles/styledTemplate/StyledTextField";
+import { theme } from "styles/theme";
 
 function PeopleCntForm() {
   const [peopleCntValue, setPeopleCntValue] =
@@ -14,7 +16,7 @@ function PeopleCntForm() {
   };
 
   return (
-    <TextField
+    <StyledTextField
       id="outlined-basic"
       label="Party"
       variant="outlined"
@@ -23,7 +25,13 @@ function PeopleCntForm() {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <GroupIcon fontSize="small" />
+            <GroupIcon
+              fontSize="small"
+              sx={{
+                color: peopleCntValue ? theme.colors.mainblue : "#aaa",
+                zIndex: 1200,
+              }}
+            />
           </InputAdornment>
         ),
       }}

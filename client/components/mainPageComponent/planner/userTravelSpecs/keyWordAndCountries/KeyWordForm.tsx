@@ -1,7 +1,9 @@
-import { InputAdornment, MenuItem, TextField } from "@mui/material";
+import { InputAdornment, MenuItem } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
 import { useRecoilState } from "recoil";
 import travelKeywordState from "atoms/plannerAtoms/travelKeywordState";
+import StyledTextField from "styles/styledTemplate/StyledTextField";
+import { theme } from "styles/theme";
 
 const keywords = [
   {
@@ -45,16 +47,21 @@ function KeyWordForm() {
   };
 
   return (
-    <TextField
+    <StyledTextField
       id="select-keyword"
       select
       label="Travel Keyword"
-      variant="outlined"
       placeholder="가고 싶은 여행의 키워드를 입력해 주세요"
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <ChatIcon fontSize="small" />
+            <ChatIcon
+              fontSize="small"
+              sx={{
+                color: travelKeywordValue ? theme.colors.mainblue : "#aaa",
+                zIndex: 1200,
+              }}
+            />
           </InputAdornment>
         ),
       }}
@@ -68,7 +75,7 @@ function KeyWordForm() {
           {keywordParam.label}
         </MenuItem>
       ))}
-    </TextField>
+    </StyledTextField>
   );
 }
 

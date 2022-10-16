@@ -1,7 +1,9 @@
 import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
-import { InputAdornment, MenuItem, TextField } from "@mui/material";
+import { InputAdornment, MenuItem } from "@mui/material";
 import airportState from "atoms/plannerAtoms/airportState";
 import { useRecoilState } from "recoil";
+import StyledTextField from "styles/styledTemplate/StyledTextField";
+import { theme } from "styles/theme";
 
 const airports = [
   {
@@ -26,7 +28,7 @@ function AirportForm() {
   };
 
   return (
-    <TextField
+    <StyledTextField
       id="select-airport"
       select
       label="Airport"
@@ -35,7 +37,13 @@ function AirportForm() {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <AirplanemodeActiveIcon fontSize="small" />
+            <AirplanemodeActiveIcon
+              fontSize="small"
+              sx={{
+                color: airportValue ? theme.colors.mainblue : "#aaa",
+                zIndex: 1200,
+              }}
+            />
           </InputAdornment>
         ),
       }}
@@ -48,7 +56,7 @@ function AirportForm() {
           {airportParam.label}
         </MenuItem>
       ))}
-    </TextField>
+    </StyledTextField>
   );
 }
 

@@ -5,6 +5,7 @@ import moment, { Moment } from "moment";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import ConnectingAirportsIcon from "@mui/icons-material/ConnectingAirports";
+import { theme } from "styles/theme";
 
 const { RangePicker } = DatePicker;
 
@@ -40,8 +41,9 @@ function DurationForm() {
           position: "absolute",
           top: "16px",
           left: "10px",
-          zIndex: 5,
-          color: "#757575",
+          zIndex: 1200,
+          color:
+            startDateValue && endDateValue ? theme.colors.mainblue : "#aaa",
         }}
       />
       <RangePicker
@@ -50,9 +52,13 @@ function DurationForm() {
         style={{
           width: "100%",
           height: "56px",
-          borderRadius: 4,
-          borderColor: "#C4C4C4",
+          borderRadius: "8px",
+          borderColor: "#ebebeb",
           paddingLeft: 40,
+          backgroundColor: "#fafafa",
+        }}
+        popupStyle={{
+          zIndex: 1300,
         }}
         size="large"
         value={[startMoment, endMoment]}

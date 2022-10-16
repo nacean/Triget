@@ -1,8 +1,10 @@
 import PublicIcon from "@mui/icons-material/Public";
-import { Autocomplete, InputAdornment, TextField } from "@mui/material";
+import { Autocomplete, InputAdornment } from "@mui/material";
 import countriesState from "atoms/plannerAtoms/countriesState";
 import { SyntheticEvent } from "react";
 import { useRecoilState } from "recoil";
+import StyledTextField from "styles/styledTemplate/StyledTextField";
+import { theme } from "styles/theme";
 
 interface countryListType {
   label: string;
@@ -30,7 +32,6 @@ function CountriesForm() {
 
   return (
     <Autocomplete
-      disablePortal
       id="country-autoComplete"
       options={countryArray}
       value={countryValue}
@@ -38,7 +39,7 @@ function CountriesForm() {
       noOptionsText="일치하는 여행지가 없습니다"
       fullWidth
       renderInput={params => (
-        <TextField
+        <StyledTextField
           {...params}
           label="countries"
           placeholder="가고 싶은 나라를 선택해주세요"
@@ -46,7 +47,13 @@ function CountriesForm() {
             ...params.InputProps,
             startAdornment: (
               <InputAdornment position="start">
-                <PublicIcon fontSize="small" />
+                <PublicIcon
+                  fontSize="small"
+                  sx={{
+                    color: countryValue ? theme.colors.mainblue : "#aaa",
+                    zIndex: 1200,
+                  }}
+                />
               </InputAdornment>
             ),
           }}

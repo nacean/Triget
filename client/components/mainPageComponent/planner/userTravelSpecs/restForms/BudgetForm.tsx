@@ -1,8 +1,10 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment } from "@mui/material";
 import SavingsOutlinedIcon from "@mui/icons-material/SavingsOutlined";
 import budgetState from "atoms/plannerAtoms/budgetState";
 import { useRecoilState } from "recoil";
 import { ChangeEvent } from "react";
+import StyledTextField from "styles/styledTemplate/StyledTextField";
+import { theme } from "styles/theme";
 
 function BudgetForm() {
   const [budgetValue, setBudgetValue] = useRecoilState<number>(budgetState);
@@ -17,7 +19,7 @@ function BudgetForm() {
   };
 
   return (
-    <TextField
+    <StyledTextField
       id="budget-textfield"
       label="Budget"
       variant="outlined"
@@ -25,7 +27,13 @@ function BudgetForm() {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <SavingsOutlinedIcon fontSize="small" />
+            <SavingsOutlinedIcon
+              fontSize="small"
+              sx={{
+                color: budgetValue ? theme.colors.mainblue : "#aaa",
+                zIndex: 1200,
+              }}
+            />
           </InputAdornment>
         ),
         endAdornment: <InputAdornment position="end">원</InputAdornment>,
