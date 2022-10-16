@@ -1,6 +1,6 @@
 import { Button, TextField } from "@mui/material";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { theme } from "styles/theme";
 
@@ -27,15 +27,62 @@ const StyledSignUpTitle = styled.h2`
   color: #1a1a1a;
 `;
 
-const StyledForm = styled(TextField)`
-  border-radius: 8px;
-  background-color: #fafafa;
-  color: #abadae;
-  font-size: 18px;
+const StyledTextField = styled(TextField)`
+  & .MuiOutlinedInput-notchedOutline {
+    border-color: #ebebeb;
+    background-color: #fafafa;
+  }
+  & .MuiInputBase-input {
+    z-index: 1300;
+  }
+  & .MuiFormLabel-root {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.45px;
+    color: #abadae;
+  }
 `;
 
 function SignUpPageContainer() {
   const router = useRouter();
+
+  const [nickName, setNickName] = useState<string>("");
+  const [id, setId] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+
+  const onNickNameChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setNickName(event.target.value);
+  };
+  const onIdChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setId(event.target.value);
+  };
+  const onPassWordChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setPassword(event.target.value);
+  };
+  const onPasswordConfirmChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setPasswordConfirm(event.target.value);
+  };
+
+  const shouldDisabledBtn = () => {
+    if (
+      nickName === "" ||
+      id === "" ||
+      password === "" ||
+      passwordConfirm === ""
+    )
+      return true;
+
+    return false;
+  };
 
   const onBackBtnClick = () => {
     router.push("/loginPage");
@@ -44,23 +91,27 @@ function SignUpPageContainer() {
   return (
     <StyledSignUpPageContainer>
       <StyledSignUpTitle>회원가입</StyledSignUpTitle>
-      <TextField
+      <StyledTextField
         id="nickNameForm"
         label="닉네임"
         variant="outlined"
         fullWidth
         margin="normal"
         required
+        value={nickName}
+        onChange={onNickNameChange}
       />
-      <TextField
+      <StyledTextField
         id="idForm"
         label="아이디"
         variant="outlined"
         fullWidth
         margin="normal"
         required
+        value={id}
+        onChange={onIdChange}
       />
-      <TextField
+      <StyledTextField
         id="passwordForm"
         label="비밀번호"
         variant="outlined"
@@ -68,8 +119,10 @@ function SignUpPageContainer() {
         margin="normal"
         type="password"
         required
+        value={password}
+        onChange={onPassWordChange}
       />
-      <TextField
+      <StyledTextField
         id="passwordConfirmForm"
         label="비밀번호 확인"
         variant="outlined"
@@ -77,6 +130,8 @@ function SignUpPageContainer() {
         margin="normal"
         type="password"
         required
+        value={passwordConfirm}
+        onChange={onPasswordConfirmChange}
       />
       <Button
         variant="contained"
@@ -92,6 +147,7 @@ function SignUpPageContainer() {
           fontSize: "18px",
           fontWeight: "normal",
         }}
+        disabled={shouldDisabledBtn()}
       >
         회원가입
       </Button>
