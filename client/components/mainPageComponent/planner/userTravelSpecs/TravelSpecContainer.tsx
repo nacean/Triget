@@ -63,6 +63,19 @@ function TravelSpecContainer() {
   // loading progress to get recommendProducts from server
   const [loading, setLoading] = useState<boolean>(false);
 
+  const shouldDisableBtn = () => {
+    if (
+      theme === "" ||
+      place === "" ||
+      departureDate === null ||
+      arrivalDate === null ||
+      peopleNum <= 0 ||
+      budget <= 0
+    )
+      return true;
+    return false;
+  };
+
   const onSpecPostBtnClick = () => {
     setLoading(true);
 
@@ -110,6 +123,7 @@ function TravelSpecContainer() {
             backgroundColor: "#616161",
           },
         }}
+        disabled={shouldDisableBtn()}
         onClick={onSpecPostBtnClick}
       >
         맞춤상품 선택
