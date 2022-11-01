@@ -9,6 +9,22 @@ import { theme } from "styles/theme";
 
 const { RangePicker } = DatePicker;
 
+const StyledRangePicker = styled(RangePicker)`
+  width: 100%;
+  height: 56px;
+  border-radius: 8px;
+  border-color: #ebebeb;
+  padding-left: 40;
+  background-color: #fafafa;
+  & .ant-picker-input {
+    left: 31px;
+  }
+  & .ant-picker-active-bar {
+    margin-left: 40px;
+    width: 390px !important;
+  }
+`;
+
 const DatePickContainer = styled.div`
   position: relative;
   width: 100%;
@@ -40,23 +56,15 @@ function DurationForm() {
         sx={{
           position: "absolute",
           top: "16px",
-          left: "10px",
+          left: "11.5px",
           zIndex: 1200,
           color:
             startDateValue && endDateValue ? theme.colors.mainblue : "#aaa",
         }}
       />
-      <RangePicker
+      <StyledRangePicker
         placeholder={["출발 날짜", "도착 날짜"]}
         format="YYYY-MM-DD"
-        style={{
-          width: "100%",
-          height: "56px",
-          borderRadius: "8px",
-          borderColor: "#ebebeb",
-          paddingLeft: 40,
-          backgroundColor: "#fafafa",
-        }}
         popupStyle={{
           zIndex: 1300,
         }}

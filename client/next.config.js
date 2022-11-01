@@ -9,6 +9,7 @@ const nextConfig = {
       "logos.skyscnr.com",
       "media-cdn.tripadvisor.com",
       "cf.bstatic.com",
+      "www.visitbritain.com",
     ],
   },
 };

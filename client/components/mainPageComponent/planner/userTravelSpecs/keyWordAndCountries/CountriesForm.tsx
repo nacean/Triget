@@ -52,10 +52,16 @@ function CountriesForm() {
                   sx={{
                     color: countryValue ? theme.colors.mainblue : "#aaa",
                     zIndex: 1200,
+                    marginLeft: "4px",
                   }}
                 />
               </InputAdornment>
             ),
+          }}
+          sx={{
+            "& .MuiOutlinedInput-root .MuiAutocomplete-input": {
+              paddingLeft: 0,
+            },
           }}
         />
       )}

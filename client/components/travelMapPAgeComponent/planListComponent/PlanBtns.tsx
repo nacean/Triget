@@ -32,7 +32,7 @@ const StyledRescheduleBtn = styled(Button)`
 function RescheduleBtn() {
   const router = useRouter();
   const onRescheduleBtnClick = () => {
-    router.push("/");
+    router.push("/ProductPickPage");
   };
   return (
     <StyledPlanBtns>
