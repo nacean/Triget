@@ -8,13 +8,13 @@ import { theme } from "styles/theme";
 
 interface countryListType {
   label: string;
-  year: number;
+  value: string;
 }
 
 const countryArray = [
-  { label: "일본-도쿄" },
-  { label: "일본-오사카" },
-  { label: "일본-후쿠오카" },
+  { label: "일본-도쿄", value: "도쿄" },
+  { label: "일본-오사카", value: "오사카" },
+  { label: "일본-후쿠오카", value: "후쿠오카" },
 ];
 
 function CountriesForm() {
@@ -27,7 +27,7 @@ function CountriesForm() {
     newCountry: countryListType | null,
   ) => {
     if (!newCountry) setCountryValue(null);
-    else setCountryValue(newCountry.label);
+    else setCountryValue(newCountry.value);
   };
 
   return (

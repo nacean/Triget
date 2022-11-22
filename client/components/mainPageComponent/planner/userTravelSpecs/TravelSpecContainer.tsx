@@ -18,6 +18,7 @@ import { useMutation } from "react-query";
 import { useRouter } from "next/router";
 import recommendProductState from "atoms/recommendProductAtoms/recommendProductState";
 import { useState } from "react";
+import travelSpecType from "types/travelSpecType/travelSpecType";
 import RestBox from "./restForms/RestBox";
 import KeyWordAndCountriesBox from "./keyWordAndCountries/KeyWordAndCountriesBox";
 import BudgetWeightForm from "./budgetWeight/BudgetWeightForm";
@@ -41,8 +42,6 @@ const StyledTravelSpecContainer = styled.section`
 function TravelSpecContainer() {
   const router = useRouter();
 
-  const travelMutation = useMutation(fetchTravelSpec);
-
   const theme = useRecoilValue(travelKeywordState);
   const place = useRecoilValue(countriesState);
   const departureDate = useRecoilValue(startDateState);
@@ -63,6 +62,17 @@ function TravelSpecContainer() {
   // loading progress to get recommendProducts from server
   const [loading, setLoading] = useState<boolean>(false);
 
+  const travelMutation = useMutation(
+    (spec: travelSpecType) => fetchTravelSpec(spec),
+    {
+      onSuccess: data => {
+        setRecommendProduct(data);
+        router.push("/ProductPickPage");
+        setLoading(false);
+      },
+    },
+  );
+
   const shouldDisableBtn = () => {
     if (
       theme === "" ||
@@ -78,29 +88,19 @@ function TravelSpecContainer() {
 
   const onSpecPostBtnClick = () => {
     setLoading(true);
-
-    travelMutation.mutate(
-      {
-        place,
-        theme,
-        peopleNum,
-        departureDate,
-        arrivalDate,
-        departureAirport,
-        budget,
-        flightsPrior,
-        accommodationsPrior,
-        restaurantsPrior,
-        attractionsPrior,
-      },
-      {
-        onSuccess: data => {
-          setRecommendProduct(data);
-          router.push("/ProductPickPage");
-          setLoading(false);
-        },
-      },
-    );
+    travelMutation.mutate({
+      place,
+      theme,
+      peopleNum,
+      departureDate,
+      arrivalDate,
+      departureAirport,
+      budget,
+      flightsPrior,
+      accommodationsPrior,
+      restaurantsPrior,
+      attractionsPrior,
+    });
   };
 
   return (
