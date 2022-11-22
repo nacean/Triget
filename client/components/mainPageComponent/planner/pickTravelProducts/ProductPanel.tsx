@@ -3,11 +3,12 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import { useInView } from "react-intersection-observer";
-import fetchTravelSpec from "modules/fetchTravelSpec";
-import journeyDataType from "types/journeyTypes/journeyDataType";
 import productDataType from "types/productTypes/productDataType";
 import productArrayType from "types/journeyTypes/productArrayType";
 import { Empty } from "antd";
+import getExtraProduct from "modules/extraProduct.ts/getExtraProduct";
+import { useRecoilValue } from "recoil";
+import journeyIdState from "atoms/recommendProductAtoms/journeyIdState";
 import ProductKeywords from "./productDetails/ProductKeywords";
 import ProductLocation from "./productDetails/ProductLocation";
 import ProductName from "./productDetails/ProductName";
@@ -23,6 +24,7 @@ interface ProductPanelType {
   productArray: productArrayType;
   pickedProducts: productDataType[];
   setPickedProducts: Dispatch<SetStateAction<productDataType[]>>;
+  productType: string;
 }
 
 const StyledPanel = styled.div`
@@ -46,6 +48,7 @@ const StyledProductPaper = styled(Paper)`
 `;
 
 const StyledProductInfoContainer = styled.div`
+  width: 712px;
   height: 248px;
   padding: 18px 24px 18px 24px;
   display: flex;
@@ -77,23 +80,34 @@ function ProductPanel({
   productArray,
   pickedProducts,
   setPickedProducts,
+  productType,
 }: ProductPanelType) {
   const [showingProducts, setShowingProducts] = useState<productDataType[]>(
     productArray.content as productDataType[],
   );
-
   const [loading, setLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+
+  let isLast: boolean = productArray.last;
+
+  const journeyId: string = useRecoilValue(journeyIdState);
 
   const { ref: scrollRef } = useInView({
     threshold: 0.5,
     onChange: async (inView: boolean) => {
-      if (inView) {
+      if (inView && !isLast) {
         setLoading(true);
-        const newProducts: journeyDataType = await fetchTravelSpec();
+        const newProducts: productArrayType = await getExtraProduct(
+          productType,
+          journeyId,
+          page,
+        );
         setShowingProducts([
           ...showingProducts,
-          ...newProducts.attractions.content,
+          ...newProducts.content,
         ] as productDataType[]);
+        isLast = newProducts.last;
+        setPage(page + 1);
         setLoading(false);
       }
     },
@@ -124,6 +138,7 @@ function ProductPanel({
                   target="_blank"
                   rel="noreferrer"
                   sx={{ padding: 0 }}
+                  key={product.id}
                 >
                   <StyledImage>
                     {product.thumbnail ? (

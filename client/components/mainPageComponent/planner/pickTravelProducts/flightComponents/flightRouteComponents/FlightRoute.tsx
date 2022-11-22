@@ -20,8 +20,10 @@ const StyledFlightRoute = styled.div`
 `;
 
 const StyledAirlineName = styled.span`
+  width: 80px;
+  height: 50px;
   margin-left: 8.3px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.5px;
   line-height: 1.6;
@@ -32,7 +34,6 @@ const StyledNameContainer = styled.div`
   width: 20%;
   height: 24px;
   display: flex;
-  align-items: center;
 `;
 
 const StyledRouteInfo = styled(Paper)<{ containerwidth: number }>`

@@ -77,6 +77,7 @@ function TravelSpecContainer() {
     if (
       theme === "" ||
       place === "" ||
+      departureAirport === "" ||
       departureDate === null ||
       arrivalDate === null ||
       peopleNum <= 0 ||

@@ -13,11 +13,16 @@ const StyledProductPopularity = styled.div`
   font-weight: 300;
   color: #1a1a1a;
 `;
+const StyledText = styled.div`
+  width: 38px;
+  font-size: 14px;
+  font-weight: 500;
+`;
 
 function ProductPopularity({ productPopularity }: ProductPopularityType) {
   return (
     <StyledProductPopularity>
-      유명도
+      <StyledText>유명도</StyledText>
       <Paper
         variant="outlined"
         sx={{

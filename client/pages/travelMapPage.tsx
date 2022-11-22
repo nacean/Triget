@@ -7,11 +7,12 @@ import PlanContainer from "components/travelMapPAgeComponent/planListComponent/P
 import fetchTravelPlanList from "modules/fetchTravelPlanList";
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { travelMovingTime } from "types/travelMovingTime";
 import flightProductType from "types/flightTypes/flightProductType";
 import productDataType from "types/productTypes/productDataType";
+import journeyIdState from "atoms/recommendProductAtoms/journeyIdState";
+import scheduleContainerType from "types/scheduleTypes/scheduleContainerType";
 
 const StyledTravelMapPage = styled.article`
   width: 100%;
@@ -23,50 +24,62 @@ function travelMapPage() {
   // 현재 고른 product 정보
   const [nowPickStep, setNowPickStep] = useState<productDataType | null>(null);
   const [nowPickIndex, setNowPickIndex] = useState<number>(-1);
+  const [nowPickDay, setNowPickDay] = useState<number>(0);
 
-  const [pickedFlight, setPickedFlight] =
-    useRecoilState<flightProductType | null>(pickedFlightState);
-  const [pickedAccommodations, setPickedAccommodations] = useRecoilState<
-    productDataType.accommodationsDataType[]
-  >(pickedAccommodationsState);
-  const [pickedRestaurants, setPickedRestaurants] = useRecoilState<
-    productDataType.restaurantsDataType[]
-  >(pickedRestaurantsState);
-  const [pickedAttractions, setPickedAttractions] = useRecoilState<
-    productDataType.attractionsDataType[]
-  >(pickedAttractionsState);
+  const pickedFlight = useRecoilValue<flightProductType | null>(
+    pickedFlightState,
+  );
+  const pickedAccommodations = useRecoilValue<productDataType[]>(
+    pickedAccommodationsState,
+  );
+  const pickedRestaurants = useRecoilValue<productDataType[]>(
+    pickedRestaurantsState,
+  );
+  const pickedAttractions = useRecoilValue<productDataType[]>(
+    pickedAttractionsState,
+  );
 
-  const { data, isSuccess, isLoading, isError, error } = useQuery(
-    "travelList",
-    fetchTravelPlanList,
+  const journeyId: string = useRecoilValue(journeyIdState);
+
+  const { data, isSuccess, isLoading } = useQuery("travelList", () =>
+    fetchTravelPlanList(
+      pickedFlight,
+      pickedAccommodations,
+      pickedRestaurants,
+      pickedAttractions,
+      journeyId,
+    ),
   );
 
   if (isLoading) {
     return <div>loading...</div>;
   }
 
-  if (isError) {
-    return <div>Error!</div>;
+  if (isSuccess) {
+    const { schedules } = data as scheduleContainerType;
+    const { vertices } = schedules[nowPickDay];
+    return (
+      <StyledTravelMapPage>
+        <MapContainer
+          travelListArray={vertices}
+          nowPickStep={nowPickStep}
+          setNowPickStep={setNowPickStep}
+          setNowPickIndex={setNowPickIndex}
+          dayCnt={schedules.length}
+          nowPickDay={nowPickDay}
+          setNowPickDay={setNowPickDay}
+        />
+        <PlanContainer
+          travelListArray={vertices}
+          setNowPickStep={setNowPickStep}
+          nowPickIndex={nowPickIndex}
+          setNowPickIndex={setNowPickIndex}
+        />
+      </StyledTravelMapPage>
+    );
   }
 
-  const travelListArray = data as (productDataType | travelMovingTime)[];
-
-  return (
-    <StyledTravelMapPage>
-      <MapContainer
-        travelListArray={travelListArray}
-        nowPickStep={nowPickStep}
-        setNowPickStep={setNowPickStep}
-        setNowPickIndex={setNowPickIndex}
-      />
-      <PlanContainer
-        travelListArray={travelListArray}
-        setNowPickStep={setNowPickStep}
-        nowPickIndex={nowPickIndex}
-        setNowPickIndex={setNowPickIndex}
-      />
-    </StyledTravelMapPage>
-  );
+  return <div>error!</div>;
 }
 
 export default travelMapPage;

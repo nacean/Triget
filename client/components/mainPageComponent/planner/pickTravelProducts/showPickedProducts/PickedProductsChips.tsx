@@ -67,6 +67,7 @@ function PickedProductsChips({
             pickedProducts={pickedProducts}
             setPickedProducts={setPickedProducts}
             product={product}
+            key={product.id}
           />
         ))}
       </List>

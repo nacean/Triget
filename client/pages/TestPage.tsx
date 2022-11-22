@@ -1,7 +1,7 @@
 import React from "react";
 
 function TestPage() {
-  fetch("http://localhost:8080/product-list/v1", {
+  fetch("http://52.79.230.138:80/api/v1/product-list", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

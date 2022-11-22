@@ -34,12 +34,14 @@ function FlightModalTimeLine({ flightLeg }: FlightModalTimeLineType) {
             startTime={legParam.departure}
             airportInfo={legParam.origin}
             movingTime={getMovingTime(legParam.durationInMinutes)}
+            key={legParam.departure}
           />,
         );
         timeArray.push(
           <FlightModalContent
             startTime={legParam.arrival}
             airportInfo={legParam.destination}
+            key={legParam.arrival}
           />,
         );
       } else {
@@ -48,6 +50,7 @@ function FlightModalTimeLine({ flightLeg }: FlightModalTimeLineType) {
             startTime={legParam.departure}
             airportInfo={legParam.origin}
             movingTime={getMovingTime(legParam.durationInMinutes)}
+            key={legParam.departure}
           />,
         );
         timeArray.push(
@@ -58,6 +61,7 @@ function FlightModalTimeLine({ flightLeg }: FlightModalTimeLineType) {
               legParam.arrival,
               flightLeg.segments[segIndex + 1].departure,
             )}
+            key={legParam.arrival}
           />,
         );
       }

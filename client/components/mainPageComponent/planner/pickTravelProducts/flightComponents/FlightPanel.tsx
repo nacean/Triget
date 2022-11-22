@@ -1,12 +1,12 @@
 import { List, ListItem } from "@mui/material";
-import fetchTravelSpec from "modules/fetchTravelSpec";
+import journeyIdState from "atoms/recommendProductAtoms/journeyIdState";
+import getExtraFlight from "modules/extraProduct.ts/getExtraFlight";
 import React, { useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { SetterOrUpdater } from "recoil";
+import { SetterOrUpdater, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import flightProductType from "types/flightTypes/flightProductType";
 import flightArrayType from "types/journeyTypes/flightArrayType";
-import journeyDataType from "types/journeyTypes/journeyDataType";
 import LoadingBackdrop from "../LoadingBackDrop";
 import FlightProductComponent from "./FlightProductComponent";
 
@@ -39,14 +39,27 @@ function FlightPanel({
     productArray.content,
   );
   const [loading, setLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [isLast, setIsLast] = useState<boolean>(false);
+
+  const journeyId: string = useRecoilValue(journeyIdState);
 
   const { ref: scrollRef } = useInView({
     threshold: 0.5,
     onChange: async (inView: boolean) => {
-      if (inView) {
+      if (inView && !isLast) {
         setLoading(true);
-        const newProducts: journeyDataType = await fetchTravelSpec();
-        setShowingFlights([...showingFlights, ...newProducts.flights.content]);
+        const newFlights: flightArrayType = await getExtraFlight(
+          journeyId,
+          page,
+        );
+        setShowingFlights([
+          ...showingFlights,
+          ...newFlights.content,
+        ] as flightProductType[]);
+
+        setIsLast(newFlights.last);
+        setPage(page + 1);
         setLoading(false);
       }
     },
@@ -72,6 +85,7 @@ function FlightPanel({
               pickedFlight={pickedFlight}
               product={product}
               onFlightBtnClick={onFlightBtnClick}
+              key={product.id}
             />
           ))}
           <ListItem ref={scrollRef} disablePadding sx={{ height: "50px" }} />

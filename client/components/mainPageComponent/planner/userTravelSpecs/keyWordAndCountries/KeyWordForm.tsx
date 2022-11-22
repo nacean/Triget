@@ -48,7 +48,7 @@ function KeyWordForm() {
 
   const getKeywords = () =>
     keywords.map((keyword: { value: string; label: string }) => (
-      <MenuItem key={keyword.value} value={keyword.value}>
+      <MenuItem key={keyword.label} value={keyword.value}>
         {keyword.label}
       </MenuItem>
     ));
@@ -59,7 +59,6 @@ function KeyWordForm() {
       label="Travel Keyword"
       select
       fullWidth
-      placeholder="yeeees"
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
@@ -77,7 +76,6 @@ function KeyWordForm() {
         },
       }}
       SelectProps={{
-        defaultValue: "ww",
         displayEmpty: true,
         renderValue:
           travelKeywordValue !== "" ? undefined : () => "키워드를 선택해주세요",

@@ -7,15 +7,15 @@ import { theme } from "styles/theme";
 
 const airports = [
   {
-    value: "김포공항",
+    value: "GMP",
     label: "김포공항",
   },
   {
-    value: "인천공항",
+    value: "ICN",
     label: "인천공항",
   },
   {
-    value: "제주공항",
+    value: "CJU",
     label: "제주공항",
   },
 ];
@@ -46,6 +46,13 @@ function AirportForm() {
             />
           </InputAdornment>
         ),
+        sx: {
+          color: airportValue !== "" ? "#000" : "#aaa",
+        },
+      }}
+      SelectProps={{
+        displayEmpty: true,
+        renderValue: airportValue !== "" ? undefined : () => "출발 공항",
       }}
       sx={{
         width: "49%",

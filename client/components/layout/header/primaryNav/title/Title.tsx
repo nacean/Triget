@@ -6,13 +6,15 @@ import Image from "next/image";
 function Title() {
   return (
     <Link className="titleLink" href="/" passHref>
-      <Image
-        src={titleLogo}
-        width={127}
-        height={26}
-        quality={100}
-        style={{ cursor: "pointer" }}
-      />
+      <div>
+        <Image
+          src={titleLogo}
+          width={127}
+          height={26}
+          quality={100}
+          style={{ cursor: "pointer" }}
+        />
+      </div>
     </Link>
   );
 }

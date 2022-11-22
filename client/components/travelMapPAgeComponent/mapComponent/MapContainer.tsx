@@ -6,12 +6,16 @@ import productDataType from "types/productTypes/productDataType";
 import MapPolyLines from "./MapPolyLines";
 import MapMarker from "./MapMarker";
 import ClickedMarkerInfo from "./ClickedMarkerInfo";
+import DayPickBtns from "./DayPickBtns";
 
 interface MapContainerType {
   travelListArray: (productDataType | travelMovingTime)[];
   nowPickStep: productDataType | null;
   setNowPickStep: Dispatch<SetStateAction<productDataType>>;
   setNowPickIndex: Dispatch<SetStateAction<number>>;
+  dayCnt: number;
+  nowPickDay: number;
+  setNowPickDay: Dispatch<SetStateAction<number>>;
 }
 
 interface pathType {
@@ -20,6 +24,7 @@ interface pathType {
 }
 
 const StyledMapContainer = styled.section`
+  position: relative;
   width: 65%;
 `;
 
@@ -28,6 +33,9 @@ function MapContainer({
   nowPickStep,
   setNowPickStep,
   setNowPickIndex,
+  dayCnt,
+  nowPickDay,
+  setNowPickDay,
 }: MapContainerType) {
   let index = 0;
 
@@ -68,6 +76,11 @@ function MapContainer({
 
   return (
     <StyledMapContainer>
+      <DayPickBtns
+        dayCnt={dayCnt}
+        nowPickDay={nowPickDay}
+        setNowPickDay={setNowPickDay}
+      />
       <LoadScriptNext googleMapsApiKey={process.env.NEXT_PUBLIC_MAP_API_KEY}>
         <GoogleMap
           mapContainerStyle={containerStyle}

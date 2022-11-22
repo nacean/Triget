@@ -52,7 +52,7 @@ function TermsOfService() {
         <DialogTitle id="termsOfService-dialog-title">이용약관</DialogTitle>
         <DialogContent>
           {termArray.map(({ termTitle, termDescription }: termsArrayType) => (
-            <DialogContentText sx={{ marginBottom: 3 }}>
+            <DialogContentText key={termTitle} sx={{ marginBottom: 3 }}>
               <StyledTermTitle>{termTitle}</StyledTermTitle>
               <StyledTermDescription>{termDescription}</StyledTermDescription>
             </DialogContentText>

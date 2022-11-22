@@ -33,6 +33,7 @@ function ProductKeywords({ keywords }: ProductKeywordsType) {
             letterSpacing: "-0.38px",
             fontWeight: 500,
           }}
+          key={keyword}
         />
       ))}
     </StyledProductKeywordsContainer>
