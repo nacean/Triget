@@ -18,7 +18,7 @@ async function fetchTravelPlanList(
   };
 
   const travelListResponse = await fetch(
-    "https://api.triget.org:80/api/v1/schedule",
+    "https://api.triget.org/api/v1/schedule",
     {
       method: "POST",
       headers: {

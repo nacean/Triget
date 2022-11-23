@@ -5,7 +5,7 @@ async function getExtraFlight(
   page: number,
 ): Promise<flightArrayType> {
   const extraDatasPromise = await fetch(
-    `https://api.triget.org:80/api/v1/product-list/flights?journeyId=${journeyId}&page=${page}`,
+    `https://api.triget.org/api/v1/product-list/flights?journeyId=${journeyId}&page=${page}`,
   );
 
   const extraDatas = await extraDatasPromise.json();
