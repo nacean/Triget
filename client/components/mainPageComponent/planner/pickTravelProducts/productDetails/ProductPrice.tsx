@@ -23,7 +23,8 @@ function ProductPrice({ productPrice, currency_code }: ProductPriceType) {
   const getPrice = (priceRate: number) =>
     12500 * priceRate + 500 * Math.floor(Math.random() * 10);
 
-  const realPrice = productPrice <= 5 ? getPrice(productPrice) : productPrice;
+  // const realPrice = productPrice <= 5 ? getPrice(productPrice) : productPrice;
+  const realPrice = productPrice;
 
   return (
     <StyledProductPrice>
