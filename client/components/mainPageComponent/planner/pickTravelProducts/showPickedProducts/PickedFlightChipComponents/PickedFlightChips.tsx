@@ -3,8 +3,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { SetterOrUpdater } from "recoil";
 import styled from "styled-components";
 import flightProductType from "types/flightTypes/flightProductType";
-import FlightChipDetail from "./FlightChipDetail";
 import { useState } from "react";
+import FlightChipDetail from "./FlightChipDetail";
 
 interface PickedProductsChipsType {
   productKind: string;

@@ -8,6 +8,8 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "styles/theme";
 import { CookiesProvider } from "react-cookie";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { ThemeProvider as MuiThemeProvider } from "@material-ui/core";
+import { StyledEngineProvider } from "@mui/material";
 
 const queryClient = new QueryClient();
 
@@ -17,12 +19,16 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_CLIENT_ID}>
           <CookiesProvider>
-            <ThemeProvider theme={theme}>
-              <GlobalStyle />
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </ThemeProvider>
+            <StyledEngineProvider injectFirst>
+              <MuiThemeProvider theme={theme}>
+                <ThemeProvider theme={theme}>
+                  <GlobalStyle />
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout>
+                </ThemeProvider>
+              </MuiThemeProvider>
+            </StyledEngineProvider>
           </CookiesProvider>
         </GoogleOAuthProvider>
       </QueryClientProvider>

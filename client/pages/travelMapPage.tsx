@@ -13,6 +13,8 @@ import flightProductType from "types/flightTypes/flightProductType";
 import productDataType from "types/productTypes/productDataType";
 import journeyIdState from "atoms/recommendProductAtoms/journeyIdState";
 import scheduleContainerType from "types/scheduleTypes/scheduleContainerType";
+import { Backdrop } from "@mui/material";
+import LoadingProduct from "components/mainPageComponent/planner/userTravelSpecs/loadingProduct/LoadingProduct";
 
 const StyledTravelMapPage = styled.article`
   width: 100%;
@@ -52,7 +54,13 @@ function travelMapPage() {
   );
 
   if (isLoading) {
-    return <div>loading...</div>;
+    return (
+      <StyledTravelMapPage>
+        <Backdrop open={isLoading} sx={{ zIndex: 2000 }}>
+          <LoadingProduct />
+        </Backdrop>
+      </StyledTravelMapPage>
+    );
   }
 
   if (isSuccess) {

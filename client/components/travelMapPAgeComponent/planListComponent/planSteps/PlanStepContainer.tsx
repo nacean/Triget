@@ -1,4 +1,5 @@
 import { List } from "@mui/material";
+import getTimeLongLat from "modules/timeModule/getTimeLongLat";
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import productDataType from "types/productTypes/productDataType";
@@ -33,33 +34,37 @@ function PlanStepContainer({
     setNowPickStep(productParam);
   };
 
-  const productOrTimeComponent = (
-    product: productDataType | travelMovingTime,
-  ) => {
-    // if it is time Obj
-    if ("transitMode" in product) {
-      return <MovingTime timeObj={product as travelMovingTime} />;
-    }
+  const makeTravelList = () => {
+    const travelList = [];
+    for (let i = 0; i < travelListArray.length; i += 1) {
+      const product: productDataType | travelMovingTime = travelListArray[i];
+      travelIndex += 1;
+      travelList.push(
+        <PlanStep
+          isPicked={nowPickIndex === travelIndex}
+          product={product as productDataType}
+          index={travelIndex}
+          onStepClick={onStepClick}
+        />,
+      );
 
-    // else it is product Obj
-    travelIndex += 1;
-    return (
-      <PlanStep
-        isPicked={nowPickIndex === travelIndex}
-        product={product as productDataType}
-        index={travelIndex}
-        onStepClick={onStepClick}
-      />
-    );
+      if (i !== travelListArray.length - 1) {
+        const lat1 = (product as productDataType).latitude;
+        const lon1 = (product as productDataType).longitude;
+        const lat2 = (travelListArray[i + 1] as productDataType).latitude;
+        const lon2 = (travelListArray[i + 1] as productDataType).longitude;
+
+        travelList.push(
+          <MovingTime timeObj={getTimeLongLat(lat1, lon1, lat2, lon2)} />,
+        );
+      }
+    }
+    return travelList;
   };
 
   return (
     <StyledPlanStepContainer>
-      <List sx={{ width: "100%" }}>
-        {travelListArray.map((product: productDataType | travelMovingTime) =>
-          productOrTimeComponent(product),
-        )}
-      </List>
+      <List sx={{ width: "100%" }}>{makeTravelList()}</List>
     </StyledPlanStepContainer>
   );
 }

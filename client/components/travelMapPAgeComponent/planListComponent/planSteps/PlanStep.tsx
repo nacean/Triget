@@ -1,10 +1,4 @@
-import {
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Paper,
-} from "@mui/material";
+import { ListItem, ListItemButton, ListItemText, Paper } from "@mui/material";
 import styled from "styled-components";
 import { theme } from "styles/theme";
 import productDataType from "types/productTypes/productDataType";
@@ -40,7 +34,7 @@ function PlanStep({ isPicked, product, index, onStepClick }: PlanStepType) {
           onStepClick(product, index);
         }}
       >
-        <ListItemIcon
+        {/* <ListItemIcon
           sx={{
             fontSize: 16,
             fontWeight: "bold",
@@ -50,7 +44,7 @@ function PlanStep({ isPicked, product, index, onStepClick }: PlanStepType) {
           }}
         >
           {product.travelTime}
-        </ListItemIcon>
+        </ListItemIcon> */}
         <IndexSphere color={isPicked ? theme.colors.mainblue : "#A4A5B6"}>
           {index}
         </IndexSphere>
@@ -58,7 +52,7 @@ function PlanStep({ isPicked, product, index, onStepClick }: PlanStepType) {
           <Paper
             variant="outlined"
             sx={{
-              maxWidth: 390,
+              maxWidth: 560,
               minHeight: 40,
               display: "flex",
               alignItems: "center",

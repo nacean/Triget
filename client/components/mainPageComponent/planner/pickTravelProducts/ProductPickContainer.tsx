@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import pickedFlightState from "atoms/pickProductAtoms/pickedFlightState";
@@ -10,6 +10,7 @@ import journeyDataType from "types/journeyTypes/journeyDataType";
 import productDataType from "types/productTypes/productDataType";
 import recommendProductState from "atoms/recommendProductAtoms/recommendProductState";
 import journeyIdState from "atoms/recommendProductAtoms/journeyIdState";
+import { useRouter } from "next/router";
 import ProductMenu from "./ProductMenu";
 import ProductPanel from "./ProductPanel";
 import PickedProductsContainer from "./showPickedProducts/PickedProductsContainer";
@@ -37,7 +38,7 @@ const StyledProductPickContainer = styled.div`
 
 function ProductPickContainer() {
   const [menuNum, setMenuNum] = useState(0);
-
+  const router = useRouter();
   // recommend Data from server
   const recommendProduct = useRecoilValue(recommendProductState);
 
@@ -55,56 +56,59 @@ function ProductPickContainer() {
 
   const setJourney = useSetRecoilState(journeyIdState);
 
-  const { journeyId, flights, accommodations, restaurants, attractions } =
-    recommendProduct as journeyDataType;
+  if (recommendProduct) {
+    const { journeyId, flights, accommodations, restaurants, attractions } =
+      recommendProduct as journeyDataType;
 
-  useEffect(() => {
     setJourney(journeyId);
-  }, []);
-
-  return (
-    <StyledProductListContainer>
-      <ProductMenu menuNum={menuNum} setMenuNum={setMenuNum} />
-      <StyledProductPickContainer>
-        <FlightPanel
-          value={menuNum}
-          index={0}
-          productArray={flights}
-          pickedFlight={pickedFlight}
-          setPickedFlight={setPickedFlight}
-          key="flights"
-        />
-        <ProductPanel
-          value={menuNum}
-          index={1}
-          productArray={accommodations}
-          pickedProducts={pickedAccommodations}
-          setPickedProducts={setPickedAccommodations}
-          productType="accommodations"
-          key="accomodations"
-        />
-        <ProductPanel
-          value={menuNum}
-          index={2}
-          productArray={restaurants}
-          pickedProducts={pickedRestaurants}
-          setPickedProducts={setPickedRestaurants}
-          productType="restaurants"
-          key="restaurants"
-        />
-        <ProductPanel
-          value={menuNum}
-          index={3}
-          productArray={attractions}
-          pickedProducts={pickedAttractions}
-          setPickedProducts={setPickedAttractions}
-          productType="attractions"
-          key="attractions"
-        />
-        <PickedProductsContainer />
-      </StyledProductPickContainer>
-    </StyledProductListContainer>
-  );
+    return (
+      <StyledProductListContainer>
+        <ProductMenu menuNum={menuNum} setMenuNum={setMenuNum} />
+        <StyledProductPickContainer>
+          <FlightPanel
+            value={menuNum}
+            index={0}
+            productArray={flights}
+            pickedFlight={pickedFlight}
+            setPickedFlight={setPickedFlight}
+            key="flights"
+          />
+          <ProductPanel
+            value={menuNum}
+            index={1}
+            productArray={accommodations}
+            pickedProducts={pickedAccommodations}
+            setPickedProducts={setPickedAccommodations}
+            productType="accommodations"
+            key="accomodations"
+          />
+          <ProductPanel
+            value={menuNum}
+            index={2}
+            productArray={restaurants}
+            pickedProducts={pickedRestaurants}
+            setPickedProducts={setPickedRestaurants}
+            productType="restaurants"
+            key="restaurants"
+          />
+          <ProductPanel
+            value={menuNum}
+            index={3}
+            productArray={attractions}
+            pickedProducts={pickedAttractions}
+            setPickedProducts={setPickedAttractions}
+            productType="attractions"
+            key="attractions"
+          />
+          <PickedProductsContainer />
+        </StyledProductPickContainer>
+      </StyledProductListContainer>
+    );
+  }
+  if (!recommendProduct && router.isReady) {
+    router.push("/");
+  }
+  return <div>error</div>;
 }
 
 export default ProductPickContainer;

@@ -17,13 +17,6 @@ async function fetchTravelPlanList(
     restaurantIds: pickedRestaurants.map(product => product.id),
   };
 
-  console.log(
-    pickedAccommodations.map(product => product.id),
-    pickedAttractions.map(product => product.id),
-    pickedFlight.id,
-    journeyId,
-    pickedRestaurants.map(product => product.id),
-  );
   const travelListResponse = await fetch(
     "http://api.triget.org:80/api/v1/schedule",
     {
@@ -36,8 +29,6 @@ async function fetchTravelPlanList(
   );
 
   const travelList = await travelListResponse.json();
-
-  console.log(travelList);
 
   return travelList;
 }

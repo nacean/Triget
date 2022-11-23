@@ -6,7 +6,7 @@ async function getExtraProduct(
   page: number,
 ): Promise<productArrayType> {
   const extraDatasPromise = await fetch(
-    `http://52.79.230.138:80/api/v1/product-list/${productType}?journeyId=${journeyId}&page=${page}`,
+    `http://api.triget.org:80/api/v1/product-list/${productType}?journeyId=${journeyId}&page=${page}`,
   );
 
   const extraDatas = await extraDatasPromise.json();
