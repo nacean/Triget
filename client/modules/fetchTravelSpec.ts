@@ -5,7 +5,7 @@ async function fetchTravelSpec(
   travelSpec: travelSpecType,
 ): Promise<journeyDataType> {
   const travelDatasPromise = await fetch(
-    "http://api.triget.org:80/api/v1/product-list",
+    "https://api.triget.org:80/api/v1/product-list",
     {
       method: "POST",
       headers: {
